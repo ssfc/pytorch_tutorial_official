@@ -6,16 +6,25 @@ import numpy as np
 
 # Tensor Initialization
 
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+print("\nDevice: ", device)
+
 data = [[1, 2],[3, 4]]
 x_data = torch.tensor(data)
+x_data = x_data.to(device)
 
 print("x_data: ")
 print(x_data)
+
+text = [111, 222]
+x_text = torch.tensor(text)
+print(text)
 
 # From a NumPy array
 
 np_array = np.array(data)
 x_np = torch.from_numpy(np_array)
+x_np = x_np.to(device)
 
 print("x_np: ")
 print(x_np)
