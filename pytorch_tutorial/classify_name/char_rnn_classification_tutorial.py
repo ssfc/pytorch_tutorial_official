@@ -43,7 +43,7 @@ all_categories = []
 
 
 # Read a file and split into lines
-def readLines(filename):
+def read_lines(filename):
     lines = open(filename, encoding='utf-8').read().strip().split('\n')
     return [unicode_to_ascii(line) for line in lines]
 
@@ -51,7 +51,7 @@ def readLines(filename):
 for filename in find_files('data/names/*.txt'):
     category = os.path.splitext(os.path.basename(filename))[0]
     all_categories.append(category)
-    lines = readLines(filename)
+    lines = read_lines(filename)
     category_lines[category] = lines
 
 n_categories = len(all_categories)
