@@ -5,16 +5,26 @@ from __future__ import unicode_literals, print_function, division
 from io import open
 import glob
 import os
+import unicodedata
+import string
+import torch
+import torch.nn as nn
+import random
+import time
+import math
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+
+
 
 def findFiles(path): return glob.glob(path)
 
-print(findFiles('data/names/*.txt'))
 
-import unicodedata
-import string
+print(findFiles('data/names/*.txt'))
 
 all_letters = string.ascii_letters + " .,;'"
 n_letters = len(all_letters)
+
 
 # Turn a Unicode string to plain ASCII, thanks to https://stackoverflow.com/a/518232/2809427
 def unicodeToAscii(s):
@@ -24,16 +34,19 @@ def unicodeToAscii(s):
         and c in all_letters
     )
 
+
 print(unicodeToAscii('Ślusàrski'))
 
 # Build the category_lines dictionary, a list of names per language
 category_lines = {}
 all_categories = []
 
+
 # Read a file and split into lines
 def readLines(filename):
     lines = open(filename, encoding='utf-8').read().strip().split('\n')
     return [unicodeToAscii(line) for line in lines]
+
 
 for filename in findFiles('data/names/*.txt'):
     category = os.path.splitext(os.path.basename(filename))[0]
@@ -43,7 +56,6 @@ for filename in findFiles('data/names/*.txt'):
 
 n_categories = len(all_categories)
 
-
 ######################################################################
 # Now we have ``category_lines``, a dictionary mapping each category
 # (language) to a list of lines (names). We also kept track of
@@ -52,7 +64,6 @@ n_categories = len(all_categories)
 #
 
 print(category_lines['Italian'][:5])
-
 
 ######################################################################
 # Turning Names into Tensors
@@ -72,17 +83,20 @@ print(category_lines['Italian'][:5])
 # batches - we're just using a batch size of 1 here.
 #
 
-import torch
+
+
 
 # Find letter index from all_letters, e.g. "a" = 0
 def letterToIndex(letter):
     return all_letters.find(letter)
+
 
 # Just for demonstration, turn a letter into a <1 x n_letters> Tensor
 def letterToTensor(letter):
     tensor = torch.zeros(1, n_letters)
     tensor[0][letterToIndex(letter)] = 1
     return tensor
+
 
 # Turn a line into a <line_length x 1 x n_letters>,
 # or an array of one-hot letter vectors
@@ -92,10 +106,10 @@ def lineToTensor(line):
         tensor[li][0][letterToIndex(letter)] = 1
     return tensor
 
+
 print(letterToTensor('J'))
 
 print(lineToTensor('Jones').size())
-
 
 ######################################################################
 # Creating the Network
@@ -118,7 +132,8 @@ print(lineToTensor('Jones').size())
 #
 #
 
-import torch.nn as nn
+
+
 
 class RNN(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
@@ -140,9 +155,9 @@ class RNN(nn.Module):
     def initHidden(self):
         return torch.zeros(1, self.hidden_size)
 
+
 n_hidden = 128
 rnn = RNN(n_letters, n_hidden, n_categories)
-
 
 ######################################################################
 # To run a step of this network we need to pass an input (in our case, the
@@ -156,7 +171,6 @@ input = letterToTensor('A')
 hidden = torch.zeros(1, n_hidden)
 
 output, next_hidden = rnn(input, hidden)
-
 
 ######################################################################
 # For the sake of efficiency we don't want to be creating a new Tensor for
@@ -196,18 +210,20 @@ def categoryFromOutput(output):
     category_i = top_i[0].item()
     return all_categories[category_i], category_i
 
-print(categoryFromOutput(output))
 
+print(categoryFromOutput(output))
 
 ######################################################################
 # We will also want a quick way to get a training example (a name and its
 # language):
 #
 
-import random
+
+
 
 def randomChoice(l):
     return l[random.randint(0, len(l) - 1)]
+
 
 def randomTrainingExample():
     category = randomChoice(all_categories)
@@ -216,10 +232,10 @@ def randomTrainingExample():
     line_tensor = lineToTensor(line)
     return category, line, category_tensor, line_tensor
 
+
 for i in range(10):
     category, line, category_tensor, line_tensor = randomTrainingExample()
     print('category =', category, '/ line =', line)
-
 
 ######################################################################
 # Training the Network
@@ -233,7 +249,6 @@ for i in range(10):
 #
 
 criterion = nn.NLLLoss()
-
 
 ######################################################################
 # Each loop of training will:
@@ -249,7 +264,8 @@ criterion = nn.NLLLoss()
 # -  Return the output and loss
 #
 
-learning_rate = 0.005 # If you set this too high, it might explode. If too low, it might not learn
+learning_rate = 0.005  # If you set this too high, it might explode. If too low, it might not learn
+
 
 def train(category_tensor, line_tensor):
     hidden = rnn.initHidden()
@@ -277,18 +293,16 @@ def train(category_tensor, line_tensor):
 # average of the loss.
 #
 
-import time
-import math
+
 
 n_iters = 100000
 print_every = 5000
 plot_every = 1000
 
-
-
 # Keep track of losses for plotting
 current_loss = 0
 all_losses = []
+
 
 def timeSince(since):
     now = time.time()
@@ -296,6 +310,7 @@ def timeSince(since):
     m = math.floor(s / 60)
     s -= m * 60
     return '%dm %ds' % (m, s)
+
 
 start = time.time()
 
@@ -308,13 +323,13 @@ for iter in range(1, n_iters + 1):
     if iter % print_every == 0:
         guess, guess_i = categoryFromOutput(output)
         correct = '✓' if guess == category else '✗ (%s)' % category
-        print('%d %d%% (%s) %.4f %s / %s %s' % (iter, iter / n_iters * 100, timeSince(start), loss, line, guess, correct))
+        print(
+            '%d %d%% (%s) %.4f %s / %s %s' % (iter, iter / n_iters * 100, timeSince(start), loss, line, guess, correct))
 
     # Add current loss avg to list of losses
     if iter % plot_every == 0:
         all_losses.append(current_loss / plot_every)
         current_loss = 0
-
 
 ######################################################################
 # Plotting the Results
@@ -324,12 +339,10 @@ for iter in range(1, n_iters + 1):
 # learning:
 #
 
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
+
 
 plt.figure()
 plt.plot(all_losses)
-
 
 ######################################################################
 # Evaluating the Results
@@ -346,6 +359,7 @@ plt.plot(all_losses)
 confusion = torch.zeros(n_categories, n_categories)
 n_confusion = 10000
 
+
 # Just return an output given a line
 def evaluate(line_tensor):
     hidden = rnn.initHidden()
@@ -354,6 +368,7 @@ def evaluate(line_tensor):
         output, hidden = rnn(line_tensor[i], hidden)
 
     return output
+
 
 # Go through a bunch of examples and record which are correctly guessed
 for i in range(n_confusion):
@@ -412,6 +427,7 @@ def predict(input_line, n_predictions=3):
             category_index = topi[0][i].item()
             print('(%.2f) %s' % (value, all_categories[category_index]))
             predictions.append([value, all_categories[category_index]])
+
 
 predict('Dovesky')
 predict('Jackson')
