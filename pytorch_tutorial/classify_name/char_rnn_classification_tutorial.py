@@ -27,7 +27,7 @@ n_letters = len(all_letters)
 
 
 # Turn a Unicode string to plain ASCII, thanks to https://stackoverflow.com/a/518232/2809427
-def unicodeToAscii(s):
+def unicode_to_ascii(s):
     return ''.join(
         c for c in unicodedata.normalize('NFD', s)
         if unicodedata.category(c) != 'Mn'
@@ -35,7 +35,7 @@ def unicodeToAscii(s):
     )
 
 
-print(unicodeToAscii('Ślusàrski'))
+print(unicode_to_ascii('Ślusàrski'))
 
 # Build the category_lines dictionary, a list of names per language
 category_lines = {}
@@ -45,7 +45,7 @@ all_categories = []
 # Read a file and split into lines
 def readLines(filename):
     lines = open(filename, encoding='utf-8').read().strip().split('\n')
-    return [unicodeToAscii(line) for line in lines]
+    return [unicode_to_ascii(line) for line in lines]
 
 
 for filename in find_files('data/names/*.txt'):
