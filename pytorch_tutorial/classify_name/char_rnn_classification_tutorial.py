@@ -16,11 +16,11 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
 
+def find_files(path):
+    return glob.glob(path)
 
-def findFiles(path): return glob.glob(path)
 
-
-print(findFiles('data/names/*.txt'))
+print(find_files('data/names/*.txt'))
 
 all_letters = string.ascii_letters + " .,;'"
 n_letters = len(all_letters)
@@ -48,7 +48,7 @@ def readLines(filename):
     return [unicodeToAscii(line) for line in lines]
 
 
-for filename in findFiles('data/names/*.txt'):
+for filename in find_files('data/names/*.txt'):
     category = os.path.splitext(os.path.basename(filename))[0]
     all_categories.append(category)
     lines = readLines(filename)
@@ -64,6 +64,7 @@ n_categories = len(all_categories)
 #
 
 print(category_lines['Italian'][:5])
+
 
 ######################################################################
 # Turning Names into Tensors
@@ -82,8 +83,6 @@ print(category_lines['Italian'][:5])
 # That extra 1 dimension is because PyTorch assumes everything is in
 # batches - we're just using a batch size of 1 here.
 #
-
-
 
 
 # Find letter index from all_letters, e.g. "a" = 0
@@ -111,6 +110,7 @@ print(letterToTensor('J'))
 
 print(lineToTensor('Jones').size())
 
+
 ######################################################################
 # Creating the Network
 # ====================
@@ -131,8 +131,6 @@ print(lineToTensor('Jones').size())
 #    :alt:
 #
 #
-
-
 
 
 class RNN(nn.Module):
@@ -213,12 +211,11 @@ def categoryFromOutput(output):
 
 print(categoryFromOutput(output))
 
+
 ######################################################################
 # We will also want a quick way to get a training example (a name and its
 # language):
 #
-
-
 
 
 def randomChoice(l):
@@ -294,7 +291,6 @@ def train(category_tensor, line_tensor):
 #
 
 
-
 n_iters = 100000
 print_every = 5000
 plot_every = 1000
@@ -338,7 +334,6 @@ for iter in range(1, n_iters + 1):
 # Plotting the historical loss from ``all_losses`` shows the network
 # learning:
 #
-
 
 
 plt.figure()
