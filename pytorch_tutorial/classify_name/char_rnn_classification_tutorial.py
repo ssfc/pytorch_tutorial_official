@@ -20,10 +20,11 @@ def find_files(path):
     return glob.glob(path)
 
 
-print(find_files('data/names/*.txt'))
+print("files found: ", find_files('data/names/*.txt'))
 
 all_letters = string.ascii_letters + " .,;'"
 n_letters = len(all_letters)
+print("all letters: ", all_letters)
 
 
 # Turn a Unicode string to plain ASCII, thanks to https://stackoverflow.com/a/518232/2809427
@@ -35,7 +36,7 @@ def unicode_to_ascii(s):
     )
 
 
-print(unicode_to_ascii('Ślusàrski'))
+print("unicode to ascii: ", unicode_to_ascii('Ślusàrski'))
 
 # Build the category_lines dictionary, a list of names per language
 category_lines = {}
