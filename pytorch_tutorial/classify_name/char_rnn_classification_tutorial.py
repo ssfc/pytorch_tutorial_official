@@ -57,6 +57,7 @@ for file_name in find_files('data/names/*.txt'):
 
 n_categories = len(all_categories)
 print("all categories: ", all_categories)
+# print("category lines: ", category_lines)
 
 ######################################################################
 # Now we have ``category_lines``, a dictionary mapping each category
