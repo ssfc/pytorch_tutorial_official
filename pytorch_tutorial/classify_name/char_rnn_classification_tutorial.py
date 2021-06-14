@@ -99,7 +99,7 @@ def letter_to_tensor(letter):
 
 # Turn a line into a <line_length x 1 x n_letters>,
 # or an array of one-hot letter vectors
-def lineToTensor(line):
+def line_to_tensor(line):
     tensor = torch.zeros(len(line), 1, n_letters)
     for li, letter in enumerate(line):
         tensor[li][0][letter_to_index(letter)] = 1
@@ -108,7 +108,7 @@ def lineToTensor(line):
 
 print(letter_to_tensor('J'))
 
-print(lineToTensor('Jones').size())
+print(line_to_tensor('Jones').size())
 
 
 ######################################################################
@@ -172,12 +172,12 @@ output, next_hidden = rnn(input, hidden)
 
 ######################################################################
 # For the sake of efficiency we don't want to be creating a new Tensor for
-# every step, so we will use ``lineToTensor`` instead of
+# every step, so we will use ``line_to_tensor`` instead of
 # ``letter_to_tensor`` and use slices. This could be further optimized by
 # pre-computing batches of Tensors.
 #
 
-input = lineToTensor('Albert')
+input = line_to_tensor('Albert')
 hidden = torch.zeros(1, n_hidden)
 
 output, next_hidden = rnn(input[0], hidden)
@@ -226,7 +226,7 @@ def randomTrainingExample():
     category = randomChoice(all_categories)
     line = randomChoice(category_lines[category])
     category_tensor = torch.tensor([all_categories.index(category)], dtype=torch.long)
-    line_tensor = lineToTensor(line)
+    line_tensor = line_to_tensor(line)
     return category, line, category_tensor, line_tensor
 
 
@@ -411,7 +411,7 @@ plt.show()
 def predict(input_line, n_predictions=3):
     print('\n> %s' % input_line)
     with torch.no_grad():
-        output = evaluate(lineToTensor(input_line))
+        output = evaluate(line_to_tensor(input_line))
 
         # Get top N categories
         topv, topi = output.topk(n_predictions, 1, True)
