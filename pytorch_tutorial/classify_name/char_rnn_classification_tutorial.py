@@ -91,7 +91,7 @@ def letter_to_index(letter):
 
 
 # Just for demonstration, turn a letter into a <1 x n_letters> Tensor
-def letterToTensor(letter):
+def letter_to_tensor(letter):
     tensor = torch.zeros(1, n_letters)
     tensor[0][letter_to_index(letter)] = 1
     return tensor
@@ -106,7 +106,7 @@ def lineToTensor(line):
     return tensor
 
 
-print(letterToTensor('J'))
+print(letter_to_tensor('J'))
 
 print(lineToTensor('Jones').size())
 
@@ -165,7 +165,7 @@ rnn = RNN(n_letters, n_hidden, n_categories)
 # step).
 #
 
-input = letterToTensor('A')
+input = letter_to_tensor('A')
 hidden = torch.zeros(1, n_hidden)
 
 output, next_hidden = rnn(input, hidden)
@@ -173,7 +173,7 @@ output, next_hidden = rnn(input, hidden)
 ######################################################################
 # For the sake of efficiency we don't want to be creating a new Tensor for
 # every step, so we will use ``lineToTensor`` instead of
-# ``letterToTensor`` and use slices. This could be further optimized by
+# ``letter_to_tensor`` and use slices. This could be further optimized by
 # pre-computing batches of Tensors.
 #
 
