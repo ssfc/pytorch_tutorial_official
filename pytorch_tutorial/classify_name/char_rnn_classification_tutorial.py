@@ -45,7 +45,18 @@ def tokenize_sentence(sentences):  # split each sentence into list, made up with
     return tokens
 
 
+tokenized_sentence = tokenize_sentence(sentences)  # split each sentence into list, made up with words;
+print("Tokenized sentence: ", tokenized_sentence)
 
+vocabulary = []
+for sentence in tokenized_sentence:
+    for token in sentence:
+        if token not in vocabulary:
+            vocabulary.append(token)  # add word not in vocabulary into vocabulary;
+
+word_size = len(vocabulary)
+print("Vocabulary: ", vocabulary)
+print("Size of vocabulary: ", word_size)
 
 
 # Turn a Unicode string to plain ASCII, thanks to https://stackoverflow.com/a/518232/2809427
