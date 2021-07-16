@@ -15,7 +15,7 @@ import math
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
-
+# --------------------------- get all files -------------------------
 def find_files(path):
     return glob.glob(path)
 
@@ -27,7 +27,7 @@ all_letters = string.ascii_letters + " .,;'"
 n_letters = len(all_letters)
 print("all letters: ", all_letters)
 
-
+# ------------------------ get all words (vocabulary) ---------------------
 
 
 
