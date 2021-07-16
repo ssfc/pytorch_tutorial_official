@@ -28,6 +28,15 @@ n_letters = len(all_letters)
 print("all letters: ", all_letters)
 
 # ------------------------ get all words (vocabulary) ---------------------
+with open("data/sentences/priority_corpus.txt", "r", encoding='UTF-8') as f:
+    data = f.readlines()
+
+sentences = []
+for line in data:
+    sentences.append(line[1: len(line) - 2])
+
+print("Sentences: ", sentences)
+print("Size of sentences: ", len(sentences))
 
 
 
