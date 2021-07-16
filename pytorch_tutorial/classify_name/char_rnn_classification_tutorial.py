@@ -39,6 +39,10 @@ print("Sentences: ", sentences)
 print("Size of sentences: ", len(sentences))
 
 
+def tokenize_sentence(sentences):  # split each sentence into list, made up with words;
+    tokens = [x.split("*") for x in sentences]
+
+    return tokens
 
 
 
