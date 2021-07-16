@@ -21,6 +21,7 @@ def find_files(path):
 
 
 print("files found: ", find_files('data/names/*.txt'))
+print("files found: ", find_files('data/sentences/*.txt'))
 
 all_letters = string.ascii_letters + " .,;'"
 n_letters = len(all_letters)
