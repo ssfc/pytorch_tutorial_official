@@ -15,6 +15,7 @@ import math
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
+
 # --------------------------- get all files -------------------------
 def find_files(path):
     return glob.glob(path)
@@ -59,6 +60,7 @@ print("Vocabulary: ", vocabulary)
 print("Size of vocabulary: ", word_size)
 
 
+# ----------------------------------------------------------------------------------------------------
 # Turn a Unicode string to plain ASCII, thanks to https://stackoverflow.com/a/518232/2809427
 def unicode_to_ascii(s):
     return ''.join(
