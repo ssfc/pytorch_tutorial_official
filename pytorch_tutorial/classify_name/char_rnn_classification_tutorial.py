@@ -28,6 +28,13 @@ n_letters = len(all_letters)
 print("all letters: ", all_letters)
 
 
+
+
+
+
+
+
+
 # Turn a Unicode string to plain ASCII, thanks to https://stackoverflow.com/a/518232/2809427
 def unicode_to_ascii(s):
     return ''.join(
