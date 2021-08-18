@@ -75,7 +75,8 @@ print("unicode to ascii: ", unicode_to_ascii('Ślusàrski'))
 # Build the category_lines dictionary, a list of names per language
 category_lines = {}
 all_categories = []
-
+type_lines = {}
+all_types = []
 
 # Read a file and split into lines
 def read_lines(file_name):
@@ -90,7 +91,7 @@ for file_name in find_files('data/names/*.txt'):
     category_lines[category] = lines
 
 n_categories = len(all_categories)
-print("all categories: ", all_categories)  # method, relation, definition; 
+print("all categories: ", all_categories)  # method, relation, definition;
 # print("category lines: ", category_lines)
 
 ######################################################################
