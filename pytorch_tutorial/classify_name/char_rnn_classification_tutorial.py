@@ -1,5 +1,5 @@
 # https://pytorch.org/tutorials/intermediate/char_rnn_classification_tutorial.html#exercises
-# we print our type after original codes; 
+# we print our type after original codes;
 
 from __future__ import unicode_literals, print_function, division
 from io import open
@@ -90,9 +90,19 @@ for file_name in find_files('data/names/*.txt'):
     lines = read_lines(file_name)
     category_lines[category] = lines
 
+for file_name in find_files('data/sentences/*.txt'):
+    sentence_type = os.path.splitext(os.path.basename(file_name))[0]
+    all_types.append(sentence_type)
+    lines = read_lines(file_name)
+    type_lines[sentence_type] = lines
+
+
+
 n_categories = len(all_categories)
 print("all categories: ", all_categories)  # method, relation, definition;
 # print("category lines: ", category_lines)
+print("all types: ", all_types)  # method, relation, definition;
+
 
 ######################################################################
 # Now we have ``category_lines``, a dictionary mapping each category
