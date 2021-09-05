@@ -1,5 +1,5 @@
 # https://pytorch.org/tutorials/intermediate/char_rnn_classification_tutorial.html#exercises
-
+# we print our type after original codes; 
 
 from __future__ import unicode_literals, print_function, division
 from io import open
