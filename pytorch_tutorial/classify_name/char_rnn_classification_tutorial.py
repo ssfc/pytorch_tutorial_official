@@ -159,7 +159,8 @@ def line_to_tensor(line):
 
 
 print("letter to index: ")
-print(letter_to_index('J'))
+print("J: ", letter_to_index('J'))
+print("o: ", letter_to_index('o'))
 print("letter to tensor: ")
 print(letter_to_tensor('J'))
 print("line to tensor: ")
