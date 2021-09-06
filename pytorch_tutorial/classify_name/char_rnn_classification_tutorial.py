@@ -158,6 +158,8 @@ def line_to_tensor(line):
     return tensor
 
 
+print("letter to index: ")
+print(letter_to_index('J'))
 print("letter to tensor: ")
 print(letter_to_tensor('J'))
 print("line to tensor: ")
