@@ -78,14 +78,17 @@ all_categories = []
 type_lines = {}
 all_types = []
 
+
 # Read a file and split into lines
 def read_lines(file_name):
     lines = open(file_name, encoding='utf-8').read().strip().split('\n')
     return [unicode_to_ascii(line) for line in lines]
 
+
 def read_type_lines(file_name):
     lines = open(file_name, encoding='utf-8').read().strip().split('\n')
     return [line for line in lines]
+
 
 for file_name in find_files('data/names/*.txt'):
     category = os.path.splitext(os.path.basename(file_name))[0]
@@ -104,7 +107,6 @@ print("all categories: ", all_categories)  # method, relation, definition;
 # print("category lines: ", category_lines)
 print("all types: ", all_types)  # method, relation, definition;
 
-
 ######################################################################
 # Now we have ``category_lines``, a dictionary mapping each category
 # (language) to a list of lines (names). We also kept track of
@@ -114,6 +116,7 @@ print("all types: ", all_types)  # method, relation, definition;
 
 print(category_lines['Italian'][:5])
 print(type_lines['priority_corpus'][:3])
+
 
 ######################################################################
 # Turning Names into Tensors
@@ -155,8 +158,9 @@ def line_to_tensor(line):
     return tensor
 
 
+print("letter to tensor: ")
 print(letter_to_tensor('J'))
-
+print("line to tensor: ")
 print(line_to_tensor('Jones').size())
 
 
