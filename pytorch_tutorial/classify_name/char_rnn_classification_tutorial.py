@@ -96,8 +96,6 @@ for file_name in find_files('data/sentences/*.txt'):
     lines = read_lines(file_name)
     type_lines[sentence_type] = lines
 
-
-
 n_categories = len(all_categories)
 print("all categories: ", all_categories)  # method, relation, definition;
 # print("category lines: ", category_lines)
