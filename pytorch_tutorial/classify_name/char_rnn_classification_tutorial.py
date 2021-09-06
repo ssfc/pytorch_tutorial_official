@@ -83,6 +83,9 @@ def read_lines(file_name):
     lines = open(file_name, encoding='utf-8').read().strip().split('\n')
     return [unicode_to_ascii(line) for line in lines]
 
+def read_type_lines(file_name):
+    lines = open(file_name, encoding='utf-8').read().strip().split('\n')
+    return [line for line in lines]
 
 for file_name in find_files('data/names/*.txt'):
     category = os.path.splitext(os.path.basename(file_name))[0]
@@ -93,7 +96,7 @@ for file_name in find_files('data/names/*.txt'):
 for file_name in find_files('data/sentences/*.txt'):
     sentence_type = os.path.splitext(os.path.basename(file_name))[0]
     all_types.append(sentence_type)
-    lines = read_lines(file_name)
+    lines = read_type_lines(file_name)
     type_lines[sentence_type] = lines
 
 n_categories = len(all_categories)
@@ -110,7 +113,7 @@ print("all types: ", all_types)  # method, relation, definition;
 #
 
 print(category_lines['Italian'][:5])
-
+print(type_lines['priority_corpus'][:3])
 
 ######################################################################
 # Turning Names into Tensors
