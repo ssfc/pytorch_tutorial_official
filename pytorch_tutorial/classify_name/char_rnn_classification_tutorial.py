@@ -141,6 +141,12 @@ print(type_lines['priority_corpus'][:3])
 def letter_to_index(letter):
     return all_letters.find(letter)
 
+# same as function letter_to_index; 
+word2idx = {w: idx for (idx, w) in enumerate(vocabulary)}  # create dictionary;
+idx2word = {idx: w for (idx, w) in enumerate(vocabulary)}  # create dictionary;
+
+print(word2idx)
+
 
 # Just for demonstration, turn a letter into a <1 x n_letters> Tensor
 def letter_to_tensor(letter):
