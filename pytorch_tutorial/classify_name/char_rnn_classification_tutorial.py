@@ -161,6 +161,10 @@ def letter_to_tensor(letter):
     return tensor
 
 
+print("letter to tensor: ")
+print(letter_to_tensor('J'))
+
+
 # Turn a line into a <line_length x 1 x n_letters>,
 # or an array of one-hot letter vectors
 def line_to_tensor(line):
@@ -169,9 +173,6 @@ def line_to_tensor(line):
         tensor[li][0][letter_to_index(letter)] = 1
     return tensor
 
-
-print("letter to tensor: ")
-print(letter_to_tensor('J'))
 print("line to tensor: ")
 print(line_to_tensor('Jones').size())
 
