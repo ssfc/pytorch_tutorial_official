@@ -142,11 +142,16 @@ def letter_to_index(letter):
     return all_letters.find(letter)
 
 
+print("letter to index: ")
+print("J: ", letter_to_index('J'))
+print("o: ", letter_to_index('o'))
+
 # same as function letter_to_index;
 word2idx = {w: idx for (idx, w) in enumerate(vocabulary)}  # create dictionary;
 idx2word = {idx: w for (idx, w) in enumerate(vocabulary)}  # create dictionary;
 
-print(word2idx)
+print("word to index: ", word2idx)
+print("word 23 to index: ", word2idx['23'])
 
 
 # Just for demonstration, turn a letter into a <1 x n_letters> Tensor
@@ -165,9 +170,6 @@ def line_to_tensor(line):
     return tensor
 
 
-print("letter to index: ")
-print("J: ", letter_to_index('J'))
-print("o: ", letter_to_index('o'))
 print("letter to tensor: ")
 print(letter_to_tensor('J'))
 print("line to tensor: ")
