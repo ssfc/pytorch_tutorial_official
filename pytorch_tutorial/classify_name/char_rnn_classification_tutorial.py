@@ -40,13 +40,13 @@ print("Sentences: ", sentences)
 print("Size of sentences: ", len(sentences))
 
 
-def tokenize_sentence(sentences):  # split each sentence into list, made up with words;
+def tokenize_sentence():  # split each sentence into list, made up with words;
     tokens = [x.split("*") for x in sentences]
 
     return tokens
 
 
-tokenized_sentence = tokenize_sentence(sentences)  # split each sentence into list, made up with words;
+tokenized_sentence = tokenize_sentence()  # split each sentence into list, made up with words;
 print("Tokenized sentence: ", tokenized_sentence)
 
 vocabulary = []
@@ -187,9 +187,13 @@ def line_to_tensor(line):
 print("line to tensor: ")
 print(line_to_tensor('Jones').size())
 
-
-
-
+'''
+def sentence_to_tensor(this_sentence):
+    tensor = torch.zeros(len(this_sentence), 1, word_size)
+    for li, letter in enumerate(this_sentence):
+        tensor[li][0][letter_to_index(letter)] = 1
+    return tensor
+'''
 
 
 
