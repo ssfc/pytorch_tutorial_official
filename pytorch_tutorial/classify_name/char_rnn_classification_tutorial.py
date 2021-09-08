@@ -114,8 +114,8 @@ print("all types: ", all_types)  # method, relation, definition;
 # later reference.
 #
 
-print(category_lines['Italian'][:5])
-print(type_lines['priority_corpus'][:3])
+print("First 5 words of Italian: ", category_lines['Italian'][:5])
+print("First 5 sentences of corpus: ", type_lines['priority_corpus'][:3])
 
 
 ######################################################################
@@ -186,6 +186,12 @@ def line_to_tensor(line):
 
 print("line to tensor: ")
 print(line_to_tensor('Jones').size())
+
+
+
+
+
+
 
 
 ######################################################################
