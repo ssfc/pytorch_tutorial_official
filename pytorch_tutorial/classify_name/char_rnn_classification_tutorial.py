@@ -174,6 +174,7 @@ def word_to_tensor(word):
 print("word to tensor: ")
 print(word_to_tensor('23'))  # 1 appear at position 35;
 
+
 # Turn a line into a <line_length x 1 x n_letters>,
 # or an array of one-hot letter vectors
 def line_to_tensor(line):
@@ -181,6 +182,7 @@ def line_to_tensor(line):
     for li, letter in enumerate(line):
         tensor[li][0][letter_to_index(letter)] = 1
     return tensor
+
 
 print("line to tensor: ")
 print(line_to_tensor('Jones').size())
