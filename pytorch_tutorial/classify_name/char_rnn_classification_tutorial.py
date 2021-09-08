@@ -162,7 +162,7 @@ def letter_to_tensor(letter):
 
 
 print("letter to tensor: ")
-print(letter_to_tensor('J'))
+print(letter_to_tensor('J'))  # 1 appear at position 35; 
 
 
 # Turn a line into a <line_length x 1 x n_letters>,
