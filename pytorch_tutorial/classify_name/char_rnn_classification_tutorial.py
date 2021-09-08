@@ -162,8 +162,17 @@ def letter_to_tensor(letter):
 
 
 print("letter to tensor: ")
-print(letter_to_tensor('J'))  # 1 appear at position 35; 
+print(letter_to_tensor('J'))  # 1 appear at position 35;
 
+
+def word_to_tensor(word):
+    tensor = torch.zeros(1, word_size)
+    tensor[0][word2idx[word]] = 1
+    return tensor
+
+
+print("word to tensor: ")
+print(word_to_tensor('23'))  # 1 appear at position 35;
 
 # Turn a line into a <line_length x 1 x n_letters>,
 # or an array of one-hot letter vectors
