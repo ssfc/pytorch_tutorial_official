@@ -259,13 +259,13 @@ input = letter_to_tensor('A')
 hidden = torch.zeros(1, n_hidden)
 
 output, next_hidden = rnn(input, hidden)
-print("single letter output: ", output)
+print("single letter output: ", output.size(), output)
 
 input = word_to_tensor('23')
 hidden = torch.zeros(1, n_hidden)
 
 output, next_hidden = rnn_ssfc(input, hidden)
-print("single word output: ", output)
+print("single word output: ", output.size(), output)
 
 ######################################################################
 # For the sake of efficiency we don't want to be creating a new Tensor for
