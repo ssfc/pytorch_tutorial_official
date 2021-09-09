@@ -192,6 +192,7 @@ print(line_to_tensor('Jones').size())
 
 def sentence_to_tensor(this_sentence):
     tokens = this_sentence.split("*")[1:-1]
+#    tokens = this_sentence.split("*")
     tensor = torch.zeros(len(tokens), 1, len(vocabulary))
     for count, word in enumerate(tokens):
         tensor[count][0][word2idx[word]] = 1
@@ -276,19 +277,20 @@ print("single word output: ", output.size(), output)
 # pre-computing batches of Tensors.
 #
 
-input = line_to_tensor('Albert')
+input_line = line_to_tensor('Albert')
+hidden_line = torch.zeros(1, n_hidden)
+
+output_line, next_hidden = rnn(input_line[0], hidden_line)
+print("line output: ", output_line.size(), output_line)
+
+
+input_sentence = sentence_to_tensor('*5*23*17*72*72*72*72*5*38*38*38*23*23*1*')
 hidden = torch.zeros(1, n_hidden)
+#print("input_sentence[0]: ", input_sentence[0].size())
 
-output, next_hidden = rnn(input[0], hidden)
-print("line output: ", output.size(), output)
+#output, next_hidden = rnn(input_sentence[0], hidden)
+#print("sentence output: ", output)
 
-
-input = sentence_to_tensor('*5*23*17*72*72*72*72*5*38*38*38*23*23*1*')
-hidden = torch.zeros(1, n_hidden)
-'''
-output, next_hidden = rnn(input[0], hidden)
-print("sentence output: ", output)
-'''
 ######################################################################
 # As you can see the output is a ``<1 x n_categories>`` Tensor, where
 # every item is the likelihood of that category (higher is more likely).
