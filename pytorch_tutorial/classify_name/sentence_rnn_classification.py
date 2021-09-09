@@ -195,7 +195,6 @@ def sentence_to_tensor(this_sentence):
         tensor[count][0][word2idx[word]] = 1
 
     return tensor
-#    return tokens
 
 
 print("sentence to tensor: ", sentence_to_tensor("*5*23*17*72*72*72*72*5*38*38*38*23*23*1*").size())
