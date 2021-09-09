@@ -261,6 +261,12 @@ hidden = torch.zeros(1, n_hidden)
 output, next_hidden = rnn(input, hidden)
 print("single letter output: ", output)
 
+input = word_to_tensor('23')
+hidden = torch.zeros(1, n_hidden)
+
+output, next_hidden = rnn_ssfc(input, hidden)
+print("single word output: ", output)
+
 ######################################################################
 # For the sake of efficiency we don't want to be creating a new Tensor for
 # every step, so we will use ``line_to_tensor`` instead of
