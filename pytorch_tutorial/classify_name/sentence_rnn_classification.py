@@ -281,10 +281,11 @@ hidden = torch.zeros(1, n_hidden)
 
 output, next_hidden = rnn(input[0], hidden)
 print("line output: ", output.size(), output)
-'''
+
+
 input = sentence_to_tensor('*5*23*17*72*72*72*72*5*38*38*38*23*23*1*')
 hidden = torch.zeros(1, n_hidden)
-
+'''
 output, next_hidden = rnn(input[0], hidden)
 print("sentence output: ", output)
 '''
