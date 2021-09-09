@@ -25,7 +25,7 @@ print("files found: ", find_files('data/names/*.txt'))
 print("files found: ", find_files('data/sentences/*.txt'))
 
 all_letters = string.ascii_letters + " .,;'"
-n_letters = len(all_letters)
+n_letters = len(all_letters)  # equals to len(vocabulary)
 print("all letters: ", all_letters)
 
 # ------------------------ get all words (vocabulary) ---------------------
@@ -239,12 +239,13 @@ class RNN(nn.Module):
         output = self.softmax(output)
         return output, hidden
 
-    def initHidden(self):
+    def init_hidden(self):
         return torch.zeros(1, self.hidden_size)
 
 
 n_hidden = 128
 rnn = RNN(n_letters, n_hidden, n_categories)
+rnn_ssfc = RNN(len(vocabulary), n_hidden, len(all_types))
 
 ######################################################################
 # To run a step of this network we need to pass an input (in our case, the
@@ -354,7 +355,7 @@ learning_rate = 0.005  # If you set this too high, it might explode. If too low,
 
 
 def train(category_tensor, line_tensor):
-    hidden = rnn.initHidden()
+    hidden = rnn.init_hidden()
 
     rnn.zero_grad()
 
@@ -446,7 +447,7 @@ n_confusion = 10000
 
 # Just return an output given a line
 def evaluate(line_tensor):
-    hidden = rnn.initHidden()
+    hidden = rnn.init_hidden()
 
     for i in range(line_tensor.size()[0]):
         output, hidden = rnn(line_tensor[i], hidden)
