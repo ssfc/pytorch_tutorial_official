@@ -279,8 +279,8 @@ print("single word output: ", output.size(), output)
 
 input_line = line_to_tensor('Albert')
 hidden_line = torch.zeros(1, n_hidden)
-
-output_line, next_hidden = rnn(input_line[0], hidden_line)
+print("input_line[0]: ", input_line[0])
+output_line, next_hidden_line = rnn(input_line[0], hidden_line)
 print("line output: ", output_line.size(), output_line)
 
 
