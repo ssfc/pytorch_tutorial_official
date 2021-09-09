@@ -259,6 +259,7 @@ input = letter_to_tensor('A')
 hidden = torch.zeros(1, n_hidden)
 
 output, next_hidden = rnn(input, hidden)
+print("single letter output: ", output)
 
 ######################################################################
 # For the sake of efficiency we don't want to be creating a new Tensor for
