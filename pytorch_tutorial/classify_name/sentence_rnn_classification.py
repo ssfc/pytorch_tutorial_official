@@ -187,15 +187,19 @@ def line_to_tensor(line):
 print("line to tensor: ")
 print(line_to_tensor('Jones').size())
 
-'''
+
 def sentence_to_tensor(this_sentence):
-    tensor = torch.zeros(len(this_sentence), 1, word_size)
-    for li, letter in enumerate(this_sentence):
-        tensor[li][0][letter_to_index(letter)] = 1
-    return tensor
-'''
+    tokens = this_sentence.split("*")
+
+#    tensor = torch.zeros(len(this_sentence), 1, word_size)
+#    for li, letter in enumerate(this_sentence):
+#        tensor[li][0][letter_to_index(letter)] = 1
+
+#    return tensor
+    return tokens
 
 
+print("sentence to tensor: ", sentence_to_tensor("*5*23*17*72*72*72*72*5*38*38*38*23*23*1*"))
 
 
 ######################################################################
