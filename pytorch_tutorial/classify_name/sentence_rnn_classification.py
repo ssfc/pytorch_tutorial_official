@@ -166,7 +166,7 @@ print(letter_to_tensor('J'))  # 1 appear at position 35;
 
 
 def word_to_tensor(word):
-    tensor = torch.zeros(1, word_size)
+    tensor = torch.zeros(1, len(vocabulary))
     tensor[0][word2idx[word]] = 1
     return tensor
 
@@ -190,7 +190,7 @@ print(line_to_tensor('Jones').size())
 
 def sentence_to_tensor(this_sentence):
     tokens = this_sentence.split("*")[1:-1]
-    tensor = torch.zeros(len(tokens), 1, word_size)
+    tensor = torch.zeros(len(tokens), 1, len(vocabulary))
     for count, word in enumerate(tokens):
         tensor[count][0][word2idx[word]] = 1
 
