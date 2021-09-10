@@ -286,10 +286,10 @@ print("line output: ", output_line.size(), output_line)
 
 input_sentence = sentence_to_tensor('*5*23*17*72*72*72*72*5*38*38*38*23*23*1*')
 hidden = torch.zeros(1, n_hidden)
-#print("input_sentence[0]: ", input_sentence[0].size())
+print("input_sentence[0]: ", input_sentence[0].size())
 
-#output, next_hidden = rnn(input_sentence[0], hidden)
-#print("sentence output: ", output)
+output, next_hidden = rnn_ssfc(input_sentence[0], hidden)
+print("sentence output: ", output)
 
 ######################################################################
 # As you can see the output is a ``<1 x n_categories>`` Tensor, where
