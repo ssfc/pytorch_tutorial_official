@@ -277,11 +277,11 @@ print("single word output: ", output.size(), output)
 # pre-computing batches of Tensors.
 #
 
-input_line = line_to_tensor('Albert')
-hidden_line = torch.zeros(1, n_hidden)
-print("input_line[0]: ", input_line[0])
-output_line, next_hidden_line = rnn(input_line[0], hidden_line)
-print("line output: ", output_line.size(), output_line)
+input = line_to_tensor('Albert')
+hidden = torch.zeros(1, n_hidden)
+print("line input[0]: ", input[0])
+output, next_hidden = rnn(input[0], hidden)
+print("line output: ", output.size(), output)
 
 
 input = sentence_to_tensor('*5*23*17*72*72*72*72*5*38*38*38*23*23*1*')
