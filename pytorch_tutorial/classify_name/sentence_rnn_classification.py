@@ -260,13 +260,11 @@ rnn_ssfc = RNN(len(vocabulary), n_hidden, len(all_types))
 
 input = letter_to_tensor('A')
 hidden = torch.zeros(1, n_hidden)
-
 output, next_hidden = rnn(input, hidden)
 print("single letter output: ", output.size(), output)
 
 input = word_to_tensor('23')
 hidden = torch.zeros(1, n_hidden)
-
 output, next_hidden = rnn_ssfc(input, hidden)
 print("single word output: ", output.size(), output)
 
@@ -283,13 +281,13 @@ print("line input[0]: ", input[0])
 output, next_hidden = rnn(input[0], hidden)
 print("line output: ", output.size(), output)
 
-
+'''
 input = sentence_to_tensor('*5*23*17*72*72*72*72*5*38*38*38*23*23*1*')
 hidden = torch.zeros(1, n_hidden)
 print("sentence input[0]: ", input[0].size())
 output, next_hidden = rnn_ssfc(input[0], hidden)
-print("sentence output: ", output)
-
+print("sentence output: ", output.size(), output)
+'''
 ######################################################################
 # As you can see the output is a ``<1 x n_categories>`` Tensor, where
 # every item is the likelihood of that category (higher is more likely).
@@ -315,7 +313,21 @@ def categoryFromOutput(output):
     return all_categories[category_i], category_i
 
 
-print(categoryFromOutput(output))
+print("categoryFromOutput: ", categoryFromOutput(output))
+
+'''
+def typeFromOutput(output):
+    top_n, top_i = output.topk(1)
+    category_i = top_i[0].item()
+    return all_categories[category_i], category_i
+'''
+
+
+
+
+
+
+
 
 
 ######################################################################
