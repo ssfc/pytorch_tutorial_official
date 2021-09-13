@@ -258,10 +258,10 @@ rnn_ssfc = RNN(len(vocabulary), n_hidden, len(all_types))
 # step).
 #
 
-input = letter_to_tensor('A')
-hidden = torch.zeros(1, n_hidden)
-output, next_hidden = rnn(input, hidden)
-print("single letter output: ", output.size(), output)
+input_letter = letter_to_tensor('A')
+hidden_letter = torch.zeros(1, n_hidden)
+output_letter, next_hidden_letter = rnn(input_letter, hidden_letter)
+print("single letter output: ", output_letter.size(), output_letter)
 
 input = word_to_tensor('23')
 hidden = torch.zeros(1, n_hidden)
