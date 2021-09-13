@@ -246,7 +246,7 @@ class RNN(nn.Module):
         return torch.zeros(1, self.hidden_size)
 
 
-n_hidden = 128
+n_hidden = 128  # number of hidden node;
 rnn = RNN(n_letters, n_hidden, n_categories)
 rnn_ssfc = RNN(len(vocabulary), n_hidden, len(all_types))
 
@@ -263,10 +263,10 @@ hidden_letter = torch.zeros(1, n_hidden)
 output_letter, next_hidden_letter = rnn(input_letter, hidden_letter)
 print("single letter output: ", output_letter.size(), output_letter)
 
-input = word_to_tensor('23')
-hidden = torch.zeros(1, n_hidden)
-output, next_hidden = rnn_ssfc(input, hidden)
-print("single word output: ", output.size(), output)
+input_word = word_to_tensor('23')
+hidden_word = torch.zeros(1, n_hidden)
+output_word, next_hidden_word = rnn_ssfc(input_word, hidden_word)
+print("single word output: ", output_word.size(), output_word)
 
 ######################################################################
 # For the sake of efficiency we don't want to be creating a new Tensor for
