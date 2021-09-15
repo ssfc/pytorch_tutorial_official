@@ -337,7 +337,7 @@ def choose_random(l):  # return a random element from list l;
     return l[random.randint(0, len(l) - 1)]
 
 
-def randomTrainingExample():
+def train_random_example():
     category = choose_random(all_categories)
     line = choose_random(category_lines[category])
     category_tensor = torch.tensor([all_categories.index(category)], dtype=torch.long)
@@ -346,7 +346,7 @@ def randomTrainingExample():
 
 
 for i in range(10):
-    category, line, category_tensor, line_tensor = randomTrainingExample()
+    category, line, category_tensor, line_tensor = train_random_example()
     print('category =', category, '/ line =', line)
 
 
@@ -445,7 +445,7 @@ def timeSince(since):
 start = time.time()
 
 for iter in range(1, n_iters + 1):
-    category, line, category_tensor, line_tensor = randomTrainingExample()
+    category, line, category_tensor, line_tensor = train_random_example()
     output, loss = train(category_tensor, line_tensor)
     current_loss += loss
 
@@ -501,7 +501,7 @@ def evaluate(line_tensor):
 
 # Go through a bunch of examples and record which are correctly guessed
 for i in range(n_confusion):
-    category, line, category_tensor, line_tensor = randomTrainingExample()
+    category, line, category_tensor, line_tensor = train_random_example()
     output = evaluate(line_tensor)
     guess, guess_i = categoryFromOutput(output)
     category_i = all_categories.index(category)
