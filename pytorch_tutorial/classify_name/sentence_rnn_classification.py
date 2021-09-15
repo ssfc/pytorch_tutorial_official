@@ -338,10 +338,12 @@ def choose_random(l):  # return a random element from list l;
 
 
 def train_random_example():
-    category = choose_random(all_categories)
-    line = choose_random(category_lines[category])
+    category = choose_random(all_categories)  # choose random category;
+    line = choose_random(category_lines[category])  # choose random name;
+
     category_tensor = torch.tensor([all_categories.index(category)], dtype=torch.long)
     line_tensor = line_to_tensor(line)
+
     return category, line, category_tensor, line_tensor
 
 
@@ -350,7 +352,7 @@ for i in range(10):
     print('category =', category, '/ line =', line)
 
 
-def randomTrainingSentence():
+def train_random_sentence():
     type = choose_random(all_types)
     sentence = choose_random(type_sentences[type])
 
