@@ -308,7 +308,7 @@ print("sentence output: ", output_sentence.size(), output_sentence)
 #
 
 def categoryFromOutput(output):
-    top_n, top_i = output.topk(1)
+    top_n, top_i = output.topk(1)   # top_n is value, top_i is index;
     category_i = top_i[0].item()
 
     return all_categories[category_i], category_i
