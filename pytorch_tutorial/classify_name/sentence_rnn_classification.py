@@ -333,13 +333,13 @@ print("typeFromOutput: ", typeFromOutput(output_sentence))
 #
 
 
-def randomChoice(l):  # return a random element from list l;
+def choose_random(l):  # return a random element from list l;
     return l[random.randint(0, len(l) - 1)]
 
 
 def randomTrainingExample():
-    category = randomChoice(all_categories)
-    line = randomChoice(category_lines[category])
+    category = choose_random(all_categories)
+    line = choose_random(category_lines[category])
     category_tensor = torch.tensor([all_categories.index(category)], dtype=torch.long)
     line_tensor = line_to_tensor(line)
     return category, line, category_tensor, line_tensor
@@ -351,8 +351,8 @@ for i in range(10):
 
 
 def randomTrainingSentence():
-    type = randomChoice(all_types)
-    sentence = randomChoice(type_sentences[type])
+    type = choose_random(all_types)
+    sentence = choose_random(type_sentences[type])
 
     type_tensor = torch.tensor([all_types.index(type)], dtype=torch.long)
     sentence_tensor = sentence_to_tensor(sentence)
