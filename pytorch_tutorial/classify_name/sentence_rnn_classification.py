@@ -75,7 +75,7 @@ print("unicode to ascii: ", unicode_to_ascii('Ślusàrski'))
 # Build the category_lines dictionary, a list of names per language
 category_lines = {}
 all_categories = []
-type_lines = {}
+type_sentences = {}
 all_types = []
 
 
