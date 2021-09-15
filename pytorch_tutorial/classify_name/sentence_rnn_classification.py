@@ -85,7 +85,7 @@ def read_lines(file_name):
     return [unicode_to_ascii(line) for line in lines]
 
 
-def read_type_lines(file_name):
+def read_type_sentences(file_name):
     lines = open(file_name, encoding='utf-8').read().strip().split('\n')
     return [line for line in lines]
 
@@ -99,8 +99,8 @@ for file_name in find_files('data/names/*.txt'):
 for file_name in find_files('data/sentences/*.txt'):
     sentence_type = os.path.splitext(os.path.basename(file_name))[0]
     all_types.append(sentence_type)
-    lines = read_type_lines(file_name)
-    type_lines[sentence_type] = lines
+    lines = read_type_sentences(file_name)
+    type_sentences[sentence_type] = lines
 
 all_types.pop(0)  # remove the first element;
 
@@ -117,7 +117,7 @@ print("all types: ", all_types)  # method, relation, definition;
 #
 
 print("First 5 words of Italian: ", category_lines['Italian'][:5])
-print("First 5 sentences of corpus: ", type_lines['priority_corpus'][:3])
+print("First 5 sentences of corpus: ", type_sentences['priority_corpus'][:3])
 
 
 ######################################################################
@@ -352,7 +352,7 @@ for i in range(10):
 '''
 def randomTrainingSentence():
     type = randomChoice(all_types)
-    sentence = randomChoice(type_lines[type])
+    sentence = randomChoice(type_sentences[type])
     type_tensor = torch.tensor([all_types.index(type)], dtype=torch.long)
     sentence_tensor = sentence_to_tensor(sentence)
     return type, sentence, type_tensor, sentence_tensor
