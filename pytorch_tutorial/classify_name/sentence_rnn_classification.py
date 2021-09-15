@@ -362,7 +362,9 @@ def train_random_sentence():
     return type, sentence, type_tensor, sentence_tensor
 
 
-
+for i in range(10):
+    type, sentence, type_tensor, sentence_tensor = train_random_sentence()
+    print('type =', type, '/ sentence =', sentence)
 
 
 
