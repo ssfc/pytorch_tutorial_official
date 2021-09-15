@@ -349,14 +349,16 @@ for i in range(10):
     category, line, category_tensor, line_tensor = randomTrainingExample()
     print('category =', category, '/ line =', line)
 
-'''
+
 def randomTrainingSentence():
     type = randomChoice(all_types)
     sentence = randomChoice(type_sentences[type])
+
     type_tensor = torch.tensor([all_types.index(type)], dtype=torch.long)
     sentence_tensor = sentence_to_tensor(sentence)
+
     return type, sentence, type_tensor, sentence_tensor
-'''
+
 
 
 
