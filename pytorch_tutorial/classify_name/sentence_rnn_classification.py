@@ -333,7 +333,7 @@ print("typeFromOutput: ", typeFromOutput(output_sentence))
 #
 
 
-def randomChoice(l):  # return a integer between 0 and l-1; 
+def randomChoice(l):  # return a random element from list l;
     return l[random.randint(0, len(l) - 1)]
 
 
