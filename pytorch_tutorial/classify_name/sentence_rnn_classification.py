@@ -318,7 +318,7 @@ print("categoryFromOutput: ", categoryFromOutput(output_sentence))
 
 
 def typeFromOutput(output):
-    top_n, top_i = output.topk(1)
+    top_n, top_i = output.topk(1)  # top_n is value, top_i is index; 
     type_i = top_i[0].item()
 
     return all_types[type_i], type_i
