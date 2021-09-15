@@ -318,7 +318,7 @@ print("categoryFromOutput: ", categoryFromOutput(output_sentence))
 
 
 def typeFromOutput(output):
-    top_n, top_i = output.topk(1)  # top_n is value, top_i is index; 
+    top_n, top_i = output.topk(1)  # top_n is value, top_i is index;
     type_i = top_i[0].item()
 
     return all_types[type_i], type_i
@@ -327,18 +327,13 @@ def typeFromOutput(output):
 print("typeFromOutput: ", typeFromOutput(output_sentence))
 
 
-
-
-
-
-
 ######################################################################
 # We will also want a quick way to get a training example (a name and its
 # language):
 #
 
 
-def randomChoice(l):
+def randomChoice(l):  # return a integer between 0 and l-1; 
     return l[random.randint(0, len(l) - 1)]
 
 
