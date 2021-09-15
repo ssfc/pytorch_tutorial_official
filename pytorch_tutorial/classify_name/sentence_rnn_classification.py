@@ -281,13 +281,13 @@ print("line input[0]: ", input[0])
 output, next_hidden = rnn(input[0], hidden)
 print("line output: ", output.size(), output)
 
-'''
+
 input_sentence = sentence_to_tensor('*5*23*17*72*72*72*72*5*38*38*38*23*23*1*')
 hidden_sentence = torch.zeros(1, n_hidden)
 print("sentence input[0]: ", input_sentence[0].size())
 output_sentence, next_hidden_sentence = rnn_ssfc(input_sentence[0], hidden_sentence)
 print("sentence output: ", output_sentence.size(), output_sentence)
-'''
+
 ######################################################################
 # As you can see the output is a ``<1 x n_categories>`` Tensor, where
 # every item is the likelihood of that category (higher is more likely).
@@ -314,7 +314,7 @@ def categoryFromOutput(output):
     return all_categories[category_i], category_i
 
 
-print("categoryFromOutput: ", categoryFromOutput(output))
+print("categoryFromOutput: ", categoryFromOutput(output_sentence))
 
 
 def typeFromOutput(output):
@@ -324,7 +324,7 @@ def typeFromOutput(output):
     return all_types[type_i], type_i
 
 
-
+print("typeFromOutput: ", typeFromOutput(output_sentence))
 
 
 
