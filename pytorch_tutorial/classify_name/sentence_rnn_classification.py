@@ -106,7 +106,7 @@ all_types.pop(0)  # remove the first element;
 
 n_categories = len(all_categories)
 print("all categories: ", all_categories)  # method, relation, definition;
-# print("category lines: ", category_lines)
+# print("category lines: ", category_lines)  # {'Arabic': ['Khoury', 'Nahas', 'Daher', 'Gerges', 'Nazari',
 print("all types: ", all_types)  # method, relation, definition;
 
 ######################################################################
@@ -348,6 +348,23 @@ def randomTrainingExample():
 for i in range(10):
     category, line, category_tensor, line_tensor = randomTrainingExample()
     print('category =', category, '/ line =', line)
+
+
+def randomTrainingSentence():
+    type = randomChoice(all_types)
+    line = randomChoice(type_lines[type])
+    category_tensor = torch.tensor([all_categories.index(category)], dtype=torch.long)
+    line_tensor = line_to_tensor(line)
+    return category, line, category_tensor, line_tensor
+
+
+
+
+
+
+
+
+
 
 ######################################################################
 # Training the Network
