@@ -85,16 +85,17 @@ def read_lines(file_name):
     return [unicode_to_ascii(line) for line in lines]
 
 
-def read_type_sentences(file_name):
-    lines = open(file_name, encoding='utf-8').read().strip().split('\n')
-    return [line for line in lines]
-
-
 for file_name in find_files('data/names/*.txt'):
     category = os.path.splitext(os.path.basename(file_name))[0]
     all_categories.append(category)
     lines = read_lines(file_name)
     category_lines[category] = lines
+
+
+def read_type_sentences(file_name):
+    lines = open(file_name, encoding='utf-8').read().strip().split('\n')
+    return [line for line in lines]
+
 
 for file_name in find_files('data/sentences/*.txt'):
     sentence_type = os.path.splitext(os.path.basename(file_name))[0]
@@ -365,11 +366,6 @@ def train_random_sentence():
 for i in range(10):
     type, sentence, type_tensor, sentence_tensor = train_random_sentence()
     print('type =', type, '/ sentence =', sentence)
-
-
-
-
-
 
 
 ######################################################################
