@@ -309,14 +309,14 @@ print("sentence output: ", output_sentence.size(), output_sentence)
 # of the greatest value:
 #
 
-def categoryFromOutput(output):
+def get_category_from_output(output):
     top_n, top_i = output.topk(1)   # top_n is value, top_i is index;
     category_i = top_i[0].item()
 
     return all_categories[category_i], category_i
 
 
-print("categoryFromOutput: ", categoryFromOutput(output_sentence))
+print("get category from output: ", get_category_from_output(output_sentence))
 
 
 def typeFromOutput(output):
@@ -452,7 +452,7 @@ for iter in range(1, n_iters + 1):
 
     # Print iter number, loss, name and guess
     if iter % print_every == 0:
-        guess, guess_i = categoryFromOutput(output)
+        guess, guess_i = get_category_from_output(output)
         correct = '✓' if guess == category else '✗ (%s)' % category
         print(
             '%d %d%% (%s) %.4f %s / %s %s' % (iter, iter / n_iters * 100, timeSince(start), loss, line, guess, correct))
@@ -504,7 +504,7 @@ def evaluate(line_tensor):
 for i in range(n_confusion):
     category, line, category_tensor, line_tensor = train_random_example()
     output = evaluate(line_tensor)
-    guess, guess_i = categoryFromOutput(output)
+    guess, guess_i = get_category_from_output(output)
     category_i = all_categories.index(category)
     confusion[category_i][guess_i] += 1
 
