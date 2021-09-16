@@ -399,22 +399,22 @@ criterion = nn.NLLLoss()
 learning_rate = 0.005  # If you set this too high, it might explode. If too low, it might not learn
 
 
-def train(category_tensor, line_tensor):
-    hidden = rnn.init_hidden()
+def train(func_category_tensor, func_line_tensor):
+    func_hidden = rnn.init_hidden()
 
     rnn.zero_grad()
 
-    for i in range(line_tensor.size()[0]):
-        output, hidden = rnn(line_tensor[i], hidden)
+    for i in range(func_line_tensor.size()[0]):
+        func_output, func_hidden = rnn(func_line_tensor[i], func_hidden)
 
-    loss = criterion(output, category_tensor)
-    loss.backward()
+    func_loss = criterion(func_output, func_category_tensor)
+    func_loss.backward()
 
     # Add parameters' gradients to their values, multiplied by learning rate
     for p in rnn.parameters():
         p.data.add_(p.grad.data, alpha=-learning_rate)
 
-    return output, loss.item()
+    return func_output, func_loss.item()
 
 
 ######################################################################
