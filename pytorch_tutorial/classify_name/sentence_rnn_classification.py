@@ -341,10 +341,10 @@ def choose_random(l):  # return a random element from list l;
 
 def train_random_example():
     func_category = choose_random(all_categories)  # choose random category;
-    func_line = choose_random(category_lines[category])  # choose random name;
+    func_line = choose_random(category_lines[func_category])  # choose random name;
 
-    func_category_tensor = torch.tensor([all_categories.index(category)], dtype=torch.long)
-    func_line_tensor = line_to_tensor(line)
+    func_category_tensor = torch.tensor([all_categories.index(func_category)], dtype=torch.long)
+    func_line_tensor = line_to_tensor(func_line)
 
     return func_category, func_line, func_category_tensor, func_line_tensor
 
