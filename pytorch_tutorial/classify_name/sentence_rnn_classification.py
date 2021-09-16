@@ -28,7 +28,7 @@ all_letters = string.ascii_letters + " .,;'"
 n_letters = len(all_letters)  # equals to len(vocabulary)
 print("all letters: ", all_letters)
 
-# ------------------------ get all words (vocabulary) ---------------------
+# ------------------------ get all words (vocabulary) from priority_corpus.txt ---------------------
 with open("data/sentences/priority_corpus.txt", "r", encoding='UTF-8') as f:
     data = f.readlines()
 
@@ -365,8 +365,8 @@ def train_random_sentence():
 
 
 for i in range(10):
-    type, sentence, type_tensor, sentence_tensor = train_random_sentence()
-    print('type =', type, '/ sentence =', sentence)
+    sentence_type, sentence, type_tensor, sentence_tensor = train_random_sentence()
+    print('sentence type =', sentence_type, '/ sentence =', sentence)
 
 
 ######################################################################
