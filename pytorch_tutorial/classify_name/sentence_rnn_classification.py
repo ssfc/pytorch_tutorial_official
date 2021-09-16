@@ -206,6 +206,7 @@ print("sentence to tensor: ", sentence_to_tensor("*5*23*17*72*72*72*72*5*38*38*3
 print("sentence to tensor: ", sentence_to_tensor("*5*23*17*72*72*72*72*5*38*38*38*23*23*1*"))
 
 ######################################################################
+# Step 2: Design model using Class; inherit from nn.Module; 
 # Creating the Network
 # ====================
 #
@@ -401,7 +402,6 @@ learning_rate = 0.005  # If you set this too high, it might explode. If too low,
 
 def train(func_category_tensor, func_line_tensor):
     func_hidden = rnn.init_hidden()
-
     rnn.zero_grad()
 
     for i in range(func_line_tensor.size()[0]):
