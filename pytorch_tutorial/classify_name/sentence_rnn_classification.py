@@ -355,13 +355,13 @@ for i in range(10):
 
 
 def train_random_sentence():
-    type = choose_random(all_types)  # choose random type;
-    sentence = choose_random(type_sentences[type])  # choose random sentence;
+    func_type = choose_random(all_types)  # choose random type;
+    func_sentence = choose_random(type_sentences[type])  # choose random sentence;
 
-    type_tensor = torch.tensor([all_types.index(type)], dtype=torch.long)
-    sentence_tensor = sentence_to_tensor(sentence)
+    func_type_tensor = torch.tensor([all_types.index(type)], dtype=torch.long)
+    func_sentence_tensor = sentence_to_tensor(sentence)
 
-    return type, sentence, type_tensor, sentence_tensor
+    return func_type, func_sentence, func_type_tensor, func_sentence_tensor
 
 
 for i in range(10):
