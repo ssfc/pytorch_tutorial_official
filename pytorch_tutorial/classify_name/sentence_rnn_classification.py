@@ -16,8 +16,9 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
 
-# --------------------------- get all files -------------------------
-def find_files(path):
+#################################################################################################
+# Step 1: Prepare dataset;
+def find_files(path): # get all files;
     return glob.glob(path)
 
 
@@ -206,7 +207,7 @@ print("sentence to tensor: ", sentence_to_tensor("*5*23*17*72*72*72*72*5*38*38*3
 print("sentence to tensor: ", sentence_to_tensor("*5*23*17*72*72*72*72*5*38*38*38*23*23*1*"))
 
 ######################################################################
-# Step 2: Design model using Class; inherit from nn.Module; 
+# Step 2: Design model using Class; inherit from nn.Module;
 # Creating the Network
 # ====================
 #
