@@ -179,16 +179,16 @@ print("word to tensor: ")
 print(word_to_tensor('23'))  # 1 appear at position 35;
 
 
-# Turn a line into a <line_length x 1 x n_letters>,
+# Turn a line(name) into a <line_length x 1 x n_letters>,
 # or an array of one-hot letter vectors
-def line_to_tensor(line):
-    tensor = torch.zeros(len(line), 1, n_letters)
-    for li, letter in enumerate(line):
+def line_to_tensor(func_line):
+    tensor = torch.zeros(len(func_line), 1, n_letters)
+    for li, letter in enumerate(func_line):
         tensor[li][0][letter_to_index(letter)] = 1
     return tensor
 
 
-print("line to tensor: ")
+print("line(name) to tensor: ")
 print(line_to_tensor('Jones').size())
 
 
