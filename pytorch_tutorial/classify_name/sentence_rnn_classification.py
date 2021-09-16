@@ -79,7 +79,7 @@ type_sentences = {}
 all_types = []
 
 
-# Read a file and split into lines
+# Read a name file and split into lines, save it as a list;
 def read_lines(file_name):
     lines = open(file_name, encoding='utf-8').read().strip().split('\n')
     return [unicode_to_ascii(line) for line in lines]
@@ -92,6 +92,7 @@ for file_name in find_files('data/names/*.txt'):
     category_lines[category] = lines
 
 
+# Read a sentence file and split into lines, save it as a list;
 def read_type_sentences(file_name):
     lines = open(file_name, encoding='utf-8').read().strip().split('\n')
     return [line for line in lines]
