@@ -22,7 +22,7 @@ def find_files(path):
 
 
 print("files found: ", find_files('data/names/*.txt'))
-print("files found: ", find_files('data/sentences/*.txt'))
+print("files found: ", find_files('data/sentences/types/*.txt'))
 
 all_letters = string.ascii_letters + " .,;'"
 n_letters = len(all_letters)  # equals to len(vocabulary)
@@ -98,7 +98,7 @@ def read_type_sentences(file_name):
     return [line for line in lines]
 
 
-for file_name in find_files('data/sentences/*.txt'):
+for file_name in find_files('data/sentences/types/*.txt'):
     sentence_type = os.path.splitext(os.path.basename(file_name))[0]
     all_types.append(sentence_type)
     lines = read_type_sentences(file_name)
@@ -119,7 +119,7 @@ print("all types: ", all_types)  # method, relation, definition;
 #
 
 print("First 5 words of Italian: ", category_lines['Italian'][:5])
-print("First 5 sentences of corpus: ", type_sentences['priority_corpus'][:3])
+print("First 5 sentences of corpus: ", type_sentences['priority_method_corpus'][:3])
 
 
 ######################################################################
@@ -237,12 +237,12 @@ class RNN(nn.Module):
         self.i2o = nn.Linear(input_size + hidden_size, output_size)
         self.softmax = nn.LogSoftmax(dim=1)
 
-    def forward(self, input, hidden):
-        combined = torch.cat((input, hidden), 1)
-        hidden = self.i2h(combined)
-        output = self.i2o(combined)
-        output = self.softmax(output)
-        return output, hidden
+    def forward(self, func_input, func_hidden):
+        combined = torch.cat((func_input, func_hidden), 1)
+        func_hidden = self.i2h(combined)
+        func_output = self.i2o(combined)
+        func_output = self.softmax(func_output)
+        return func_output, func_hidden
 
     def init_hidden(self):
         return torch.zeros(1, self.hidden_size)
