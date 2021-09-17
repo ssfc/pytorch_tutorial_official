@@ -311,8 +311,8 @@ print("sentence output: ", output_sentence.size(), output_sentence)
 # of the greatest value:
 #
 
-def get_category_from_output(output):
-    top_n, top_i = output.topk(1)   # top_n is value, top_i is index;
+def get_category_from_output(func_output):
+    top_n, top_i = func_output.topk(1)   # top_n is value, top_i is index;
     category_i = top_i[0].item()
 
     return all_categories[category_i], category_i
@@ -321,8 +321,8 @@ def get_category_from_output(output):
 print("get category from output: ", get_category_from_output(output_sentence))
 
 
-def get_type_from_output(output):
-    top_n, top_i = output.topk(1)  # top_n is value, top_i is index;
+def get_type_from_output(func_output):
+    top_n, top_i = func_output.topk(1)  # top_n is value, top_i is index;
     type_i = top_i[0].item()
 
     return all_types[type_i], type_i
@@ -382,9 +382,10 @@ for i in range(10):
 # layer of the RNN is ``nn.LogSoftmax``.
 #
 
-criterion = nn.NLLLoss()
+criterion = nn.NLLLoss()  # Step 3: Construct loss and optimizer;
 
 ######################################################################
+# Step 4: Training cycle, forward, backward, update;
 # Each loop of training will:
 #
 # -  Create input and target tensors
