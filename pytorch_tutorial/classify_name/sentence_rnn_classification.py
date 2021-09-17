@@ -480,24 +480,26 @@ for iter in range(1, n_iters + 1):
         all_losses.append(current_loss / plot_every)
         current_loss = 0
 
-'''
+
+start = time.time()
+
 for iter in range(1, n_iters + 1):
-    category, line, category_tensor, line_tensor = train_random_example()
-    output, loss = train(category_tensor, line_tensor)
+    sentence_type, sentence, type_tensor, line_tensor = train_random_sentence()
+    output, loss = train(type_tensor, line_tensor)
     current_loss += loss
 
     # Print iter number, loss, name and guess
     if iter % print_every == 0:
         guess, guess_i = get_category_from_output(output)
-        correct = '✓' if guess == category else '✗ (%s)' % category
+        correct = '✓' if guess == category else '✗ (%s)' % sentence_type
         print(
-            '%d %d%% (%s) %.4f %s / %s %s' % (iter, iter / n_iters * 100, timeSince(start), loss, line, guess, correct))
+            '%d %d%% (%s) %.4f %s / %s %s' % (iter, iter / n_iters * 100, timeSince(start), loss, sentence, guess, correct))
 
     # Add current loss avg to list of losses
     if iter % plot_every == 0:
         all_losses.append(current_loss / plot_every)
         current_loss = 0
-'''
+
 
 ######################################################################
 # Plotting the Results
@@ -507,6 +509,9 @@ for iter in range(1, n_iters + 1):
 # learning:
 #
 
+
+plt.figure()
+plt.plot(all_losses)  # plot all losses;
 
 plt.figure()
 plt.plot(all_losses)  # plot all losses;
