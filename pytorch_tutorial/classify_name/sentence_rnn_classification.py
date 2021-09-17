@@ -474,7 +474,7 @@ for iter in range(1, n_iters + 1):
 
 
 plt.figure()
-plt.plot(all_losses)
+plt.plot(all_losses)  # plot all losses;
 
 ######################################################################
 # Evaluating the Results
@@ -493,13 +493,13 @@ n_confusion = 10000
 
 
 # Just return an output given a line
-def evaluate(line_tensor):
-    hidden = rnn.init_hidden()
+def evaluate(func_line_tensor):
+    func_hidden = rnn.init_hidden()
 
-    for i in range(line_tensor.size()[0]):
-        output, hidden = rnn(line_tensor[i], hidden)
+    for i in range(func_line_tensor.size()[0]):
+        func_output, func_hidden = rnn(func_line_tensor[i], func_hidden)
 
-    return output
+    return func_output
 
 
 # Go through a bunch of examples and record which are correctly guessed
@@ -551,12 +551,12 @@ def predict(input_line, n_predictions=3):
         output = evaluate(line_to_tensor(input_line))
 
         # Get top N categories
-        topv, topi = output.topk(n_predictions, 1, True)
+        top_value, top_index = output.topk(n_predictions, 1, True)  # True means returning largest; 
         predictions = []
 
         for i in range(n_predictions):
-            value = topv[0][i].item()
-            category_index = topi[0][i].item()
+            value = top_value[0][i].item()
+            category_index = top_index[0][i].item()
             print('(%.2f) %s' % (value, all_categories[category_index]))
             predictions.append([value, all_categories[category_index]])
 
