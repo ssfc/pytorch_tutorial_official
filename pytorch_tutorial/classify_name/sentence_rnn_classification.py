@@ -548,10 +548,10 @@ plt.show()
 def predict(input_line, n_predictions=3):
     print('\n> %s' % input_line)
     with torch.no_grad():
-        output = evaluate(line_to_tensor(input_line))
+        func_output = evaluate(line_to_tensor(input_line))
 
         # Get top N categories
-        top_value, top_index = output.topk(n_predictions, 1, True)  # True means returning largest;
+        top_value, top_index = func_output.topk(n_predictions, 1, True)  # True means returning largest;
         predictions = []
 
         for i in range(n_predictions):
