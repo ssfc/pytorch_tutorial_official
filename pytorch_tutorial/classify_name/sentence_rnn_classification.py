@@ -452,6 +452,10 @@ plot_every = 1000
 current_loss = 0
 all_losses = []
 
+sentence_current_loss = 0
+sentence_all_losses = []
+
+
 
 def timeSince(since):
     now = time.time()
@@ -480,26 +484,26 @@ for iter in range(1, n_iters + 1):
         all_losses.append(current_loss / plot_every)
         current_loss = 0
 
-
+'''
 start = time.time()
 
 for iter in range(1, n_iters + 1):
-    sentence_type, sentence, type_tensor, line_tensor = train_random_sentence()
-    output, loss = train(type_tensor, line_tensor)
-    current_loss += loss
+    sentence_type, sentence, type_tensor, sentence_tensor = train_random_sentence()
+    output, loss = train_ssfc(type_tensor, sentence_tensor)
+    sentence_current_loss += loss
 
     # Print iter number, loss, name and guess
     if iter % print_every == 0:
-        guess, guess_i = get_category_from_output(output)
-        correct = '✓' if guess == category else '✗ (%s)' % sentence_type
+        guess, guess_i = get_type_from_output(output)
+        correct = '✓' if guess == sentence_type else '✗ (%s)' % sentence_type
         print(
             '%d %d%% (%s) %.4f %s / %s %s' % (iter, iter / n_iters * 100, timeSince(start), loss, sentence, guess, correct))
 
     # Add current loss avg to list of losses
     if iter % plot_every == 0:
-        all_losses.append(current_loss / plot_every)
-        current_loss = 0
-
+        sentence_all_losses.append(sentence_current_loss / plot_every)
+        sentence_current_loss = 0
+'''
 
 ######################################################################
 # Plotting the Results
@@ -514,7 +518,7 @@ plt.figure()
 plt.plot(all_losses)  # plot all losses;
 
 plt.figure()
-plt.plot(all_losses)  # plot all losses;
+plt.plot(sentence_all_losses)  # plot all losses;
 
 ######################################################################
 # Evaluating the Results
