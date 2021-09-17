@@ -419,6 +419,22 @@ def train(func_category_tensor, func_line_tensor):
     return func_output, func_loss.item()
 
 
+def train_ssfc(func_type_tensor, func_sentence_tensor):
+    func_hidden = rnn_ssfc.init_hidden()
+    rnn_ssfc.zero_grad()
+
+    for i in range(func_sentence_tensor.size()[0]):
+        func_output, func_hidden = rnn_ssfc(func_sentence_tensor[i], func_hidden)
+
+    func_loss = criterion(func_output, func_type_tensor)
+    func_loss.backward()
+
+    # Add parameters' gradients to their values, multiplied by learning rate
+    for p in rnn_ssfc.parameters():
+        p.data.add_(p.grad.data, alpha=-learning_rate)
+
+    return func_output, func_loss.item()
+
 ######################################################################
 # Now we just have to run that with a bunch of examples. Since the
 # ``train`` function returns both the output and loss we can print its
