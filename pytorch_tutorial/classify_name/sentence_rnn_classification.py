@@ -73,8 +73,9 @@ def unicode_to_ascii(s):
 
 print("unicode to ascii: ", unicode_to_ascii('Ślusàrski'))
 
-# Build the category_lines dictionary, a list of names per language
-category_lines = {}
+# Build the category_names dictionary, a list of names per language;
+# {language: [names ...]}
+category_names = {}
 all_categories = []
 type_sentences = {}
 all_types = []
@@ -90,7 +91,7 @@ for file_name in find_files('data/names/*.txt'):
     category = os.path.splitext(os.path.basename(file_name))[0]
     all_categories.append(category)
     lines = read_lines(file_name)
-    category_lines[category] = lines
+    category_names[category] = lines
 
 
 # Read a sentence file and split into lines, save it as a list;
@@ -109,17 +110,17 @@ all_types.pop(0)  # remove the first element;
 
 n_categories = len(all_categories)
 print("all categories: ", all_categories)  # method, relation, definition;
-# print("category lines: ", category_lines)  # {'Arabic': ['Khoury', 'Nahas', 'Daher', 'Gerges', 'Nazari',
+# print("category lines: ", category_names)  # {'Arabic': ['Khoury', 'Nahas', 'Daher', 'Gerges', 'Nazari',
 print("all types: ", all_types)  # method, relation, definition;
 
 ######################################################################
-# Now we have ``category_lines``, a dictionary mapping each category
+# Now we have ``category_names``, a dictionary mapping each category
 # (language) to a list of lines (names). We also kept track of
 # ``all_categories`` (just a list of languages) and ``n_categories`` for
 # later reference.
 #
 
-print("First 5 words of Italian: ", category_lines['Italian'][:5])
+print("First 5 words of Italian: ", category_names['Italian'][:5])
 print("First 5 sentences of corpus: ", type_sentences['priority_method_corpus'][:3])
 
 
@@ -344,7 +345,7 @@ def choose_random(l):  # return a random element from list l;
 
 def train_random_example():
     func_category = choose_random(all_categories)  # choose random category;
-    func_line = choose_random(category_lines[func_category])  # choose random name;
+    func_line = choose_random(category_names[func_category])  # choose random name;
 
     func_category_tensor = torch.tensor([all_categories.index(func_category)], dtype=torch.long)
     func_name_tensor = name_to_tensor(func_line)
