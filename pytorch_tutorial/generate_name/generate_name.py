@@ -33,7 +33,7 @@ def unicodeToAscii(s):
 
 
 # Read a file and split into lines
-def readLines(filename):
+def read_lines(filename):
     lines = open(filename, encoding='utf-8').read().strip().split('\n')
     return [unicodeToAscii(line) for line in lines]
 
@@ -44,7 +44,7 @@ all_categories = []
 for filename in findFiles('data/names/*.txt'):
     category = os.path.splitext(os.path.basename(filename))[0]
     all_categories.append(category)
-    lines = readLines(filename)
+    lines = read_lines(filename)
     category_lines[category] = lines
 
 n_categories = len(all_categories)
@@ -121,14 +121,14 @@ class RNN(nn.Module):
 
 
 # Random item from a list
-def randomChoice(l):
+def choose_random(l):
     return l[random.randint(0, len(l) - 1)]
 
 
 # Get a random category and random line from that category
 def randomTrainingPair():
-    category = randomChoice(all_categories)
-    line = randomChoice(category_lines[category])
+    category = choose_random(all_categories)
+    line = choose_random(category_lines[category])
     return category, line
 
 
@@ -350,20 +350,3 @@ samples('Spanish', 'SPA')
 
 samples('Chinese', 'CHI')
 
-######################################################################
-# Exercises
-# =========
-#
-# -  Try with a different dataset of category -> line, for example:
-#
-#    -  Fictional series -> Character name
-#    -  Part of speech -> Word
-#    -  Country -> City
-#
-# -  Use a "start of sentence" token so that sampling can be done without
-#    choosing a start letter
-# -  Get better results with a bigger and/or better shaped network
-#
-#    -  Try the nn.LSTM and nn.GRU layers
-#    -  Combine multiple of these RNNs as a higher level network
-#

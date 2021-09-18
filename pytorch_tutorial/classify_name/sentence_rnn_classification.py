@@ -159,7 +159,7 @@ print("word to index: ", word2idx)
 print("word 23 to index: ", word2idx['23'])
 
 
-# Just for demonstration, turn a letter into a <1 x n_letters> Tensor
+# Just for demonstration, turn a letter into a <1 x n_letters> Tensor (one-hot matrix);
 def letter_to_tensor(letter):
     tensor = torch.zeros(1, n_letters)
     tensor[0][letter_to_index(letter)] = 1
@@ -182,7 +182,7 @@ print(word_to_tensor('23'))  # 1 appear at position 35;
 
 # Turn a name into a <line_length x 1 x n_letters>,
 # or an array of one-hot letter vectors
-def line_to_tensor(func_line):
+def name_to_tensor(func_line):
     tensor = torch.zeros(len(func_line), 1, n_letters)
     for li, letter in enumerate(func_line):
         tensor[li][0][letter_to_index(letter)] = 1
@@ -190,7 +190,7 @@ def line_to_tensor(func_line):
 
 
 print("name to tensor: ")
-print(line_to_tensor('Jones').size())
+print(name_to_tensor('Jones').size())
 
 
 def sentence_to_tensor(this_sentence):
@@ -274,12 +274,12 @@ print("single word output: ", output_word.size(), output_word)
 
 ######################################################################
 # For the sake of efficiency we don't want to be creating a new Tensor for
-# every step, so we will use ``line_to_tensor`` instead of
+# every step, so we will use ``name_to_tensor`` instead of
 # ``letter_to_tensor`` and use slices. This could be further optimized by
 # pre-computing batches of Tensors.
 #
 
-input = line_to_tensor('Albert')
+input = name_to_tensor('Albert')
 hidden = torch.zeros(1, n_hidden)
 print("name input[0]: ", input[0])
 output, next_hidden = rnn(input[0], hidden)
@@ -346,7 +346,7 @@ def train_random_example():
     func_line = choose_random(category_lines[func_category])  # choose random name;
 
     func_category_tensor = torch.tensor([all_categories.index(func_category)], dtype=torch.long)
-    func_name_tensor = line_to_tensor(func_line)
+    func_name_tensor = name_to_tensor(func_line)
 
     return func_category, func_line, func_category_tensor, func_name_tensor
 
@@ -592,7 +592,7 @@ plt.show()
 def predict(input_line, n_predictions=3):
     print('\n> %s' % input_line)
     with torch.no_grad():
-        func_output = evaluate(line_to_tensor(input_line))
+        func_output = evaluate(name_to_tensor(input_line))
 
         # Get top N categories
         top_value, top_index = func_output.topk(n_predictions, 1, True)  # True means returning largest;
