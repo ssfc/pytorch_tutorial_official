@@ -390,14 +390,14 @@ criterion = nn.NLLLoss()  # Step 3: Construct loss and optimizer;
 # Step 4: Training cycle, forward, backward, update;
 # Each loop of training will:
 #
-# -  Create input and target tensors
-# -  Create a zeroed initial hidden state
-# -  Read each letter in and
+# -  (1) Create input and target tensors;
+# -  (2) Create a zeroed initial hidden state;
+# -  (3) Read each letter in and
 #
-#    -  Keep hidden state for next letter
+#    -  Keep hidden state for next letter;
 #
-# -  Compare final output to target
-# -  Back-propagate
+# -  (4) Compare final output to target;
+# -  (5) Back-propagate;
 # -  Return the output and loss
 #
 
@@ -405,13 +405,13 @@ learning_rate = 0.005  # If you set this too high, it might explode. If too low,
 
 
 def train(func_category_tensor, func_name_tensor):
-    func_hidden = rnn.init_hidden()
+    func_hidden = rnn.init_hidden()  # (2) Create a zeroed initial hidden state;
     rnn.zero_grad()
 
-    for i in range(func_name_tensor.size()[0]):
+    for i in range(func_name_tensor.size()[0]):  # (3) Read each letter in and Keep hidden state for next letter;
         func_output, func_hidden = rnn(func_name_tensor[i], func_hidden)
 
-    func_loss = criterion(func_output, func_category_tensor)
+    func_loss = criterion(func_output, func_category_tensor)  # (4) Compare final output to target
     func_loss.backward()
 
     # Add parameters' gradients to their values, multiplied by learning rate
