@@ -312,7 +312,8 @@ print("sentence output: ", output_sentence.size(), output_sentence)
 #
 
 def get_category_from_output(func_output):
-    top_value, top_index = func_output.topk(1)
+    # torch.topk(input, k, dim=None, largest=True, sorted=True, *, out=None)
+    top_value, top_index = torch.topk(func_output, 1)
     category_i = top_index[0].item()
 
     return all_categories[category_i], category_i
