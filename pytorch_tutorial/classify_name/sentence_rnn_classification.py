@@ -83,7 +83,7 @@ all_types = []
 # Read a name file and split into lines, save it as a list;
 def read_lines(file_name):
     lines = open(file_name, encoding='utf-8').read().strip().split('\n')
-    return [unicode_to_ascii(line) for line in lines]
+    return [unicode_to_ascii(name) for name in lines]
 
 
 for file_name in find_files('data/names/*.txt'):
@@ -96,7 +96,7 @@ for file_name in find_files('data/names/*.txt'):
 # Read a sentence file and split into lines, save it as a list;
 def read_type_sentences(file_name):
     lines = open(file_name, encoding='utf-8').read().strip().split('\n')
-    return [line for line in lines]
+    return [name for name in lines]
 
 
 for file_name in find_files('data/sentences/types/*.txt'):
@@ -180,7 +180,7 @@ print("word to tensor: ")
 print(word_to_tensor('23'))  # 1 appear at position 35;
 
 
-# Turn a line(name) into a <line_length x 1 x n_letters>,
+# Turn a name into a <line_length x 1 x n_letters>,
 # or an array of one-hot letter vectors
 def line_to_tensor(func_line):
     tensor = torch.zeros(len(func_line), 1, n_letters)
@@ -189,7 +189,7 @@ def line_to_tensor(func_line):
     return tensor
 
 
-print("line(name) to tensor: ")
+print("name to tensor: ")
 print(line_to_tensor('Jones').size())
 
 
@@ -281,9 +281,9 @@ print("single word output: ", output_word.size(), output_word)
 
 input = line_to_tensor('Albert')
 hidden = torch.zeros(1, n_hidden)
-print("line input[0]: ", input[0])
+print("name input[0]: ", input[0])
 output, next_hidden = rnn(input[0], hidden)
-print("line output: ", output.size(), output)
+print("name output: ", output.size(), output)
 
 
 input_sentence = sentence_to_tensor('*5*23*17*72*72*72*72*5*38*38*38*23*23*1*')
@@ -352,8 +352,8 @@ def train_random_example():
 
 
 for i in range(10):
-    category, line, category_tensor, line_tensor = train_random_example()
-    print('category =', category, '/ line =', line)
+    category, name, category_tensor, line_tensor = train_random_example()
+    print('category =', category, '/ name =', name)
 
 
 def train_random_sentence():
@@ -468,7 +468,7 @@ def timeSince(since):
 start = time.time()
 
 for iter in range(1, n_iters + 1):
-    category, line, category_tensor, line_tensor = train_random_example()
+    category, name, category_tensor, line_tensor = train_random_example()
     output, loss = train(category_tensor, line_tensor)
     current_loss += loss
 
@@ -477,7 +477,7 @@ for iter in range(1, n_iters + 1):
         guess, guess_i = get_category_from_output(output)
         correct = '✓' if guess == category else '✗ (%s)' % category
         print(
-            '%d %d%% (%s) %.4f %s / %s %s' % (iter, iter / n_iters * 100, timeSince(start), loss, line, guess, correct))
+            '%d %d%% (%s) %.4f %s / %s %s' % (iter, iter / n_iters * 100, timeSince(start), loss, name, guess, correct))
 
     # Add current loss avg to list of losses
     if iter % plot_every == 0:
@@ -516,10 +516,10 @@ for iter in range(1, n_iters + 1):
 
 plt.figure()
 plt.plot(all_losses)  # plot all losses;
-
+'''
 plt.figure()
 plt.plot(sentence_all_losses)  # plot all losses;
-
+'''
 ######################################################################
 # Evaluating the Results
 # ======================
@@ -536,7 +536,7 @@ confusion = torch.zeros(n_categories, n_categories)
 n_confusion = 10000
 
 
-# Just return an output given a line
+# Just return an output given a name
 def evaluate(func_line_tensor):
     func_hidden = rnn.init_hidden()
 
@@ -548,7 +548,7 @@ def evaluate(func_line_tensor):
 
 # Go through a bunch of examples and record which are correctly guessed
 for i in range(n_confusion):
-    category, line, category_tensor, line_tensor = train_random_example()
+    category, name, category_tensor, line_tensor = train_random_example()
     output = evaluate(line_tensor)
     guess, guess_i = get_category_from_output(output)
     category_i = all_categories.index(category)
