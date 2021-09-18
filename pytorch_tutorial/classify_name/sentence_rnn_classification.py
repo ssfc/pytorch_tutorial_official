@@ -183,9 +183,9 @@ print(word_to_tensor('23'))  # 1 appear at position 35;
 
 # Turn a name into a <line_length x 1 x n_letters>,
 # or an array of one-hot letter vectors
-def name_to_tensor(func_line):
-    tensor = torch.zeros(len(func_line), 1, n_letters)
-    for li, letter in enumerate(func_line):
+def name_to_tensor(func_name):
+    tensor = torch.zeros(len(func_name), 1, n_letters)
+    for li, letter in enumerate(func_name):
         tensor[li][0][letter_to_index(letter)] = 1
     return tensor
 
@@ -345,12 +345,12 @@ def choose_random(l):  # return a random element from list l;
 
 def train_random_example():
     func_category = choose_random(all_categories)  # choose random category;
-    func_line = choose_random(category_names[func_category])  # choose random name;
+    func_name = choose_random(category_names[func_category])  # choose random name of given category;
 
     func_category_tensor = torch.tensor([all_categories.index(func_category)], dtype=torch.long)
-    func_name_tensor = name_to_tensor(func_line)
+    func_name_tensor = name_to_tensor(func_name)
 
-    return func_category, func_line, func_category_tensor, func_name_tensor
+    return func_category, func_name, func_category_tensor, func_name_tensor
 
 
 for i in range(10):
