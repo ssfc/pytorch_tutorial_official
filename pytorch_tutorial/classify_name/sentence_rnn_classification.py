@@ -314,9 +314,9 @@ print("sentence output: ", output_sentence.size(), output_sentence)
 def get_category_from_output(func_output):
     # torch.topk(input, k, dim=None, largest=True, sorted=True, *, out=None)
     top_value, top_index = torch.topk(func_output, 1)
-    category_i = top_index[0].item()
+    category_index = top_index[0].item()
 
-    return all_categories[category_i], category_i
+    return all_categories[category_index], category_index
 
 
 print("get category from output: ", get_category_from_output(output_sentence))
@@ -552,8 +552,8 @@ for i in range(n_confusion):
     category, name, category_tensor, line_tensor = train_random_example()
     output = evaluate(line_tensor)
     guess, guess_i = get_category_from_output(output)
-    category_i = all_categories.index(category)
-    confusion[category_i][guess_i] += 1
+    category_index = all_categories.index(category)
+    confusion[category_index][guess_i] += 1
 
 # Normalize by dividing every row by its sum
 for i in range(n_categories):
