@@ -281,7 +281,7 @@ print("single word output: ", output_word.size(), output_word)
 
 input = name_to_tensor('Albert')
 hidden = torch.zeros(1, n_hidden)
-print("name input[0]: ", input[0])
+print("name input[0]: ", input[0])  # input[0] stands for first letter;
 output, next_hidden = rnn(input[0], hidden)
 print("name output: ", output.size(), output)
 
@@ -312,8 +312,8 @@ print("sentence output: ", output_sentence.size(), output_sentence)
 #
 
 def get_category_from_output(func_output):
-    top_n, top_i = func_output.topk(1)   # top_n is value, top_i is index;
-    category_i = top_i[0].item()
+    top_value, top_index = func_output.topk(1)
+    category_i = top_index[0].item()
 
     return all_categories[category_i], category_i
 
@@ -322,8 +322,8 @@ print("get category from output: ", get_category_from_output(output_sentence))
 
 
 def get_type_from_output(func_output):
-    top_n, top_i = func_output.topk(1)  # top_n is value, top_i is index;
-    type_i = top_i[0].item()
+    top_value, top_index = func_output.topk(1)
+    type_i = top_index[0].item()
 
     return all_types[type_i], type_i
 
