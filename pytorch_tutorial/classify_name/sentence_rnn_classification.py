@@ -398,7 +398,7 @@ criterion = nn.NLLLoss()  # Step 3: Construct loss and optimizer;
 #
 # -  (4) Compare final output to target;
 # -  (5) Back-propagate;
-# -  Return the output and loss
+# -  (6) Return the output and loss;
 #
 
 learning_rate = 0.005  # If you set this too high, it might explode. If too low, it might not learn
@@ -412,13 +412,13 @@ def train(func_category_tensor, func_name_tensor):
         func_output, func_hidden = rnn(func_name_tensor[i], func_hidden)
 
     func_loss = criterion(func_output, func_category_tensor)  # (4) Compare final output to target
-    func_loss.backward()
+    func_loss.backward()  # (5) Back-propagate;
 
     # Add parameters' gradients to their values, multiplied by learning rate
     for p in rnn.parameters():
         p.data.add_(p.grad.data, alpha=-learning_rate)
 
-    return func_output, func_loss.item()
+    return func_output, func_loss.item()  # (6) Return the output and loss; 
 
 
 def train_ssfc(func_type_tensor, func_sentence_tensor):
