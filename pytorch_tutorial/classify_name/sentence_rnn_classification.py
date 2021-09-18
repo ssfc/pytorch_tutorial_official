@@ -346,9 +346,9 @@ def train_random_example():
     func_line = choose_random(category_lines[func_category])  # choose random name;
 
     func_category_tensor = torch.tensor([all_categories.index(func_category)], dtype=torch.long)
-    func_line_tensor = line_to_tensor(func_line)
+    func_name_tensor = line_to_tensor(func_line)
 
-    return func_category, func_line, func_category_tensor, func_line_tensor
+    return func_category, func_line, func_category_tensor, func_name_tensor
 
 
 for i in range(10):
@@ -402,12 +402,12 @@ criterion = nn.NLLLoss()  # Step 3: Construct loss and optimizer;
 learning_rate = 0.005  # If you set this too high, it might explode. If too low, it might not learn
 
 
-def train(func_category_tensor, func_line_tensor):
+def train(func_category_tensor, func_name_tensor):
     func_hidden = rnn.init_hidden()
     rnn.zero_grad()
 
-    for i in range(func_line_tensor.size()[0]):
-        func_output, func_hidden = rnn(func_line_tensor[i], func_hidden)
+    for i in range(func_name_tensor.size()[0]):
+        func_output, func_hidden = rnn(func_name_tensor[i], func_hidden)
 
     func_loss = criterion(func_output, func_category_tensor)
     func_loss.backward()
@@ -537,11 +537,11 @@ n_confusion = 10000
 
 
 # Just return an output given a name
-def evaluate(func_line_tensor):
+def evaluate(func_name_tensor):
     func_hidden = rnn.init_hidden()
 
-    for i in range(func_line_tensor.size()[0]):
-        func_output, func_hidden = rnn(func_line_tensor[i], func_hidden)
+    for i in range(func_name_tensor.size()[0]):
+        func_output, func_hidden = rnn(func_name_tensor[i], func_hidden)
 
     return func_output
 
