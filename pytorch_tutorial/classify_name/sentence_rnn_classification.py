@@ -323,7 +323,7 @@ print("get category from output: ", get_category_from_output(output_sentence))
 
 
 def get_type_from_output(func_output):
-    top_value, top_index = func_output.topk(1)
+    top_value, top_index = torch.topk(func_output, 1)
     type_i = top_index[0].item()
 
     return all_types[type_i], type_i
@@ -596,7 +596,7 @@ def predict(input_line, n_predictions=3):
         func_output = evaluate(name_to_tensor(input_line))
 
         # Get top N categories
-        top_value, top_index = func_output.topk(n_predictions, 1, True)  # True means returning largest;
+        top_value, top_index = torch.topk(func_output, n_predictions, 1, True)  # True means returning largest;
         predictions = []
 
         for i in range(n_predictions):
