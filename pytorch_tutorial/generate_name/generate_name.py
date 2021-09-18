@@ -6,11 +6,22 @@ import glob
 import os
 import unicodedata
 import string
+import torch
+import torch.nn as nn
+import random
+import time
+import math
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+
 
 all_letters = string.ascii_letters + " .,;'-"
-n_letters = len(all_letters) + 1 # Plus EOS marker
+n_letters = len(all_letters) + 1  # Plus EOS marker
 
-def findFiles(path): return glob.glob(path)
+
+def findFiles(path):
+    return glob.glob(path)
+
 
 # Turn a Unicode string to plain ASCII, thanks to https://stackoverflow.com/a/518232/2809427
 def unicodeToAscii(s):
@@ -20,10 +31,12 @@ def unicodeToAscii(s):
         and c in all_letters
     )
 
+
 # Read a file and split into lines
 def readLines(filename):
     lines = open(filename, encoding='utf-8').read().strip().split('\n')
     return [unicodeToAscii(line) for line in lines]
+
 
 # Build the category_lines dictionary, a list of lines per category
 category_lines = {}
@@ -38,8 +51,8 @@ n_categories = len(all_categories)
 
 if n_categories == 0:
     raise RuntimeError('Data not found. Make sure that you downloaded data '
-        'from https://download.pytorch.org/tutorial/data.zip and extract it to '
-        'the current directory.')
+                       'from https://download.pytorch.org/tutorial/data.zip and extract it to '
+                       'the current directory.')
 
 print('# categories:', n_categories, all_categories)
 print(unicodeToAscii("O'Néàl"))
@@ -71,8 +84,6 @@ print(unicodeToAscii("O'Néàl"))
 #
 #
 
-import torch
-import torch.nn as nn
 
 class RNN(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
@@ -108,11 +119,11 @@ class RNN(nn.Module):
 # First of all, helper functions to get random pairs of (category, line):
 #
 
-import random
 
 # Random item from a list
 def randomChoice(l):
     return l[random.randint(0, len(l) - 1)]
+
 
 # Get a random category and random line from that category
 def randomTrainingPair():
@@ -151,6 +162,7 @@ def categoryTensor(category):
     tensor[0][li] = 1
     return tensor
 
+
 # One-hot matrix of first to last letters (not including EOS) for input
 def inputTensor(line):
     tensor = torch.zeros(len(line), 1, n_letters)
@@ -159,10 +171,11 @@ def inputTensor(line):
         tensor[li][0][all_letters.find(letter)] = 1
     return tensor
 
+
 # LongTensor of second letter to end (EOS) for target
 def targetTensor(line):
     letter_indexes = [all_letters.find(line[li]) for li in range(1, len(line))]
-    letter_indexes.append(n_letters - 1) # EOS
+    letter_indexes.append(n_letters - 1)  # EOS
     return torch.LongTensor(letter_indexes)
 
 
@@ -197,6 +210,7 @@ criterion = nn.NLLLoss()
 
 learning_rate = 0.0005
 
+
 def train(category_tensor, input_line_tensor, target_line_tensor):
     target_line_tensor.unsqueeze_(-1)
     hidden = rnn.initHidden()
@@ -223,8 +237,6 @@ def train(category_tensor, input_line_tensor, target_line_tensor):
 # ``timeSince(timestamp)`` function which returns a human readable string:
 #
 
-import time
-import math
 
 def timeSince(since):
     now = time.time()
@@ -243,11 +255,11 @@ def timeSince(since):
 
 rnn = RNN(n_letters, 128, n_letters)
 
-n_iters = 100000
+n_iters = 50000
 print_every = 5000
 plot_every = 500
 all_losses = []
-total_loss = 0 # Reset every plot_every iters
+total_loss = 0  # Reset every plot_every iters
 
 start = time.time()
 
@@ -262,7 +274,6 @@ for iter in range(1, n_iters + 1):
         all_losses.append(total_loss / plot_every)
         total_loss = 0
 
-
 ######################################################################
 # Plotting the Losses
 # -------------------
@@ -271,12 +282,8 @@ for iter in range(1, n_iters + 1):
 # learning:
 #
 
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
-
 plt.figure()
 plt.plot(all_losses)
-
 
 ######################################################################
 # Sampling the Network
@@ -305,6 +312,7 @@ plt.plot(all_losses)
 
 max_length = 20
 
+
 # Sample from a category and starting letter
 def sample(category, start_letter='A'):
     with torch.no_grad():  # no need to track history in sampling
@@ -327,10 +335,12 @@ def sample(category, start_letter='A'):
 
         return output_name
 
+
 # Get multiple samples from one category and multiple starting letters
 def samples(category, start_letters='ABC'):
     for start_letter in start_letters:
         print(sample(category, start_letter))
+
 
 samples('Russian', 'RUS')
 
@@ -339,7 +349,6 @@ samples('German', 'GER')
 samples('Spanish', 'SPA')
 
 samples('Chinese', 'CHI')
-
 
 ######################################################################
 # Exercises
