@@ -354,7 +354,7 @@ def train_random_example():
 
 
 for i in range(10):
-    category, name, category_tensor, line_tensor = train_random_example()
+    category, name, category_tensor, name_tensor = train_random_example()
     print('category =', category, '/ name =', name)
 
 
@@ -470,13 +470,13 @@ def timeSince(since):
 start = time.time()
 
 for iter in range(1, n_iters + 1):
-    category, name, category_tensor, line_tensor = train_random_example()
-    output, loss = train(category_tensor, line_tensor)
+    category, name, category_tensor, name_tensor = train_random_example()
+    output, loss = train(category_tensor, name_tensor)
     current_loss += loss
 
     # Print iter number, loss, name and guess
     if iter % print_every == 0:
-        guess, guess_i = get_category_from_output(output)
+        guess, guess_index = get_category_from_output(output)
         correct = '✓' if guess == category else '✗ (%s)' % category
         print(
             '%d %d%% (%s) %.4f %s / %s %s' % (iter, iter / n_iters * 100, timeSince(start), loss, name, guess, correct))
@@ -496,7 +496,7 @@ for iter in range(1, n_iters + 1):
 
     # Print iter number, loss, name and guess
     if iter % print_every == 0:
-        guess, guess_i = get_type_from_output(output)
+        guess, guess_index = get_type_from_output(output)
         correct = '✓' if guess == sentence_type else '✗ (%s)' % sentence_type
         print(
             '%d %d%% (%s) %.4f %s / %s %s' % (iter, iter / n_iters * 100, timeSince(start), loss, sentence, guess, correct))
@@ -550,11 +550,11 @@ def evaluate(func_name_tensor):
 
 # Go through a bunch of examples and record which are correctly guessed
 for i in range(n_confusion):
-    category, name, category_tensor, line_tensor = train_random_example()
-    output = evaluate(line_tensor)
-    guess, guess_i = get_category_from_output(output)
+    category, name, category_tensor, name_tensor = train_random_example()
+    output = evaluate(name_tensor)
+    guess, guess_index = get_category_from_output(output)
     category_index = all_categories.index(category)
-    confusion[category_index][guess_i] += 1
+    confusion[category_index][guess_index] += 1
 
 # Normalize by dividing every row by its sum
 for i in range(n_categories):
