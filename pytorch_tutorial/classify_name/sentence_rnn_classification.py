@@ -347,7 +347,7 @@ def train_random_example():
     func_category = choose_random(all_categories)  # choose random category;
     func_name = choose_random(category_names[func_category])  # choose random name of given category;
 
-    # convert name and category to tensor; 
+    # convert name and category to tensor;
     func_category_tensor = torch.tensor([all_categories.index(func_category)], dtype=torch.long)
     func_name_tensor = name_to_tensor(func_name)
 
@@ -470,6 +470,7 @@ def timeSince(since):
 
 start = time.time()
 
+# training process; 
 for iter in range(1, n_iters + 1):
     category, name, category_tensor, name_tensor = train_random_example()
     output, loss = train(category_tensor, name_tensor)
