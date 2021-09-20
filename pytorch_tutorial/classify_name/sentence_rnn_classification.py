@@ -421,21 +421,21 @@ def train(func_category_tensor, func_name_tensor):  # (1) Create input and targe
     return func_output, func_loss.item()  # (6) Return the output and loss;
 
 
-def train_ssfc(func_type_tensor, func_sentence_tensor):
-    func_hidden = rnn_ssfc.init_hidden()
+def train_ssfc(func_type_tensor, func_sentence_tensor):  # (1) Create input and target tensors;
+    func_hidden = rnn_ssfc.init_hidden()  # (2) Create a zeroed initial hidden state;
     rnn_ssfc.zero_grad()
 
-    for i in range(func_sentence_tensor.size()[0]):
+    for i in range(func_sentence_tensor.size()[0]):  # (3) Read each letter in and Keep hidden state for next letter;
         func_output, func_hidden = rnn_ssfc(func_sentence_tensor[i], func_hidden)
 
-    func_loss = criterion(func_output, func_type_tensor)
-    func_loss.backward()
+    func_loss = criterion(func_output, func_type_tensor)  # (4) Compare final output to target
+    func_loss.backward()  # (5) Back-propagate;
 
     # Add parameters' gradients to their values, multiplied by learning rate
     for p in rnn_ssfc.parameters():
         p.data.add_(p.grad.data, alpha=-learning_rate)
 
-    return func_output, func_loss.item()
+    return func_output, func_loss.item()  # (6) Return the output and loss;
 
 ######################################################################
 # Now we just have to run that with a bunch of examples. Since the
