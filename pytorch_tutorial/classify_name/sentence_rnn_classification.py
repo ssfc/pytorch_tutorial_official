@@ -347,6 +347,7 @@ def train_random_example():
     func_category = choose_random(all_categories)  # choose random category;
     func_name = choose_random(category_names[func_category])  # choose random name of given category;
 
+    # convert name and category to tensor; 
     func_category_tensor = torch.tensor([all_categories.index(func_category)], dtype=torch.long)
     func_name_tensor = name_to_tensor(func_name)
 
