@@ -401,7 +401,9 @@ for i in range(10):
 # layer of the RNN is ``nn.LogSoftmax``.
 #
 
+learning_rate = 0.003  # If you set this too high, it might explode. If too low, it might not learn
 criterion = nn.NLLLoss()  # Step 3: Construct loss and optimizer;
+optimizer = torch.optim.SGD(rnn.parameters(), learning_rate)
 
 ######################################################################
 # Step 4: Training cycle, forward, backward, update;
@@ -418,8 +420,6 @@ criterion = nn.NLLLoss()  # Step 3: Construct loss and optimizer;
 # -  (6) Return the output and loss;
 #
 
-learning_rate = 0.005  # If you set this too high, it might explode. If too low, it might not learn
-
 
 def train(func_category_tensor, func_name_tensor):  # (1) Create input and target tensors;
     func_hidden = rnn.init_hidden()  # (2) Create a zeroed initial hidden state;
@@ -429,11 +429,10 @@ def train(func_category_tensor, func_name_tensor):  # (1) Create input and targe
         func_output, func_hidden = rnn(func_name_tensor[i], func_hidden)
 
     func_loss = criterion(func_output, func_category_tensor)  # (4) Compare final output to target
-    func_loss.backward()  # (5) Back-propagate;
 
-    # Add parameters' gradients to their values, multiplied by learning rate
-    for p in rnn.parameters():
-        p.data.add_(p.grad.data, alpha=-learning_rate)
+    optimizer.zero_grad()
+    func_loss.backward()  # (5) Back-propagate;
+    optimizer.step()
 
     return func_output, func_loss.item()  # (6) Return the output and loss;
 
@@ -483,7 +482,7 @@ def timeSince(since):
     return '%dm %ds' % (m, s)
 
 
-epochs = 5
+epochs = 6
 start = time.time()
 
 
