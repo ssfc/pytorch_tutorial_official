@@ -437,6 +437,7 @@ def train(func_category_tensor, func_name_tensor):  # (1) Create input and targe
     return func_output, func_loss.item()  # (6) Return the output and loss;
 
 
+'''
 def train_ssfc(func_type_tensor, func_sentence_tensor):  # (1) Create input and target tensors;
     func_hidden = rnn_ssfc.init_hidden()  # (2) Create a zeroed initial hidden state;
     rnn_ssfc.zero_grad()
@@ -452,6 +453,7 @@ def train_ssfc(func_type_tensor, func_sentence_tensor):  # (1) Create input and 
         p.data.add_(p.grad.data, alpha=-learning_rate)
 
     return func_output, func_loss.item()  # (6) Return the output and loss;
+'''
 
 ######################################################################
 # Now we just have to run that with a bunch of examples. Since the
