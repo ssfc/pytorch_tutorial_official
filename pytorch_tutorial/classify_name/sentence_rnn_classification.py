@@ -77,6 +77,8 @@ print("unicode to ascii: ", unicode_to_ascii('Ślusàrski'))
 # {language: [names ...]}
 category_names = {}
 all_categories = []
+category_name_pair = []
+
 type_sentences = {}
 all_types = []
 
@@ -92,6 +94,15 @@ for file_name in find_files('data/names/*.txt'):
     all_categories.append(category)
     lines = read_lines(file_name)
     category_names[category] = lines
+
+    for name in lines:
+        category_name_pair.append((category, name))
+
+
+print("category_name_pair size: ", len(category_name_pair))
+print("category_name_pair [0]: ", category_name_pair[0])
+print("category_name_pair [1]: ", category_name_pair[1])
+print("category_name_pair [0][0]: ", category_name_pair[0][0])
 
 
 # Read a sentence file and split into lines, save it as a list;
@@ -452,7 +463,7 @@ def train_ssfc(func_type_tensor, func_sentence_tensor):  # (1) Create input and 
 #
 
 
-n_iters = 100000
+n_iters = 100000  # category_name_pair size: 20074;
 print_every = 5000
 plot_every = 1000
 
@@ -464,7 +475,6 @@ sentence_current_loss = 0
 sentence_all_losses = []
 
 
-
 def timeSince(since):
     now = time.time()
     s = now - since
@@ -473,27 +483,39 @@ def timeSince(since):
     return '%dm %ds' % (m, s)
 
 
+epochs = 5
 start = time.time()
 
-# training process;
-for iter in range(1, n_iters + 1):
-    category, name = get_random_pair()
-    category_tensor, name_tensor = get_pair_tensor(category, name)
 
-    output, loss = train(category_tensor, name_tensor)
-    current_loss += loss
+for epoch in range(epochs):
+    print("current epoch: ", epoch)
 
-    # Print iter number, loss, name and guess
-    if iter % print_every == 0:
-        guess, guess_index = get_category_from_output(output)
-        correct = '✓' if guess == category else '✗ (%s)' % category
-        print(
-            '%d %d%% (%s) %.4f %s / %s %s' % (iter, iter / n_iters * 100, timeSince(start), loss, name, guess, correct))
+    random.shuffle(category_name_pair)
+    counter = 0
+    for element in category_name_pair:
+        category = element[0]
+        name = element[1]
 
-    # Add current loss avg to list of losses
-    if iter % plot_every == 0:
-        all_losses.append(current_loss / plot_every)
-        current_loss = 0
+    #    category, name = get_random_pair()
+        category_tensor, name_tensor = get_pair_tensor(category, name)
+
+        output, loss = train(category_tensor, name_tensor)
+        current_loss += loss
+
+        # Print iter number, loss, name and guess
+        if counter % print_every == 0:
+            guess, guess_index = get_category_from_output(output)
+            correct = '✓' if guess == category else '✗ (%s)' % category
+            print(
+                '%d %d%% (%s) %.4f %s / %s %s' % (counter, counter / n_iters * 100, timeSince(start), loss, name, guess, correct))
+
+        # Add current loss avg to list of losses
+        if counter % plot_every == 0:
+            all_losses.append(current_loss / plot_every)
+            current_loss = 0
+
+        counter = counter + 1
+
 
 
 '''
