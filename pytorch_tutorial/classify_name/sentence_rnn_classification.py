@@ -343,17 +343,6 @@ def choose_random(l):  # return a random element from list l;
     return l[random.randint(0, len(l) - 1)]
 
 
-def train_random_example():
-    func_category = choose_random(all_categories)  # choose random category;
-    func_name = choose_random(category_names[func_category])  # choose random name of given category;
-
-    # convert name and category to tensor;
-    func_category_tensor = torch.tensor([all_categories.index(func_category)], dtype=torch.long)
-    func_name_tensor = name_to_tensor(func_name)
-
-    return func_category, func_name, func_category_tensor, func_name_tensor
-
-
 # get random pair of (category, name);
 def get_random_pair():
     func_category = choose_random(all_categories)  # choose random category;
@@ -371,7 +360,7 @@ def get_pair_tensor(func_category, func_name):
 
 
 for i in range(10):
-    category, name, category_tensor, name_tensor = train_random_example()
+    category, name= get_random_pair()
     print('category =', category, '/ name =', name)
 
 
@@ -571,7 +560,9 @@ def evaluate(func_name_tensor):
 
 # Go through a bunch of examples and record which are correctly guessed
 for i in range(n_confusion):
-    category, name, category_tensor, name_tensor = train_random_example()
+    category, name = get_random_pair()
+    category_tensor, name_tensor = get_pair_tensor(category, name)
+
     output = evaluate(name_tensor)
     guess, guess_index = get_category_from_output(output)
     category_index = all_categories.index(category)
