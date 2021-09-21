@@ -354,6 +354,22 @@ def train_random_example():
     return func_category, func_name, func_category_tensor, func_name_tensor
 
 
+# get random pair of (category, name);
+def get_random_pair():
+    func_category = choose_random(all_categories)  # choose random category;
+    func_name = choose_random(category_names[func_category])  # choose random name of given category;
+
+    return func_category, func_name
+
+
+def get_pair_tensor(func_category, func_name):
+    # convert name and category to tensor;
+    func_category_tensor = torch.tensor([all_categories.index(func_category)], dtype=torch.long)
+    func_name_tensor = name_to_tensor(func_name)
+
+    return func_category_tensor, func_name_tensor
+
+
 for i in range(10):
     category, name, category_tensor, name_tensor = train_random_example()
     print('category =', category, '/ name =', name)
@@ -470,9 +486,11 @@ def timeSince(since):
 
 start = time.time()
 
-# training process; 
+# training process;
 for iter in range(1, n_iters + 1):
-    category, name, category_tensor, name_tensor = train_random_example()
+    category, name = get_random_pair()
+    category_tensor, name_tensor = get_pair_tensor(category, name)
+
     output, loss = train(category_tensor, name_tensor)
     current_loss += loss
 
@@ -487,6 +505,7 @@ for iter in range(1, n_iters + 1):
     if iter % plot_every == 0:
         all_losses.append(current_loss / plot_every)
         current_loss = 0
+
 
 '''
 start = time.time()
