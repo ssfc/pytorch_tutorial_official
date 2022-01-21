@@ -1,5 +1,4 @@
 
-### 1: import some libraries; 
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
@@ -7,7 +6,7 @@ from torchvision import datasets
 from torchvision.transforms import ToTensor, Lambda, Compose
 import matplotlib.pyplot as plt
 
-### 2: download data; 
+### 1: prepare data; 
 # Download training data from open datasets.
 training_data = datasets.FashionMNIST(
     root="data",
@@ -24,7 +23,7 @@ test_data = datasets.FashionMNIST(
     transform=ToTensor(),
 )
 
-### 3: We pass the Dataset as an argument to DataLoader
+# We pass the Dataset as an argument to DataLoader
 batch_size = 64
 
 # Create data loaders.
