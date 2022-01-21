@@ -6,7 +6,8 @@ from torchvision import datasets
 from torchvision.transforms import ToTensor, Lambda, Compose
 import matplotlib.pyplot as plt
 
-### 1: prepare data; 
+##########################################################################################################
+# 1: prepare data; 
 # Download training data from open datasets.
 training_data = datasets.FashionMNIST(
     root="data",
@@ -35,6 +36,7 @@ for X, y in test_dataloader:
     print("Shape of y: ", y.shape, y.dtype)
     break
 
+##########################################################################################################
 ### 2: Creating Models
 # Get cpu or gpu device for training.
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -61,7 +63,8 @@ class NeuralNetwork(nn.Module):
 model = NeuralNetwork().to(device)
 print(model)
 
-### 3: Optimizing the Model Parameters
+##########################################################################################################
+# 3: Optimizing the Model Parameters
 loss_fn = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=1e-3)
 
@@ -106,11 +109,13 @@ for t in range(epochs):
     test(test_dataloader, model, loss_fn)
 print("Done!")
 
-### 4: saving models; 
+##########################################################################################################
+# 4: saving models; 
 torch.save(model.state_dict(), "model.pth")
 print("Saved PyTorch Model State to model.pth")
 
-### 5: loading models; 
+##########################################################################################################
+# 5: loading models; 
 del model  # this is according to leehongyi's homework 1; 
 model = NeuralNetwork()
 model.load_state_dict(torch.load("model.pth"))
