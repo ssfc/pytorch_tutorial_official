@@ -46,7 +46,10 @@ flatten = nn.Flatten()
 flat_image = flatten(input_image)
 print(flat_image.size())
 
-
+# (2) nn.Linear
+layer1 = nn.Linear(in_features=28*28, out_features=20)  # The linear layer is a module that applies a linear transformation on the input using its stored weights and biases.
+hidden1 = layer1(flat_image)
+print(hidden1.size())
 
 
 
