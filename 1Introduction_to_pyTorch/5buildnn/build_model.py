@@ -14,7 +14,7 @@ print(f'Using {device} device')
 ######################################################################################################################################
 # 2: Define the Class
 class NeuralNetwork(nn.Module):  # We define our neural network by subclassing nn.Module; 
-    def __init__(self):
+    def __init__(self):  # and initialize the neural network layers in __init__;
         super(NeuralNetwork, self).__init__()
         self.flatten = nn.Flatten()
         self.linear_relu_stack = nn.Sequential(
@@ -25,7 +25,7 @@ class NeuralNetwork(nn.Module):  # We define our neural network by subclassing n
             nn.Linear(512, 10),
         )
 
-    def forward(self, x):
+    def forward(self, x):  # Every nn.Module subclass implements the operations on input data in the forward method.
         x = self.flatten(x)
         logits = self.linear_relu_stack(x)
         return logits
