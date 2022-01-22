@@ -58,6 +58,13 @@ class CustomImageDataset(Dataset):
             label = self.target_transform(label)
         return image, label  # returns the tensor image and corresponding label in a tuple; 
 
+#################################################################################################################################
+# 4: Preparing your data for training with DataLoaders
+from torch.utils.data import DataLoader
+
+train_dataloader = DataLoader(training_data, batch_size=64, shuffle=True)  # pass samples in “minibatches”, reshuffle the data at every epoch; 
+test_dataloader = DataLoader(test_data, batch_size=64, shuffle=True)
+
 
 
 
