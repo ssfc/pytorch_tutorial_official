@@ -67,9 +67,20 @@ seq_modules = nn.Sequential(
 input_image = torch.rand(3,28,28)
 logits = seq_modules(input_image)
 print("logits size: ", logits.size())
+print("logits: ", logits)
 
+# (5) nn.Softmax
+# The logits are scaled to values [0, 1] representing the model’s predicted probabilities for each class; 
+softmax = nn.Softmax(dim=1)
+pred_probab = softmax(logits)
+print("pred_probab: ", pred_probab)
 
+######################################################################################################################################
+# 4: Model parameters; 
+print("Model structure: ", model, "\n\n")
 
+for name, param in model.named_parameters():
+    print(f"Layer: {name} | Size: {param.size()} | Values : {param[:2]} \n")
 
 
 
