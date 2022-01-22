@@ -14,6 +14,8 @@ loss = torch.nn.functional.binary_cross_entropy_with_logits(z, y)
 print('Gradient function for z =', z.grad_fn)
 print('Gradient function for loss =', loss.grad_fn)
 
+###################################################################################################
+# 2: Computing Gradients
 
 
 
