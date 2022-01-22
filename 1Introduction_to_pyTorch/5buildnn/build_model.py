@@ -53,7 +53,7 @@ print(hidden1.size())
 
 # (3) nn.ReLU
 print(f"Before ReLU: {hidden1}\n\n")
-hidden1 = nn.ReLU()(hidden1)
+hidden1 = nn.ReLU()(hidden1)  # They are applied after linear transformations to introduce nonlinearity; 
 print(f"After ReLU: {hidden1}")
 
 
