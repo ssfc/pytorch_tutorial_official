@@ -79,6 +79,7 @@ print("pred_probab: ", pred_probab)
 # 4: Model parameters; 
 print("Model structure: ", model, "\n\n")
 
+# makes all parameters accessible using your model’s parameters() or named_parameters() methods; 
 for name, param in model.named_parameters():
     print(f"Layer: {name} | Size: {param.size()} | Values : {param[:2]} \n")
 
