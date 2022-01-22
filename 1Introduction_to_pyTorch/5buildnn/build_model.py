@@ -37,10 +37,14 @@ print(model)
 ######################################################################################################################################
 # 3: Model Layers
 
+input_image = torch.rand(3,28,28)
+print(input_image.size())
 
-
-
-
+# (1) nn.Flatten: 
+# We initialize the nn.Flatten layer to convert each 2D 28x28 image into a contiguous array of 784 pixel values ( the minibatch dimension (at dim=0) is maintained).
+flatten = nn.Flatten()
+flat_image = flatten(input_image)
+print(flat_image.size())
 
 
 
