@@ -43,6 +43,7 @@ class CustomImageDataset(Dataset):
         self.transform = transform
         self.target_transform = target_transform
 
+    # The __len__ function returns the number of samples in our dataset.
     def __len__(self):
         return len(self.img_labels)
 
