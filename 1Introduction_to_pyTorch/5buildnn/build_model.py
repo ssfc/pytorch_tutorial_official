@@ -34,6 +34,8 @@ class NeuralNetwork(nn.Module):  # We define our neural network by subclassing n
 model = NeuralNetwork().to(device)
 print(model)
 
+######################################################################################################################################
+# 3: Model Layers
 
 
 
