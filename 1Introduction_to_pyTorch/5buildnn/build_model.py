@@ -57,6 +57,7 @@ hidden1 = nn.ReLU()(hidden1)  # They are applied after linear transformations to
 print(f"After ReLU: {hidden1}")
 
 # (4) nn.Sequential
+# The data is passed through all the modules in the same order as defined; 
 seq_modules = nn.Sequential(
     flatten,
     layer1,
