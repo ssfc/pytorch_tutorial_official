@@ -35,6 +35,8 @@ import pandas as pd
 from torchvision.io import read_image
 
 class CustomImageDataset(Dataset):
+    # The __init__ function is run once when instantiating the Dataset object. 
+    # We initialize the directory containing the images, the annotations file, and both transforms (covered in more detail in the next section).
     def __init__(self, annotations_file, img_dir, transform=None, target_transform=None):
         self.img_labels = pd.read_csv(annotations_file)  # their labels are stored separately in a CSV file annotations_file; 
         self.img_dir = img_dir  # the FashionMNIST images are stored in a directory img_dir; 
