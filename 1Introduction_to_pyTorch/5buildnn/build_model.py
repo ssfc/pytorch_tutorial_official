@@ -51,6 +51,10 @@ layer1 = nn.Linear(in_features=28*28, out_features=20)  # The linear layer is a 
 hidden1 = layer1(flat_image)
 print(hidden1.size())
 
+# (3) nn.ReLU
+print(f"Before ReLU: {hidden1}\n\n")
+hidden1 = nn.ReLU()(hidden1)
+print(f"After ReLU: {hidden1}")
 
 
 
