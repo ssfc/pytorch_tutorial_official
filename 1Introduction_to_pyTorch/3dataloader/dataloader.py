@@ -17,10 +17,10 @@ training_data = datasets.FashionMNIST(
 )
 
 test_data = datasets.FashionMNIST(
-    root="data",
-    train=False,
-    download=True,
-    transform=ToTensor()
+    root="data", # root is the path where the train/test data is stored; 
+    train=False, # train specifies training or test dataset; 
+    download=True, # download=True downloads the data from the internet if it’s not available at root; 
+    transform=ToTensor() # transform and target_transform specify the feature and label transformations; 
 )
 
 #################################################################################################################################
