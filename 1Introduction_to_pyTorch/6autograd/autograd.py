@@ -16,12 +16,25 @@ print('Gradient function for loss =', loss.grad_fn)
 
 ###################################################################################################
 # 2: Computing Gradients
+loss.backward()
+print(w.grad)
+print(b.grad)
 
+###################################################################################################
+# 3: Disabling Gradient Tracking
+z = torch.matmul(x, w)+b
+print(z.requires_grad)
 
+with torch.no_grad():
+    z = torch.matmul(x, w)+b
+print(z.requires_grad)
 
+z = torch.matmul(x, w)+b
+z_det = z.detach()
+print(z_det.requires_grad)
 
-
-
+###################################################################################################
+# 4: More on Computational Graphs
 
 
 
