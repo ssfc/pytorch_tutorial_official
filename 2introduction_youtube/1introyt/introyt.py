@@ -230,16 +230,18 @@ for epoch in range(2):  # we are doing only 2 training epochs (line 1);
 
     running_loss = 0.0
     for i, data in enumerate(trainloader, 0):  # Each pass has an inner loop that iterates over the training data (line 4); 
-        # get the inputs
+        # (1) prepare data; 
         inputs, labels = data
 
-        # zero the parameter gradients, reset them for every batch; 
-        optimizer.zero_grad()
-
-        # forward + backward + optimize
+        # (2) forward; 
         outputs = net(inputs)
         loss = criterion(outputs, labels)
+
+        # (3) backward; 
+        optimizer.zero_grad()  # zero the parameter gradients, reset them for every batch; 
         loss.backward()
+
+        # (4) update; 
         optimizer.step()
 
         # print statistics
