@@ -14,7 +14,8 @@ model.eval()
 
 ###########################################################################################################################################################
 # 2: Saving and Loading Models with Shapes
-
+torch.save(model, 'model.pth')  # We might want to save the structure of this class together with the model, in which case we can pass model (and not model.state_dict()) to the saving function; 
+model = torch.load('model.pth')
 
 
 
