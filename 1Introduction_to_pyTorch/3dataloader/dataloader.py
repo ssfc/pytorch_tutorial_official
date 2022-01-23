@@ -11,14 +11,14 @@ import matplotlib.pyplot as plt
 
 training_data = datasets.FashionMNIST(
     root="data", # root is the path where the train/test data is stored; 
-    train=True, # train specifies training or test dataset; 
+    train=True, # true is training, false is testing; 
     download=True, # download=True downloads the data from the internet if it’s not available at root; 
     transform=ToTensor() # transform and target_transform specify the feature and label transformations; 
 )
 
 test_data = datasets.FashionMNIST(
     root="data", # root is the path where the train/test data is stored; 
-    train=False, # train specifies training or test dataset; 
+    train=False, # true is training, false is testing; 
     download=True, # download=True downloads the data from the internet if it’s not available at root; 
     transform=ToTensor() # transform and target_transform specify the feature and label transformations; 
 )
