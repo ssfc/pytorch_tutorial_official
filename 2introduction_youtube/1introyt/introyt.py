@@ -74,7 +74,7 @@ import torch.nn as nn            # for torch.nn.Module, the parent object for Py
 import torch.nn.functional as F  # for the activation function
 
 
-class LeNet(nn.Module):
+class LeNet(nn.Module):  # It inherits from torch.nn.Module - modules may be nested - in fact, even the Conv2d and Linear layer classes inherit from torch.nn.Module. 
 
     def __init__(self):
         super(LeNet, self).__init__()
