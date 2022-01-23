@@ -69,7 +69,8 @@ epochs = 5  # Each iteration of the optimization loop is called an epoch;
 # 4: Full Implementation
 def train_loop(dataloader, model, criterion, optimizer):  # We define train_loop that loops over our optimization code; 
     size = len(dataloader.dataset)
-    for batch, (X, y) in enumerate(dataloader):
+    for i, data in enumerate(dataloader):
+        X, y = data
         # Forward: compute prediction and loss
         pred = model(X)
         loss = criterion(pred, y)
@@ -79,8 +80,8 @@ def train_loop(dataloader, model, criterion, optimizer):  # We define train_loop
         loss.backward()  # Backpropagate the prediction loss with a call to loss.backward(). 
         optimizer.step()  # Update: once we have our gradients, we call optimizer.step() to adjust the parameters by the gradients collected in the backward pass. 
 
-        if batch % 100 == 0:
-            loss, current = loss.item(), batch * len(X)
+        if i % 100 == 0:
+            loss, current = loss.item(), i * len(X)
             print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
 
 
