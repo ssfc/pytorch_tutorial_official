@@ -57,7 +57,7 @@ epochs = 5  # Each iteration of the optimization loop is called an epoch;
 
 ##############################################################################################################################################
 # 3: Optimization Loop
-# 3.1: Optimization Loop
+# 3.1: Loss Function
 
 
 
