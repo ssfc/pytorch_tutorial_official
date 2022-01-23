@@ -77,7 +77,7 @@ def train_loop(dataloader, model, criterion, optimizer):  # We define train_loop
         # Backpropagation
         optimizer.zero_grad()  # Call optimizer.zero_grad() to reset the gradients of model parameters. 
         loss.backward()  # Backpropagate the prediction loss with a call to loss.backward(). 
-        optimizer.step()  # Once we have our gradients, we call optimizer.step() to adjust the parameters by the gradients collected in the backward pass. 
+        optimizer.step()  # Update: once we have our gradients, we call optimizer.step() to adjust the parameters by the gradients collected in the backward pass. 
 
         if batch % 100 == 0:
             loss, current = loss.item(), batch * len(X)
