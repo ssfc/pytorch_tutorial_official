@@ -70,15 +70,18 @@ epochs = 5  # Each iteration of the optimization loop is called an epoch;
 def train_loop(dataloader, model, criterion, optimizer):  # We define train_loop that loops over our optimization code; 
     size = len(dataloader.dataset)
     for i, data in enumerate(dataloader):
+        # (1) prepare data; 
         X, y = data
-        # Forward: compute prediction and loss
+        # (2) Forward: compute prediction and loss
         pred = model(X)
         loss = criterion(pred, y)
 
-        # Backpropagation
+        # (3) Backpropagation
         optimizer.zero_grad()  # Call optimizer.zero_grad() to reset the gradients of model parameters. 
         loss.backward()  # Backpropagate the prediction loss with a call to loss.backward(). 
-        optimizer.step()  # Update: once we have our gradients, we call optimizer.step() to adjust the parameters by the gradients collected in the backward pass. 
+
+        # (4) update
+        optimizer.step()  # once we have our gradients, we call optimizer.step() to adjust the parameters by the gradients collected in the backward pass. 
 
         if i % 100 == 0:
             loss, current = loss.item(), i * len(X)
