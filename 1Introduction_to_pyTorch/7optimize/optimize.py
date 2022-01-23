@@ -99,9 +99,9 @@ def test_loop(dataloader, model, loss_fn):  # and test_loop that evaluates the m
     correct /= size
     print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
 
-# We initialize the loss function and optimizer, and pass it to train_loop and test_loop. 
+
 loss_fn = nn.CrossEntropyLoss()
-optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)  # We initialize the optimizer by registering the model’s parameters that need to be trained, and passing in the learning rate hyperparameter.
 
 epochs = 10
 for t in range(epochs):
