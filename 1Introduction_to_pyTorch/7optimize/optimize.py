@@ -5,6 +5,11 @@
 # (3) collects the derivatives of the error with respect to its parameters (as we saw in the previous section), 
 # (4) and optimizes these parameters using gradient descent; 
 
+##############################################################################################################################################
+# 1: Prerequisite Code
+
+
+
 
 
 
