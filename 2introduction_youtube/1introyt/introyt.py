@@ -9,12 +9,101 @@ z = torch.zeros(5, 3)  # Above, we create a 5x3 matrix filled with zeros;
 print(z)
 print(z.dtype)  # query its datatype to find out that the zeros are 32-bit floating point numbers, which is the default PyTorch; 
 
+i = torch.ones((5, 3), dtype=torch.int16)  # What if you wanted integers instead? You can always override the default; 
+print(i)
+
+torch.manual_seed(1729)  # It’s common to initialize learning weights randomly, often with a specific seed for the PRNG for reproducibility of results; 
+r1 = torch.rand(2, 2)
+print('A random tensor:')
+print(r1)
+
+r2 = torch.rand(2, 2)
+print('\nA different random tensor:')
+print(r2) # new values
+
+torch.manual_seed(1729)
+r3 = torch.rand(2, 2)
+print('\nShould match r1:')
+print(r3) # repeats values of r1 because of re-seed
+
+# PyTorch tensors perform arithmetic operations intuitively. Tensors of similar shapes may be added, multiplied, etc. Operations with scalars are distributed over the tensor:
+ones = torch.ones(2, 3)
+print(ones)
+
+twos = torch.ones(2, 3) * 2 # every element is multiplied by 2
+print(twos)
+
+threes = ones + twos       # additon allowed because shapes are similar
+print(threes)              # tensors are added element-wise
+print(threes.shape)        # this has the same dimensions as input tensors
+
+r1 = torch.rand(2, 3)
+r2 = torch.rand(3, 2)
+# uncomment this line to get a runtime error
+# r3 = r1 + r2
+
+# Here’s a small sample of the mathematical operations available:
+r = (torch.rand(2, 2) - 0.5) * 2 # values between -1 and 1
+print('A random matrix, r:')
+print(r)
+
+# Common mathematical operations are supported:
+print('\nAbsolute value of r:')
+print(torch.abs(r))
+
+# ...as are trigonometric functions:
+print('\nInverse sine of r:')
+print(torch.asin(r))
+
+# ...and linear algebra operations like determinant and singular value decomposition
+print('\nDeterminant of r:')
+print(torch.det(r))
+print('\nSingular value decomposition of r:')
+print(torch.svd(r))
+
+# ...and statistical and aggregate operations:
+print('\nAverage and standard deviation of r:')
+print(torch.std_mean(r))
+print('\nMaximum value of r:')
+print(torch.max(r))
+
+###############################################################################################################################################################
+# 2: PyTorch Models
+import torch                     # for all things PyTorch
+import torch.nn as nn            # for torch.nn.Module, the parent object for PyTorch models
+import torch.nn.functional as F  # for the activation function
 
 
+class LeNet(nn.Module):
 
+    def __init__(self):
+        super(LeNet, self).__init__()
+        # 1 input image channel (black & white), 6 output channels, 3x3 square convolution
+        # kernel
+        self.conv1 = nn.Conv2d(1, 6, 3)  # Layer C1 is a convolutional layer, meaning that it scans the input image for features it learned during training. 
+        self.conv2 = nn.Conv2d(6, 16, 3)
+        # an affine operation: y = Wx + b
+        self.fc1 = nn.Linear(16 * 6 * 6, 120)  # 6*6 from image dimension
+        self.fc2 = nn.Linear(120, 84)
+        self.fc3 = nn.Linear(84, 10)
 
+    def forward(self, x):
+        # Max pooling over a (2, 2) window
+        x = F.max_pool2d(F.relu(self.conv1(x)), (2, 2))
+        # If the size is a square you can only specify a single number
+        x = F.max_pool2d(F.relu(self.conv2(x)), 2)
+        x = x.view(-1, self.num_flat_features(x))
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
+        return x
 
-
+    def num_flat_features(self, x):
+        size = x.size()[1:]  # all dimensions except the batch dimension
+        num_features = 1
+        for s in size:
+            num_features *= s
+        return num_features
 
 
 
