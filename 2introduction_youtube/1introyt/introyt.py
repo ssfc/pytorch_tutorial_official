@@ -87,7 +87,7 @@ class LeNet(nn.Module):  # It inherits from torch.nn.Module - modules may be nes
         self.fc2 = nn.Linear(120, 84)
         self.fc3 = nn.Linear(84, 10)
 
-    def forward(self, x):
+    def forward(self, x):  # An input is passed through the network layers and various functions to generate an output. 
         # Max pooling over a (2, 2) window
         x = F.max_pool2d(F.relu(self.conv1(x)), (2, 2))
         # If the size is a square you can only specify a single number
