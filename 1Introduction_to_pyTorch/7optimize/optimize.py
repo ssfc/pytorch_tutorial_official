@@ -60,19 +60,19 @@ epochs = 5  # Each iteration of the optimization loop is called an epoch;
 # 3.1: Loss Function
 
 # Initialize the loss function
-# loss_fn = nn.CrossEntropyLoss()
+# criterion = nn.CrossEntropyLoss()
 
 # 3.2: Optimizer
 # optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
 
 ##############################################################################################################################################
 # 4: Full Implementation
-def train_loop(dataloader, model, loss_fn, optimizer):  # We define train_loop that loops over our optimization code; 
+def train_loop(dataloader, model, criterion, optimizer):  # We define train_loop that loops over our optimization code; 
     size = len(dataloader.dataset)
     for batch, (X, y) in enumerate(dataloader):
         # Compute prediction and loss
         pred = model(X)
-        loss = loss_fn(pred, y)
+        loss = criterion(pred, y)
 
         # Backpropagation
         optimizer.zero_grad()  # Call optimizer.zero_grad() to reset the gradients of model parameters. 
@@ -84,7 +84,7 @@ def train_loop(dataloader, model, loss_fn, optimizer):  # We define train_loop t
             print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
 
 
-def test_loop(dataloader, model, loss_fn):  # and test_loop that evaluates the model’s performance against our test data; 
+def test_loop(dataloader, model, criterion):  # and test_loop that evaluates the model’s performance against our test data; 
     size = len(dataloader.dataset)
     num_batches = len(dataloader)
     test_loss, correct = 0, 0
@@ -92,7 +92,7 @@ def test_loop(dataloader, model, loss_fn):  # and test_loop that evaluates the m
     with torch.no_grad():
         for X, y in dataloader:
             pred = model(X)
-            test_loss += loss_fn(pred, y).item()
+            test_loss += criterion(pred, y).item()
             correct += (pred.argmax(1) == y).type(torch.float).sum().item()
 
     test_loss /= num_batches
@@ -100,14 +100,14 @@ def test_loop(dataloader, model, loss_fn):  # and test_loop that evaluates the m
     print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
 
 
-loss_fn = nn.CrossEntropyLoss()
+criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)  # We initialize the optimizer by registering the model’s parameters that need to be trained, and passing in the learning rate hyperparameter.
 
 epochs = 10
 for t in range(epochs):
     print(f"Epoch {t+1}\n-------------------------------")
-    train_loop(train_dataloader, model, loss_fn, optimizer)
-    test_loop(test_dataloader, model, loss_fn)
+    train_loop(train_dataloader, model, criterion, optimizer)
+    test_loop(test_dataloader, model, criterion)
 print("Done!")
 
 
