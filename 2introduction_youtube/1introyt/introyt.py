@@ -105,7 +105,20 @@ class LeNet(nn.Module):  # It inherits from torch.nn.Module - modules may be nes
             num_features *= s
         return num_features
 
+# First, we instantiate the LeNet class, and we print the net object. 
+# A subclass of torch.nn.Module will report the layers it has created and their shapes and parameters. 
+# This can provide a handy overview of a model if you want to get the gist of its processing.
+net = LeNet()
+print(net)                         # what does the object tell us about itself?
 
+input = torch.rand(1, 1, 32, 32)   # stand-in for a 32x32 black & white image
+print('\nImage batch shape:')
+print(input.shape)
+
+output = net(input)                # we don't call forward() directly
+print('\nRaw output:')
+print(output)
+print(output.shape)
 
 
 
