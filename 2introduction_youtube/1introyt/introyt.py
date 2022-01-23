@@ -233,7 +233,7 @@ for epoch in range(2):  # we are doing only 2 training epochs (line 1);
         # get the inputs
         inputs, labels = data
 
-        # zero the parameter gradients
+        # zero the parameter gradients, reset them for every batch; 
         optimizer.zero_grad()
 
         # forward + backward + optimize
