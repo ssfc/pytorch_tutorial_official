@@ -70,7 +70,7 @@ epochs = 5  # Each iteration of the optimization loop is called an epoch;
 def train_loop(dataloader, model, criterion, optimizer):  # We define train_loop that loops over our optimization code; 
     size = len(dataloader.dataset)
     for batch, (X, y) in enumerate(dataloader):
-        # Compute prediction and loss
+        # Forward: compute prediction and loss
         pred = model(X)
         loss = criterion(pred, y)
 
