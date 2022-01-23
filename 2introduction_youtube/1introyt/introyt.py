@@ -111,6 +111,8 @@ class LeNet(nn.Module):  # It inherits from torch.nn.Module - modules may be nes
 net = LeNet()
 print(net)                         # what does the object tell us about itself?
 
+# Below that, we create a dummy input representing a 32x32 image with 1 color channel. 
+# You may have noticed an extra dimension to our tensor - the batch dimension. 
 input = torch.rand(1, 1, 32, 32)   # stand-in for a 32x32 black & white image
 print('\nImage batch shape:')
 print(input.shape)
