@@ -75,7 +75,7 @@ def train_loop(dataloader, model, loss_fn, optimizer):  # We define train_loop t
         loss = loss_fn(pred, y)
 
         # Backpropagation
-        optimizer.zero_grad()
+        optimizer.zero_grad()  # Call optimizer.zero_grad() to reset the gradients of model parameters. 
         loss.backward()
         optimizer.step()
 
