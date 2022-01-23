@@ -76,7 +76,7 @@ import torch.nn.functional as F  # for the activation function
 
 class LeNet(nn.Module):  # It inherits from torch.nn.Module - modules may be nested - in fact, even the Conv2d and Linear layer classes inherit from torch.nn.Module. 
 
-    def __init__(self):
+    def __init__(self):  # A model will have an __init__() function, where it instantiates its layers, and loads any data artifacts it might need (e.g., an NLP model might load a vocabulary).
         super(LeNet, self).__init__()
         # 1 input image channel (black & white), 6 output channels, 3x3 square convolution
         # kernel
