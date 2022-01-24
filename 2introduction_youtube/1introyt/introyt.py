@@ -239,7 +239,7 @@ for epoch in range(2):  # we are doing only 2 training epochs (line 1);
 
         # (3) backward; 
         optimizer.zero_grad()  # zero the parameter gradients, reset them for every batch; 
-        loss.backward()
+        loss.backward()  # we do the backward() pass, and calculate the gradients that will direct the learning. 
 
         # (4) update; 
         optimizer.step()
