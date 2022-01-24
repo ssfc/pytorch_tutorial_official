@@ -5,7 +5,7 @@ import math
 
 ##################################################################################################################################################
 # 1: Creating Tensors
-x = torch.empty(3, 4)  # We created a tensor using one of the numerous factory methods attached to the torch module. 
+x = torch.empty(3, 4)  # We created a tensor using one of the numerous factory methods attached to the torch module; all start with torch. 
 print(type(x))  # The type of the object returned is torch.Tensor, which is an alias for torch.FloatTensor. 
 print(x)  # The torch.empty() call allocates memory for the tensor, but does not initialize it with any values. 
 
@@ -77,7 +77,17 @@ print(c)
 
 ##################################################################################################################################################
 # 2: Math & Logic with PyTorch Tensors
+ones = torch.zeros(2, 2) + 1
+twos = torch.ones(2, 2) * 2
+threes = (torch.ones(2, 2) * 7 - 1) / 2
+fours = twos ** 2
+sqrt2s = twos ** 0.5
 
+print(ones)
+print(twos)
+print(threes)
+print(fours)
+print(sqrt2s)
 
 
 
