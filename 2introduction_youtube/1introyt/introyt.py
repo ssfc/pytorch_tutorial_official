@@ -253,7 +253,22 @@ for epoch in range(2):  # we are doing only 2 training epochs (line 1);
 
 print('Finished Training')
 
+correct = 0
+total = 0
+with torch.no_grad():  # Disabling gradient calculation is useful for inference, when you are sure that you will not call Tensor.backward(). It will reduce memory consumption for computations that would otherwise have requires_grad=True.
+    for data in testloader:
+        # (1) prepare data; 
+        images, labels = data  
 
+        # (2) forward; 
+        outputs = net(images)
+        _, predicted = torch.max(outputs.data, 1)
+        
+        total += labels.size(0)
+        correct += (predicted == labels).sum().item()
+
+print('Accuracy of the network on the 10000 test images: %d %%' % (
+    100 * correct / total))
 
 
 
