@@ -242,7 +242,7 @@ for epoch in range(2):  # we are doing only 2 training epochs (line 1);
         loss.backward()  # we do the backward() pass, and calculate the gradients that will direct the learning. 
 
         # (4) update; 
-        optimizer.step()
+        optimizer.step()  # it uses the gradients from the backward() call to nudge the learning weights in the direction it thinks will reduce the loss. 
 
         # print statistics
         running_loss += loss.item()
