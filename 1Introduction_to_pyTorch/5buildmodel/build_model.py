@@ -18,28 +18,16 @@ class NeuralNetwork(nn.Module):  # We define our neural network by subclassing n
         super(NeuralNetwork, self).__init__()
         
         self.flatten = nn.Flatten()
-        '''
-        self.linear_relu_stack = nn.Sequential(
-            nn.Linear(28*28, 512),
-            nn.ReLU(),
-            nn.Linear(512, 512),
-            nn.ReLU(),
-            nn.Linear(512, 10),
-        )'''
         self.linear1 = nn.Linear(28*28, 512)
-        self.relu1 = nn.ReLU()
         self.linear2 = nn.Linear(512, 512)
-        self.relu2 = nn.ReLU()
         self.linear3 = nn.Linear(512, 10)
+        self.relu = nn.ReLU()
 
 
     def forward(self, x):  # Every nn.Module subclass implements the operations on input data in the forward method.
         x = self.flatten(x)
-#        logits = self.linear_relu_stack(x)
-        x = self.linear1(x)
-        x = self.relu1(x)
-        x = self.linear2(x)
-        x = self.relu2(x)
+        x = self.relu(self.linear1(x))
+        x = self.relu(self.linear2(x))
         x = self.linear3(x)
 
         return logits
