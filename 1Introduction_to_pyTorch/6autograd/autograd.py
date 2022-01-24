@@ -18,7 +18,7 @@ print('Gradient function for loss =', loss.grad_fn)
 # 2: Computing Gradients
 loss.backward()  # we call loss.backward(); 
 print(w.grad)  # and then retrieve the values from w.grad and b.grad; 
-print(b.grad)
+print(b.grad)  # so grad is retrieved from parameters; 
 
 ###################################################################################################
 # 3: Disabling Gradient Tracking
