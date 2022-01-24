@@ -19,7 +19,20 @@ torch.manual_seed(1729)
 random = torch.rand(2, 3)
 print(random)
 
+# (1) Random Tensors and Seeding
+torch.manual_seed(1729)  # you’ll want some assurance of the reproducibility of your results; 
+random1 = torch.rand(2, 3)
+print(random1)
 
+random2 = torch.rand(2, 3)
+print(random2)
+
+torch.manual_seed(1729)
+random3 = torch.rand(2, 3)
+print(random3)
+
+random4 = torch.rand(2, 3)
+print(random4)
 
 
 
