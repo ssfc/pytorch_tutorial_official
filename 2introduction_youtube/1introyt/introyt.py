@@ -234,8 +234,8 @@ for epoch in range(2):  # we are doing only 2 training epochs (line 1);
         inputs, labels = data
 
         # (2) forward; 
-        outputs = net(inputs)
-        loss = criterion(outputs, labels)
+        outputs = net(inputs)  # we ask the model for its predictions on this batch. 
+        loss = criterion(outputs, labels)  # we compute the loss - the difference between outputs (the model prediction) and labels (the correct output).
 
         # (3) backward; 
         optimizer.zero_grad()  # zero the parameter gradients, reset them for every batch; 

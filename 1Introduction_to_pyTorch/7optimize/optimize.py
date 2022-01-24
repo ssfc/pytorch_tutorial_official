@@ -72,9 +72,9 @@ def train_loop(dataloader, model, criterion, optimizer):  # We define train_loop
     for i, data in enumerate(dataloader):
         # (1) prepare data; 
         X, y = data
-        # (2) Forward: compute prediction and loss
-        pred = model(X)
-        loss = criterion(pred, y)
+        # (2) Forward
+        pred = model(X)  # we ask the model for its predictions on this batch. 
+        loss = criterion(pred, y)  # we compute the loss - the difference between outputs (the model prediction) and labels (the correct output).
 
         # (3) Backpropagation
         optimizer.zero_grad()  # Call optimizer.zero_grad() to reset the gradients of model parameters. 
