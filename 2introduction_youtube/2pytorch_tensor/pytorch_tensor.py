@@ -181,7 +181,7 @@ print(b)
 print(torch.sin_(b))  # note the underscore
 print(b)              # b has changed
 
-# a's operation is a's object; 
+# Note that these in-place arithmetic functions are methods on the torch.Tensor object, not attached to the torch module like many other functions (e.g., torch.sin()). 
 a = torch.ones(2, 2)
 b = torch.rand(2, 2)
 
