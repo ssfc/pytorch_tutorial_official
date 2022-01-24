@@ -16,6 +16,7 @@ print(f'Using {device} device')
 class NeuralNetwork(nn.Module):  # We define our neural network by subclassing nn.Module; 
     def __init__(self):  # and initialize the neural network layers in __init__;
         super(NeuralNetwork, self).__init__()
+        
         self.flatten = nn.Flatten()
         self.linear_relu_stack = nn.Sequential(
             nn.Linear(28*28, 512),
