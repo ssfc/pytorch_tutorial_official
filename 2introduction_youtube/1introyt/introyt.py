@@ -226,7 +226,7 @@ net = Net()
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 
-for epoch in range(2):  # we are doing only 2 training epochs (line 1); 
+for epoch in range(10):  # we are doing only 2 training epochs (line 1); 
 
     running_loss = 0.0
     for i, data in enumerate(trainloader, 0):  # Each pass has an inner loop that iterates over the training data (line 4); 
@@ -263,7 +263,7 @@ with torch.no_grad():  # Disabling gradient calculation is useful for inference,
         # (2) forward; 
         outputs = net(images)
         _, predicted = torch.max(outputs.data, 1)
-        
+
         total += labels.size(0)
         correct += (predicted == labels).sum().item()
 
