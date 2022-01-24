@@ -181,8 +181,20 @@ print(b)
 print(torch.sin_(b))  # note the underscore
 print(b)              # b has changed
 
+# a's operation is a's object; 
+a = torch.ones(2, 2)
+b = torch.rand(2, 2)
 
-
+print('Before:')
+print(a)
+print(b)
+print('\nAfter adding:')
+print(a.add_(b))
+print(a)
+print(b)
+print('\nAfter multiplying')
+print(b.mul_(b))
+print(b)
 
 
 
