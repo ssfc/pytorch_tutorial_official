@@ -89,11 +89,32 @@ print(threes)
 print(fours)
 print(sqrt2s)
 
+powers2 = twos ** torch.tensor([[1, 2], [3, 4]])
+print(powers2)
 
+fives = ones + fours
+print(fives)
 
+dozens = threes * fours
+print(dozens)
 
+# (1) In Brief: Tensor Broadcasting
+rand = torch.rand(2, 4)
+doubled = rand * (torch.ones(1, 4) * 2)
 
+print(rand)
+print(doubled)
 
+a =     torch.ones(4, 3, 2)
+
+b = a * torch.rand(   3, 2) # 3rd & 2nd dims identical to a, dim 1 absent
+print(b)
+
+c = a * torch.rand(   3, 1) # 3rd dim = 1, 2nd dim identical to a
+print(c)
+
+d = a * torch.rand(   1, 2) # 3rd dim identical to a, 2nd dim = 1
+print(d)
 
 
 
