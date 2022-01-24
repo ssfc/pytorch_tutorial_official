@@ -34,14 +34,49 @@ print(random3)
 random4 = torch.rand(2, 3)
 print(random4)
 
+# (2) Tensor Shapes
+x = torch.empty(2, 2, 3)
+print(x.shape)
+print(x)
 
+empty_like_x = torch.empty_like(x)  # having the same number of dimensions and the same number of cells in each dimension; 
+print(empty_like_x.shape)
+print(empty_like_x)
 
+zeros_like_x = torch.zeros_like(x)
+print(zeros_like_x.shape)
+print(zeros_like_x)
 
+ones_like_x = torch.ones_like(x)
+print(ones_like_x.shape)
+print(ones_like_x)
 
+rand_like_x = torch.rand_like(x)
+print(rand_like_x.shape)
+print(rand_like_x)
 
+# The last way to create a tensor that will cover is to specify its data directly from a PyTorch collection: 
+some_constants = torch.tensor([[3.1415926, 2.71828], [1.61803, 0.0072897]])
+print(some_constants)
 
+some_integers = torch.tensor((2, 3, 5, 7, 11, 13, 17, 19))
+print(some_integers)
 
+more_integers = torch.tensor(((2, 4, 6), [3, 6, 9]))
+print(more_integers)
 
+# (3) Tensor Data Types
+a = torch.ones((2, 3), dtype=torch.int16)  # specifying the tensor’s shape as a series of integer arguments, to grouping those arguments in a tuple; 
+print(a)  # printing the tensor also specifies its dtype. 
+
+b = torch.rand((2, 3), dtype=torch.float64) * 20.
+print(b)
+
+c = b.to(torch.int32)  # converting b to a 32-bit integer with the .to() method. 
+print(c)
+
+##################################################################################################################################################
+# 2: Math & Logic with PyTorch Tensors
 
 
 
