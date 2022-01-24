@@ -238,7 +238,7 @@ for epoch in range(2):  # we are doing only 2 training epochs (line 1);
         loss = criterion(outputs, labels)  # we compute the loss - the difference between outputs (the model prediction) and labels (the correct output).
 
         # (3) backward; 
-        optimizer.zero_grad()  # zero the parameter gradients, reset them for every batch; 
+        optimizer.zero_grad()  # Call optimizer.zero_grad() to reset the gradients of model parameters. 
         loss.backward()  # we do the backward() pass, and calculate the gradients that will direct the learning. 
 
         # (4) update; 
