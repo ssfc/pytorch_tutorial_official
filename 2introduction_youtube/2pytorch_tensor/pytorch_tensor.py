@@ -168,6 +168,23 @@ m3 = torch.matmul(m1, m2)
 print(m3)                  # 3 times m1
 print(torch.svd(m3))       # singular value decomposition
 
+# (3) Altering Tensors in Place: most of the math functions have a version with an appended underscore (_) that will alter a tensor in place. 
+a = torch.tensor([0, math.pi / 4, math.pi / 2, 3 * math.pi / 4])
+print('a:')
+print(a)
+print(torch.sin(a))   # this operation creates a new tensor in memory
+print(a)              # a has not changed
+
+b = torch.tensor([0, math.pi / 4, math.pi / 2, 3 * math.pi / 4])
+print('\nb:')
+print(b)
+print(torch.sin_(b))  # note the underscore
+print(b)              # b has changed
+
+
+
+
+
 
 
 
