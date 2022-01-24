@@ -30,7 +30,7 @@ class NeuralNetwork(nn.Module):  # We define our neural network by subclassing n
         x = self.relu(self.linear2(x))
         x = self.linear3(x)
 
-        return logits
+        return x
 
 # We create an instance of NeuralNetwork, and move it to the device, and print its structure.
 model = NeuralNetwork().to(device)
