@@ -77,7 +77,7 @@ print(c)
 
 ##################################################################################################################################################
 # 2: Math & Logic with PyTorch Tensors
-ones = torch.zeros(2, 2) + 1
+ones = torch.zeros(2, 2) + 1  #  arithmetic operations between tensors and scalars are distributed over every element of the tensor; 
 twos = torch.ones(2, 2) * 2
 threes = (torch.ones(2, 2) * 7 - 1) / 2
 fours = twos ** 2
