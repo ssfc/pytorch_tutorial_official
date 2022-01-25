@@ -321,6 +321,17 @@ print(numpy_array)
 pytorch_tensor = torch.from_numpy(numpy_array)  # PyTorch creates a tensor of the same shape and containing the same data as the NumPy array, going so far as to keep NumPy’s default 64-bit float data type. 
 print(pytorch_tensor)
 
+pytorch_rand = torch.rand(2, 3)
+print(pytorch_rand)
+
+numpy_rand = pytorch_rand.numpy()
+print(numpy_rand)
+
+numpy_array[1, 1] = 23  # these converted objects are using the same underlying memory as their source objects, meaning that changes to one are reflected in the other; 
+print(pytorch_tensor)
+
+pytorch_rand[1, 1] = 17
+print(numpy_rand)
 
 
 
