@@ -237,10 +237,10 @@ print(a)
 b = a.clone()
 print(b)  # we can see that it’s tracking its computation history - it has inherited a’s autograd settings, and added to the computation history. 
 
-c = a.detach().clone()
+c = a.detach().clone()  # The detach() method detaches the tensor from its computation history. It says, “do whatever comes next as if autograd was off.”
 print(c)  # we see no computation history, and no requires_grad=True. 
 
-print(a)
+print(a)  # It does this without changing a - you can see that when we print a again at the end, it retains its requires_grad=True property. 
 
 
 
