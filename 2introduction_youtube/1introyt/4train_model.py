@@ -120,11 +120,11 @@ total = 0
 with torch.no_grad():  # Disabling gradient calculation is useful for inference, when you are sure that you will not call Tensor.backward(). It will reduce memory consumption for computations that would otherwise have requires_grad=True.
     for data in testloader:
         # (1) prepare data; 
-        images, target = data  
-        images, target = images.to(device), target.to(device)
+        input, target = data  
+        input, target = input.to(device), target.to(device)
 
         # (2) forward; 
-        outputs = net(images)
+        outputs = net(input)
         _, predicted = torch.max(outputs.data, 1)
 
         total += target.size(0)
