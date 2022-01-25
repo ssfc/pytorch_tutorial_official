@@ -92,12 +92,12 @@ for epoch in range(2):  # we are doing only 2 training epochs (line 1);
     running_loss = 0.0
     for i, data in enumerate(trainloader, 0):  # Each pass has an inner loop that iterates over the training data (line 4); 
         # (1) prepare data; 
-        inputs, labels = data
-        inputs, labels = inputs.to(device), labels.to(device)
+        input, target = data
+        input, target = input.to(device), target.to(device)
 
         # (2) forward; 
-        outputs = net(inputs)  # we ask the model for its predictions on this batch. 
-        loss = criterion(outputs, labels)  # we compute the loss - the difference between outputs (the model prediction) and labels (the correct output).
+        outputs = net(input)  # we ask the model for its predictions on this batch. 
+        loss = criterion(outputs, target)  # we compute the loss - the difference between outputs (the model prediction) and targets (the correct output).
 
         # (3) backward; 
         optimizer.zero_grad()  # Call optimizer.zero_grad() to reset the gradients of model parameters. 
@@ -120,15 +120,15 @@ total = 0
 with torch.no_grad():  # Disabling gradient calculation is useful for inference, when you are sure that you will not call Tensor.backward(). It will reduce memory consumption for computations that would otherwise have requires_grad=True.
     for data in testloader:
         # (1) prepare data; 
-        images, labels = data  
-        images, labels = images.to(device), labels.to(device)
+        images, target = data  
+        images, target = images.to(device), target.to(device)
 
         # (2) forward; 
         outputs = net(images)
         _, predicted = torch.max(outputs.data, 1)
 
-        total += labels.size(0)
-        correct += (predicted == labels).sum().item()
+        total += target.size(0)
+        correct += (predicted == target).sum().item()
 
 print('Accuracy of the network on the 10000 test images: %d %%' % (
     100 * correct / total))
