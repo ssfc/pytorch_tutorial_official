@@ -215,8 +215,21 @@ assert id(c), old_id    # still the same object!
 
 ##################################################################################################################################################
 # 3: Copying Tensors
+a = torch.ones(2, 2)
+b = a
 
+a[0][1] = 561  # we change a...
+print(b)       # ...and b is also altered
 
+# But what if you want a separate copy of the data to work on? The clone() method is there for you:
+a = torch.ones(2, 2)
+b = a.clone()
+
+assert b is not a      # different objects in memory...
+print(torch.eq(a, b))  # ...but still with the same contents!
+
+a[0][1] = 561          # a changes...
+print(b)               # ...but b is still all ones
 
 
 
