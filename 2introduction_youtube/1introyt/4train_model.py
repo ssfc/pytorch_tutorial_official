@@ -79,17 +79,21 @@ class Net(nn.Module):
 
 
 net = Net()
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+print("device: ", device)
+net.to(device)
 
 # The last ingredients we need are a loss function and an optimizer:
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 
-for epoch in range(10):  # we are doing only 2 training epochs (line 1); 
+for epoch in range(2):  # we are doing only 2 training epochs (line 1); 
 
     running_loss = 0.0
     for i, data in enumerate(trainloader, 0):  # Each pass has an inner loop that iterates over the training data (line 4); 
         # (1) prepare data; 
         inputs, labels = data
+        inputs, labels = inputs.to(device), labels.to(device)
 
         # (2) forward; 
         outputs = net(inputs)  # we ask the model for its predictions on this batch. 
@@ -117,6 +121,7 @@ with torch.no_grad():  # Disabling gradient calculation is useful for inference,
     for data in testloader:
         # (1) prepare data; 
         images, labels = data  
+        inputs, labels = inputs.to(device), labels.to(device)
 
         # (2) forward; 
         outputs = net(images)
