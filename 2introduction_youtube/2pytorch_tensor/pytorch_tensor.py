@@ -278,8 +278,48 @@ b = a.unsqueeze(0)  # The unsqueeze() method adds a dimension of extent 1. unsqu
 print(a.shape)
 print(b.shape)
 
+c = torch.rand(1, 1, 1, 1, 1)
+print(c)
 
+a = torch.rand(1, 20)
+print(a.shape)
+print(a)
 
+b = a.squeeze(0)
+print(b.shape)
+print(b)
+
+c = torch.rand(2, 2)
+print(c.shape)
+
+d = c.squeeze(0)  # Calls to squeeze() and unsqueeze() can only act on dimensions of extent 1 because to do otherwise would change the number of elements in the tensor.
+print(d.shape)
+
+# The squeeze() and unsqueeze() methods also have in-place versions, squeeze_() and unsqueeze_(): 
+batch_me = torch.rand(3, 226, 226)
+print(batch_me.shape)
+batch_me.unsqueeze_(0)
+print(batch_me.shape)
+
+# reshape() will do this for you, provided that the dimensions you request yield the same number of elements as the input tensor has; 
+output3d = torch.rand(6, 20, 20)
+print(output3d.shape)
+
+input1d = output3d.reshape(6 * 20 * 20)
+print(input1d.shape)
+
+# can also call it as a method on the torch module:
+print(torch.reshape(output3d, (6 * 20 * 20,)).shape)
+
+##################################################################################################################################################
+# 6: NumPy Bridge
+import numpy as np
+
+numpy_array = np.ones((2, 3))
+print(numpy_array)
+
+pytorch_tensor = torch.from_numpy(numpy_array)  # PyTorch creates a tensor of the same shape and containing the same data as the NumPy array, going so far as to keep NumPy’s default 64-bit float data type. 
+print(pytorch_tensor)
 
 
 
