@@ -74,11 +74,11 @@ def train_loop(dataloader, model, criterion, optimizer):  # We define train_loop
     size = len(dataloader.dataset)
     for i, data in enumerate(dataloader):
         # (1) prepare data; 
-        input, y = data
-        input, y = input.to(device), y.to(device)
+        input, target = data
+        input, target = input.to(device), target.to(device)
         # (2) Forward
         pred = model(input)  # we ask the model for its predictions on this batch. 
-        loss = criterion(pred, y)  # we compute the loss - the difference between outputs (the model prediction) and labels (the correct output).
+        loss = criterion(pred, target)  # we compute the loss - the difference between outputs (the model prediction) and labels (the correct output).
 
         # (3) Backpropagation
         optimizer.zero_grad()  # Call optimizer.zero_grad() to reset the gradients of model parameters. 
@@ -98,11 +98,11 @@ def test_loop(dataloader, model, criterion):  # and test_loop that evaluates the
     test_loss, correct = 0, 0
 
     with torch.no_grad():
-        for input, y in dataloader:
-            input, y = input.to(device), y.to(device)
+        for input, target in dataloader:
+            input, target = input.to(device), target.to(device)
             pred = model(input)
-            test_loss += criterion(pred, y).item()
-            correct += (pred.argmax(1) == y).type(torch.float).sum().item()
+            test_loss += criterion(pred, target).item()
+            correct += (pred.argmax(1) == target).type(torch.float).sum().item()
 
     test_loss /= num_batches
     correct /= size
