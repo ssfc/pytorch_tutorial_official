@@ -242,8 +242,12 @@ print(c)  # we see no computation history, and no requires_grad=True.
 
 print(a)  # It does this without changing a - you can see that when we print a again at the end, it retains its requires_grad=True property. 
 
-
-
+##################################################################################################################################################
+# 4: moving to GPU 
+if torch.cuda.is_available():
+    print('We have a GPU!')
+else:
+    print('Sorry, CPU only.')
 
 
 
