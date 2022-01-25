@@ -256,11 +256,21 @@ else:
     print('Sorry, CPU only.')
 
 
+if torch.cuda.is_available():
+    my_device = torch.device('cuda')  # By default, new tensors are created on the CPU, so we have to specify when we want to create our tensor on the GPU with the optional device argument. 
+else:
+    my_device = torch.device('cpu')
+print('Device: {}'.format(my_device))  # creating a device handle that can be passed to your tensors instead of a string; 
 
+x = torch.rand(2, 2, device=my_device)
+print(x)
 
+y = torch.rand(2, 2)  #  creates a tensor on CPU, and moves it to whichever device handle you acquired in the previous cell.
+y = y.to(my_device)
 
-
-
+##################################################################################################################################################
+# 5: Manipulating Tensor Shapes
+ 
 
 
 
