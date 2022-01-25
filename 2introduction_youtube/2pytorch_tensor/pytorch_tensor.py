@@ -197,6 +197,22 @@ print(b.mul_(b))
 print(b)
 
 
+a = torch.rand(2, 2)
+b = torch.rand(2, 2)
+c = torch.zeros(2, 2)
+old_id = id(c)
+
+print(c)
+d = torch.matmul(a, b, out=c)  # have an out argument that lets you specify a tensor to receive the output. 
+print(c)                # contents of c have changed
+
+assert c is d           # test c & d are same object, not just containing equal values
+assert id(c), old_id    # make sure that our new c is the same object as the old one
+
+torch.rand(2, 2, out=c) # works for creation too!
+print(c)                # c has changed again
+assert id(c), old_id    # still the same object!
+
 
 
 
