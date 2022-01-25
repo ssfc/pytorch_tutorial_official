@@ -249,7 +249,11 @@ if torch.cuda.is_available():
 else:
     print('Sorry, CPU only.')
 
-
+if torch.cuda.is_available():
+    gpu_rand = torch.rand(2, 2, device='cuda')  # There are multiple ways to get your data onto your target device. You may do it at creation time; 
+    print(gpu_rand)
+else:
+    print('Sorry, CPU only.')
 
 
 
