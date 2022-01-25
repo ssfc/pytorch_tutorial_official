@@ -48,6 +48,9 @@ class NeuralNetwork(nn.Module):
         return x
 
 model = NeuralNetwork()
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+print("device: ", device)
+model.to(device)
 
 ##############################################################################################################################################
 # 2: Hyperparameters
@@ -71,9 +74,10 @@ def train_loop(dataloader, model, criterion, optimizer):  # We define train_loop
     size = len(dataloader.dataset)
     for i, data in enumerate(dataloader):
         # (1) prepare data; 
-        X, y = data
+        input, y = data
+        input, y = input.to(device), y.to(device)
         # (2) Forward
-        pred = model(X)  # we ask the model for its predictions on this batch. 
+        pred = model(input)  # we ask the model for its predictions on this batch. 
         loss = criterion(pred, y)  # we compute the loss - the difference between outputs (the model prediction) and labels (the correct output).
 
         # (3) Backpropagation
@@ -84,7 +88,7 @@ def train_loop(dataloader, model, criterion, optimizer):  # We define train_loop
         optimizer.step()  # it uses the gradients from the backward() call to nudge the learning weights in the direction it thinks will reduce the loss. 
 
         if i % 100 == 0:
-            loss, current = loss.item(), i * len(X)
+            loss, current = loss.item(), i * len(input)
             print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
 
 
@@ -94,8 +98,9 @@ def test_loop(dataloader, model, criterion):  # and test_loop that evaluates the
     test_loss, correct = 0, 0
 
     with torch.no_grad():
-        for X, y in dataloader:
-            pred = model(X)
+        for input, y in dataloader:
+            input, y = input.to(device), y.to(device)
+            pred = model(input)
             test_loss += criterion(pred, y).item()
             correct += (pred.argmax(1) == y).type(torch.float).sum().item()
 
