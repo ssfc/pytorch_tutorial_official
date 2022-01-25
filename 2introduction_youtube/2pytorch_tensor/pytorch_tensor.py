@@ -231,7 +231,16 @@ print(torch.eq(a, b))  # ...but still with the same contents!
 a[0][1] = 561          # a changes...
 print(b)               # ...but b is still all ones
 
+a = torch.rand(2, 2, requires_grad=True) # turn on autograd: requires_grad=True - this means that autograd and computation history tracking are turned on. 
+print(a)
 
+b = a.clone()
+print(b)  # we can see that it’s tracking its computation history - it has inherited a’s autograd settings, and added to the computation history. 
+
+c = a.detach().clone()
+print(c)  # we see no computation history, and no requires_grad=True. 
+
+print(a)
 
 
 
