@@ -271,7 +271,12 @@ y = y.to(my_device)
 ##################################################################################################################################################
 # 5: Manipulating Tensor Shapes
  
+# Changing the Number of Dimensions
+a = torch.rand(3, 226, 226)
+b = a.unsqueeze(0)  # The unsqueeze() method adds a dimension of extent 1. unsqueeze(0) adds it as a new zeroth dimension - now you have a batch of one! 
 
+print(a.shape)
+print(b.shape)
 
 
 
