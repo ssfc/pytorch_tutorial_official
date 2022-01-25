@@ -121,7 +121,7 @@ with torch.no_grad():  # Disabling gradient calculation is useful for inference,
     for data in testloader:
         # (1) prepare data; 
         images, labels = data  
-        inputs, labels = inputs.to(device), labels.to(device)
+        images, labels = images.to(device), labels.to(device)
 
         # (2) forward; 
         outputs = net(images)
