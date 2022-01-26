@@ -5,7 +5,7 @@ import torch
 
 class TinyModel(torch.nn.Module):  # This is the PyTorch base class meant to encapsulate behaviors specific to PyTorch Models and their components. 
 
-    def __init__(self):
+    def __init__(self):  # This shows the fundamental structure of a PyTorch model: there is an __init__() method that defines the layers and other components of a model; 
         super(TinyModel, self).__init__()
 
         self.linear1 = torch.nn.Linear(100, 200)
@@ -13,7 +13,7 @@ class TinyModel(torch.nn.Module):  # This is the PyTorch base class meant to enc
         self.linear2 = torch.nn.Linear(200, 10)
         self.softmax = torch.nn.Softmax()
 
-    def forward(self, x):
+    def forward(self, x):  # and a forward() method where the computation gets done. 
         x = self.linear1(x)
         x = self.activation(x)
         x = self.linear2(x)
@@ -22,8 +22,8 @@ class TinyModel(torch.nn.Module):  # This is the PyTorch base class meant to enc
 
 tinymodel = TinyModel()
 
-print('The model:')
-print(tinymodel)
+print('The model:')  
+print(tinymodel)  # we can print the model, or any of its submodules, to learn about its structure. 
 
 print('\n\nJust one layer:')
 print(tinymodel.linear2)
