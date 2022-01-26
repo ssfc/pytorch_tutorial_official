@@ -36,6 +36,8 @@ print('\n\nLayer params:')
 for param in tinymodel.linear2.parameters():  # The Parameter class is a subclass of torch.Tensor, with the special behavior that when they are assigned as attributes of a Module, they are added to the list of that modules parameters. 
     print(param)
 
+####################################################################################################################################################################
+# 2: Common Layer Types
 
 
 
