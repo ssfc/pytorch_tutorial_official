@@ -163,6 +163,14 @@ print(x)
 print(y)  # matplotlib expects a NumPy array as input, and the implicit conversion from a PyTorch tensor to a NumPy array is not enabled for tensors with requires_grad=True. 
 
 # Autograd and In-place Operations
+# a = torch.linspace(0., 2. * math.pi, steps=25, requires_grad=True)
+# torch.sin_(a)
+
+##################################################################################################################################################################
+# 5: Autograd Profiler
+
+
+
 
 
 
