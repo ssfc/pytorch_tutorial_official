@@ -83,7 +83,7 @@ ideal_output = torch.randn(BATCH_SIZE, DIM_OUT, requires_grad=False)
 model = TinyModel()
 
 print(model.layer2.weight[0][0:10]) # just a small slice
-print(model.layer2.weight.grad)
+print(model.layer2.weight.grad)  # Within a subclass of torch.nn.Module, it’s assumed that we want to track gradients on the layers’ weights for learning. 
 
 
 
