@@ -139,6 +139,29 @@ print(c2)
 c3 = a * b
 print(c3)
 
+def add_tensors1(x, y):
+    return x + y
+
+@torch.no_grad()  # torch.no_grad() can also be used as a function or method dectorator; 
+def add_tensors2(x, y):
+    return x + y
+
+
+a = torch.ones(2, 3, requires_grad=True) * 2
+b = torch.ones(2, 3, requires_grad=True) * 3
+
+c1 = add_tensors1(a, b)
+print(c1)
+
+c2 = add_tensors2(a, b)
+print(c2)
+
+x = torch.rand(5, requires_grad=True)
+y = x.detach()  # detach() method - it creates a copy of the tensor that is detached from the computation history; 
+
+print(x)
+print(y)  # matplotlib expects a NumPy array as input, and the implicit conversion from a PyTorch tensor to a NumPy array is not enabled for tensors with requires_grad=True. 
+
 
 
 
