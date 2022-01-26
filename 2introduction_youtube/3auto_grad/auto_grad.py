@@ -162,6 +162,7 @@ y = x.detach()  # detach() method - it creates a copy of the tensor that is deta
 print(x)
 print(y)  # matplotlib expects a NumPy array as input, and the implicit conversion from a PyTorch tensor to a NumPy array is not enabled for tensors with requires_grad=True. 
 
+# Autograd and In-place Operations
 
 
 
