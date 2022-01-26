@@ -45,13 +45,45 @@ print(b.grad_fn)
 print('\na:')
 print(a.grad_fn)
 
+out.backward()
+print(a.grad)
+# plt.plot(a.detach(), a.grad.detach())
 
+a = torch.linspace(0., 2. * math.pi, steps=25, requires_grad=True)
+b = torch.sin(a)
+c = 2 * b
+d = c + 1
+out = d.sum()
 
+##################################################################################################################################################################
+# 3: Autograd in Training
+BATCH_SIZE = 16
+DIM_IN = 1000
+HIDDEN_SIZE = 100
+DIM_OUT = 10
 
+class TinyModel(torch.nn.Module):
 
+    def __init__(self):
+        super(TinyModel, self).__init__()
 
+        self.layer1 = torch.nn.Linear(1000, 100)  # Within a subclass of torch.nn.Module, it’s assumed that we want to track gradients on the layers’ weights for learning. 
+        self.relu = torch.nn.ReLU()
+        self.layer2 = torch.nn.Linear(100, 10)
 
+    def forward(self, x):
+        x = self.layer1(x)
+        x = self.relu(x)
+        x = self.layer2(x)
+        return x
 
+some_input = torch.randn(BATCH_SIZE, DIM_IN, requires_grad=False)
+ideal_output = torch.randn(BATCH_SIZE, DIM_OUT, requires_grad=False)
+
+model = TinyModel()
+
+print(model.layer2.weight[0][0:10]) # just a small slice
+print(model.layer2.weight.grad)
 
 
 
