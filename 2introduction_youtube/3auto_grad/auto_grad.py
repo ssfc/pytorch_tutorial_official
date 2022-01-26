@@ -100,8 +100,21 @@ optimizer.step()
 print(model.layer2.weight[0][0:10])  # You should see that layer2’s weights have changed. 
 print(model.layer2.weight.grad[0][0:10])
 
+print(model.layer2.weight.grad[0][0:10])
 
+for i in range(0, 5):
+    prediction = model(some_input)
+    loss = (ideal_output - prediction).pow(2).sum()
+    loss.backward()
 
+print(model.layer2.weight.grad[0][0:10])
+
+optimizer.zero_grad()  # After calling optimizer.step(), you need to call optimizer.zero_grad() 
+
+print(model.layer2.weight.grad[0][0:10])
+
+##################################################################################################################################################################
+# 4: Turning Autograd Off and On
 
 
 
