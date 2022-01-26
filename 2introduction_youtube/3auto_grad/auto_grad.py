@@ -168,9 +168,24 @@ print(y)  # matplotlib expects a NumPy array as input, and the implicit conversi
 
 ##################################################################################################################################################################
 # 5: Autograd Profiler
+device = torch.device('cpu')
+run_on_gpu = False
+if torch.cuda.is_available():
+    device = torch.device('cuda')
+    run_on_gpu = True
 
+x = torch.randn(2, 3, requires_grad=True)
+y = torch.rand(2, 3, requires_grad=True)
+z = torch.ones(2, 3, requires_grad=True)
 
+with torch.autograd.profiler.profile(use_cuda=run_on_gpu) as prf:
+    for _ in range(1000):
+        z = (z / x) * y
 
+print(prf.key_averages().table(sort_by='self_cpu_time_total'))
+
+##################################################################################################################################################################
+# 6: Advanced Topic: More Autograd Detail and the High-Level API
 
 
 
