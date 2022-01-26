@@ -39,7 +39,18 @@ for param in tinymodel.linear2.parameters():  # The Parameter class is a subclas
 ####################################################################################################################################################################
 # 2: Common Layer Types
 # (1) Linear Layers
+lin = torch.nn.Linear(3, 2)  # This is a layer where every input influences every output of the layer to a degree specified by the layer’s weights. 
+x = torch.rand(1, 3)
+print('Input:')
+print(x)
 
+print('\n\nWeight and Bias parameters:')
+for param in lin.parameters():
+    print(param)
+
+y = lin(x)
+print('\n\nOutput:')
+print(y)
 
 
 
