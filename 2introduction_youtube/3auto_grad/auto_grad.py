@@ -186,10 +186,20 @@ print(prf.key_averages().table(sort_by='self_cpu_time_total'))
 
 ##################################################################################################################################################################
 # 6: Advanced Topic: More Autograd Detail and the High-Level API
+x = torch.randn(3, requires_grad=True)
 
+y = x * 2
+while y.data.norm() < 1000:
+    y = y * 2
 
+print(y)
 
+v = torch.tensor([0.1, 1.0, 0.0001], dtype=torch.float) # stand-in for gradients
+y.backward(v)
 
+print(x.grad)
+
+# The High-Level API
 
 
 
