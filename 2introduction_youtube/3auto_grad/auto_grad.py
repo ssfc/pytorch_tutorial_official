@@ -125,7 +125,19 @@ a.requires_grad = False
 b2 = 2 * a  # When we turn off autograd explicitly with a.requires_grad = False, computation history is no longer tracked, as we see when we compute b2. 
 print(b2)
 
+a = torch.ones(2, 3, requires_grad=True) * 2
+b = torch.ones(2, 3, requires_grad=True) * 3
 
+c1 = a + b
+print(c1)
+
+with torch.no_grad():  # If you only need autograd turned off temporarily, a better way is to use the torch.no_grad(); 
+    c2 = a + b
+
+print(c2)
+
+c3 = a * b
+print(c3)
 
 
 
