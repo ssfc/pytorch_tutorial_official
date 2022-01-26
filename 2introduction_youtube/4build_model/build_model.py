@@ -29,7 +29,7 @@ print('\n\nJust one layer:')
 print(tinymodel.linear2)
 
 print('\n\nModel params:')
-for param in tinymodel.parameters():
+for param in tinymodel.parameters():  # If a particular Module subclass has learning weights, these weights are expressed as instances of torch.nn.Parameter. 
     print(param)
 
 print('\n\nLayer params:')
