@@ -3,7 +3,7 @@
 
 import torch
 
-class TinyModel(torch.nn.Module):
+class TinyModel(torch.nn.Module):  # This is the PyTorch base class meant to encapsulate behaviors specific to PyTorch Models and their components. 
 
     def __init__(self):
         super(TinyModel, self).__init__()
