@@ -115,7 +115,15 @@ print(model.layer2.weight.grad[0][0:10])
 
 ##################################################################################################################################################################
 # 4: Turning Autograd Off and On
+a = torch.ones(2, 3, requires_grad=True)
+print(a)
 
+b1 = 2 * a
+print(b1)
+
+a.requires_grad = False
+b2 = 2 * a  # When we turn off autograd explicitly with a.requires_grad = False, computation history is no longer tracked, as we see when we compute b2. 
+print(b2)
 
 
 
