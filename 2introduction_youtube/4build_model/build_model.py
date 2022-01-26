@@ -38,6 +38,7 @@ for param in tinymodel.linear2.parameters():  # The Parameter class is a subclas
 
 ####################################################################################################################################################################
 # 2: Common Layer Types
+# Linear Layers
 
 
 
