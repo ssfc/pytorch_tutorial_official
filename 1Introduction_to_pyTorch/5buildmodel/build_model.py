@@ -22,13 +22,12 @@ class NeuralNetwork(nn.Module):  # We define our neural network by subclassing n
         self.linear1 = nn.Linear(28*28, 512)
         self.linear2 = nn.Linear(512, 512)
         self.linear3 = nn.Linear(512, 10)
-        self.relu = nn.ReLU()
 
 
     def forward(self, x):  # Every nn.Module subclass implements the operations on input data in the forward method.
         x = self.flatten(x)
-        x = self.relu(self.linear1(x))
-        x = self.relu(self.linear2(x))
+        x = F.relu(self.linear1(x))
+        x = F.relu(self.linear2(x))
         x = self.linear3(x)
 
         return x
