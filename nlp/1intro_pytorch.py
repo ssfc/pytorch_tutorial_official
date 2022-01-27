@@ -3,8 +3,6 @@
 #################################################################################################################################################################
 # 1: Introduction to Torch’s tensor library
 
-
-
 # Author: Robert Guthrie
 
 import torch
@@ -42,14 +40,40 @@ print(M[0])
 # Index into T and get a matrix
 print(T[0])
 
+x = torch.randn((3, 4, 5))
+print(x)
 
+# (2) Operations with Tensors
+x = torch.tensor([1., 2., 3.])
+y = torch.tensor([4., 5., 6.])
+z = x + y
+print(z)
 
+# By default, it concatenates along the first axis (concatenates rows)
+x_1 = torch.randn(2, 5)
+y_1 = torch.randn(3, 5)
+z_1 = torch.cat([x_1, y_1])
+print(z_1)
 
+# Concatenate columns:
+x_2 = torch.randn(2, 3)
+y_2 = torch.randn(2, 5)
+# second arg specifies which axis to concat along
+z_2 = torch.cat([x_2, y_2], 1)
+print(z_2)
 
+# If your tensors are not compatible, torch will complain.  Uncomment to see the error
+# torch.cat([x_1, x_2])
 
+# (3) Reshaping Tensors: Use the .view() method to reshape a tensor. 
+x = torch.randn(2, 3, 4)
+print(x)
+print(x.view(2, 12))  # Reshape to 2 rows, 12 columns
+# Same as above.  If one of the dimensions is -1, its size can be inferred
+print(x.view(2, -1))
 
-
-
+#################################################################################################################################################################
+# 2: Computation Graphs and Automatic Differentiation
 
 
 
