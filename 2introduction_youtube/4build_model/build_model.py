@@ -86,6 +86,7 @@ class LeNet(torch.nn.Module):
             num_features *= s
         return num_features
 
+# (3) Recurrent Layers
 
 
 
