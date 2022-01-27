@@ -19,7 +19,14 @@ lin = nn.Linear(5, 3)  # maps from R^5 to R^3, parameters A, b
 data = torch.randn(2, 5)
 print(lin(data))  # yes
 
+# (2) Non-Linearities
 
+# In pytorch, most non-linearities are in torch.functional (we have it imported as F)
+# Note that non-linearites typically don't have parameters like affine maps do.
+# That is, they don't have weights that are updated during training.
+data = torch.randn(2, 2)
+print(data)
+print(F.relu(data))
 
 
 
