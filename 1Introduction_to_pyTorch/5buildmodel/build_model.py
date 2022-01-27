@@ -3,6 +3,7 @@
 import os
 import torch
 from torch import nn  # The torch.nn namespace provides all the building blocks you need to build your own neural network; 
+import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
