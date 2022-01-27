@@ -28,7 +28,13 @@ data = torch.randn(2, 2)
 print(data)
 print(F.relu(data))
 
-
+# (3) Softmax and Probabilities
+# Softmax is also in torch.nn.functional
+data = torch.randn(5)
+print(data)
+print(F.softmax(data, dim=0))
+print(F.softmax(data, dim=0).sum())  # Sums to 1 because it is a distribution!
+print(F.log_softmax(data, dim=0))  # theres also log_softmax
 
 
 
