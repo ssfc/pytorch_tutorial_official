@@ -75,6 +75,16 @@ print(x.view(2, -1))
 #################################################################################################################################################################
 # 2: Computation Graphs and Automatic Differentiation
 
+# Tensor factory methods have a ``requires_grad`` flag
+x = torch.tensor([1., 2., 3], requires_grad=True)
+
+# With requires_grad=True, you can still do all the operations you previously could; 
+y = torch.tensor([4., 5., 6], requires_grad=True)
+z = x + y
+print(z)
+
+# If requires_grad=True, the Tensor object keeps track of how it was created. 
+print(z.grad_fn)
 
 
 
