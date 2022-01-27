@@ -125,7 +125,11 @@ print(new_z.grad_fn)
 # about how it was computed.
 # In essence, we have broken the Tensor away from its past history
 
+print(x.requires_grad)
+print((x ** 2).requires_grad)
 
+with torch.no_grad():
+    print((x ** 2).requires_grad)
 
 
 
