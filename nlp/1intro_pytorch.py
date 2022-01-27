@@ -86,7 +86,10 @@ print(z)
 # If requires_grad=True, the Tensor object keeps track of how it was created. 
 print(z.grad_fn)
 
-
+# Let's sum up all the entries in z
+s = z.sum()
+print(s)
+print(s.grad_fn)
 
 
 
