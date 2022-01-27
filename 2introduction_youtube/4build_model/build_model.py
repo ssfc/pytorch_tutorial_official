@@ -70,7 +70,7 @@ class LeNet(torch.nn.Module):
 
     def forward(self, x):
         # Max pooling over a (2, 2) window
-        x = F.max_pool2d(F.relu(self.conv1(x)), (2, 2))
+        x = F.max_pool2d(F.relu(self.conv1(x)), (2, 2))  # We then pass the output of the convolution through a ReLU activation function (more on activation functions later), then through a max pooling layer. 
         # If the size is a square you can only specify a single number
         x = F.max_pool2d(F.relu(self.conv2(x)), 2)
         x = x.view(-1, self.num_flat_features(x))
