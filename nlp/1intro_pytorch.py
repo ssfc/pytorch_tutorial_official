@@ -91,7 +91,9 @@ s = z.sum()
 print(s)
 print(s.grad_fn)
 
-
+# calling .backward() on any variable will run backprop, starting from it.
+s.backward()
+print(x.grad)  # compute gradient for x; 
 
 
 
