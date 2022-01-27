@@ -108,7 +108,8 @@ class LSTMTagger(torch.nn.Module):
         tag_scores = F.log_softmax(tag_space, dim=1)  # applying log_softmax() to the output of the final layer converts the output into a normalized set of estimated probabilities that a given word maps to a given tag. 
         return tag_scores
 
-
+# SEQUENCE MODELS AND LONG SHORT-TERM MEMORY NETWORKS
+# https://pytorch.org/tutorials/beginner/nlp/sequence_models_tutorial.html
 
 
 
