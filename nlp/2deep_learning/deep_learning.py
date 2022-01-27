@@ -43,7 +43,8 @@ print(F.log_softmax(data, dim=0))  # theres also log_softmax
 
 #  Often, just replacing vanilla SGD with an optimizer like Adam or RMSProp will boost performance noticably.
 
-
+###########################################################################################################################################################
+# 3: Creating Network Components in PyTorch
 
 
 
