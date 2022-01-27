@@ -29,7 +29,7 @@ T_data = [[[1., 2.], [3., 4.]],
 T = torch.tensor(T_data)
 print(T)
 
-
+# What is a 3D tensor anyway? Think about it like this. If you have a vector, indexing into the vector gives you a scalar. If you have a matrix, indexing into the matrix gives you a vector. If you have a 3D tensor, then indexing into the tensor gives you a matrix! 
 
 
 
