@@ -1,6 +1,7 @@
 # https://pytorch.org/tutorials/beginner/nlp/deep_learning_tutorial.html
 
-
+###########################################################################################################################################################
+# 1: Deep Learning Building Blocks: Affine maps, non-linearities and objectives
 
 
 
