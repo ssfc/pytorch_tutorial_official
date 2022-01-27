@@ -31,7 +31,16 @@ print(T)
 
 # What is a 3D tensor anyway? Think about it like this. If you have a vector, indexing into the vector gives you a scalar. If you have a matrix, indexing into the matrix gives you a vector. If you have a 3D tensor, then indexing into the tensor gives you a matrix! 
 
+# Index into V and get a scalar (0 dimensional tensor)
+print(V[0])
+# Get a Python number from it
+print(V[0].item())
 
+# Index into M and get a vector
+print(M[0])
+
+# Index into T and get a matrix
+print(T[0])
 
 
 
