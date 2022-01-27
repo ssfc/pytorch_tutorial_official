@@ -95,8 +95,7 @@ class LSTMTagger(torch.nn.Module):
 
         self.word_embeddings = torch.nn.Embedding(vocab_size, embedding_dim)
 
-        # The LSTM takes word embeddings as inputs, and outputs hidden states
-        # with dimensionality hidden_dim.
+        # The LSTM takes word embeddings as inputs, and outputs hidden states with dimensionality hidden_dim.
         self.lstm = torch.nn.LSTM(embedding_dim, hidden_dim)
 
         # The linear layer that maps from hidden state space to tag space
