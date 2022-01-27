@@ -102,10 +102,10 @@ class LSTMTagger(torch.nn.Module):
         self.hidden2tag = torch.nn.Linear(hidden_dim, tagset_size)
 
     def forward(self, sentence):
-        embeds = self.word_embeddings(sentence)
-        lstm_out, _ = self.lstm(embeds.view(len(sentence), 1, -1))
-        tag_space = self.hidden2tag(lstm_out.view(len(sentence), -1))
-        tag_scores = F.log_softmax(tag_space, dim=1)
+        embeds = self.word_embeddings(sentence)  # The input will be a sentence with the words represented as indices of one-hot vectors. The embedding layer will then map these down to an embedding_dim-dimensional space. 
+        lstm_out, _ = self.lstm(embeds.view(len(sentence), 1, -1))  # The LSTM takes this sequence of embeddings and iterates over it, fielding an output vector of length hidden_dim. 
+        tag_space = self.hidden2tag(lstm_out.view(len(sentence), -1))  # The final linear layer acts as a classifier; 
+        tag_scores = F.log_softmax(tag_space, dim=1)  # applying log_softmax() to the output of the final layer converts the output into a normalized set of estimated probabilities that a given word maps to a given tag. 
         return tag_scores
 
 
