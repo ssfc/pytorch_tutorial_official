@@ -41,7 +41,7 @@ print(F.log_softmax(data, dim=0))  # theres also log_softmax
 ###########################################################################################################################################################
 # 2: Optimization and Training
 
-
+#  Often, just replacing vanilla SGD with an optimizer like Adam or RMSProp will boost performance noticably.
 
 
 
