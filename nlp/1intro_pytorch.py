@@ -34,7 +34,7 @@ print(T)
 # Index into V and get a scalar (0 dimensional tensor)
 print(V[0])
 # Get a Python number from it
-print(V[0].item())
+print(V[0].item())  # Returns the value of this tensor as a standard Python number. This only works for tensors with one element. 
 
 # Index into M and get a vector
 print(M[0])
