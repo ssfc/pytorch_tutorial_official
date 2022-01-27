@@ -38,6 +38,8 @@ print(F.log_softmax(data, dim=0))  # theres also log_softmax
 
 # (4) Objective Functions
 
+###########################################################################################################################################################
+# 2: Optimization and Training
 
 
 
