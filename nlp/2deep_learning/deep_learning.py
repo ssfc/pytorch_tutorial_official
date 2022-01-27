@@ -36,6 +36,7 @@ print(F.softmax(data, dim=0))
 print(F.softmax(data, dim=0).sum())  # Sums to 1 because it is a distribution!
 print(F.log_softmax(data, dim=0))  # theres also log_softmax
 
+# (4) Objective Functions
 
 
 
