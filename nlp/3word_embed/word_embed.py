@@ -26,6 +26,7 @@ print("hello embedding: ", hello_embed)
 
 CONTEXT_SIZE = 2  # window size; 
 EMBEDDING_DIM = 10
+
 # We will use Shakespeare Sonnet 2
 test_sentence = """When forty winters shall besiege thy brow,
 And dig deep trenches in thy beauty's field,
@@ -41,6 +42,7 @@ Shall sum my count, and make my old excuse,'
 Proving his beauty by succession thine!
 This were to be new made when thou art old,
 And see thy blood warm when thou feel'st it cold.""".split()
+
 # we should tokenize the input, but we will ignore that for now
 # build a list of tuples.
 # Each tuple is ([ word_i-CONTEXT_SIZE, ..., word_i-1 ], target word)
