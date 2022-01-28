@@ -91,22 +91,20 @@ optimizer = optim.SGD(model.parameters(), lr=0.001)
 for epoch in range(10):
     total_loss = 0
     for context, target in ngrams:
-        # (1) Prepare data: pass inputs to the model (i.e, turn the words into integer indices and wrap them in tensors)
-        context_idxs = torch.tensor([word_to_ix[w] for w in context], dtype=torch.long)
+        # (1) Prepare data
+        context_idxs = torch.tensor([word_to_ix[w] for w in context], dtype=torch.long)  # model.zero_grad() and optimizer.zero_grad() are the same IF all your model parameters are in that optimizer. I found it is safer to call model.zero_grad() to make sure all grads are zero, e.g. if you have two or more optimizers for one model.
         target_idxs = torch.tensor([word_to_ix[target]], dtype=torch.long)
         context_idxs, target_idxs = context_idxs.to(device), target_idxs.to(device)
 
-        # (2) Recall that torch *accumulates* gradients. Before passing in a new instance, you need to zero out the gradients from the old instance
-        model.zero_grad()
-
-        # (3) Forward 
+        # (2) Forward 
         log_probs = model(context_idxs)  # getting log probabilities over next words
         loss = criterion(log_probs, target_idxs)  # Compute your loss function. (Again, Torch wants the target word wrapped in a tensor)
 
-        # (4) Backward
+        # (3) Backward
+        optimizer.zero_grad()
         loss.backward()
 
-        # (5) Update the gradient
+        # (4) Update the gradient
         optimizer.step()
 
         # Get the Python number from a 1-element Tensor by calling tensor.item()
