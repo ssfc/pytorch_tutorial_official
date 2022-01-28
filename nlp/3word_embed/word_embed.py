@@ -91,8 +91,6 @@ optimizer = optim.SGD(model.parameters(), lr=0.001)
 for epoch in range(10):
     total_loss = 0
     for context, target in ngrams:
-#        context, target = context.to(device), target.to(device)
-
         # Step 1. Prepare the inputs to be passed to the model (i.e, turn the words into integer indices and wrap them in tensors)
         context_idxs = torch.tensor([word_to_ix[w] for w in context], dtype=torch.long)
         target_idxs = torch.tensor([word_to_ix[target]], dtype=torch.long)
