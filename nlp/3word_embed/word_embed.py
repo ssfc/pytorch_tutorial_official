@@ -82,7 +82,8 @@ criterion = nn.NLLLoss()
 
 model = NGramLanguageModeler(len(vocab), EMBEDDING_DIM, CONTEXT_SIZE)
 
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
+# device = 'cuda' if torch.cuda.is_available() else 'cpu'
+device = 'cuda'
 print("device: ", device)
 model.to(device)
 
