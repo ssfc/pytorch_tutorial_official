@@ -79,12 +79,18 @@ class NGramLanguageModeler(nn.Module):
 
 losses = []
 loss_function = nn.NLLLoss()
+
 model = NGramLanguageModeler(len(vocab), EMBEDDING_DIM, CONTEXT_SIZE)
+
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+print("device: ", device)
+
 optimizer = optim.SGD(model.parameters(), lr=0.001)
 
 for epoch in range(10):
     total_loss = 0
     for context, target in ngrams:
+#        context, target = context.to(device), target.to(device)
 
         # Step 1. Prepare the inputs to be passed to the model (i.e, turn the words into integer indices and wrap them in tensors)
         context_idxs = torch.tensor([word_to_ix[w] for w in context], dtype=torch.long)
@@ -112,7 +118,7 @@ for epoch in range(10):
 print(losses)  # The loss decreased every iteration over the training data!
 
 # To get the embedding of a particular word, e.g. "beauty"
-print(model.embeddings.weight[word_to_ix["beauty"]])
+print("Embedding beauty: ", model.embeddings.weight[word_to_ix["beauty"]])
 
 
 
