@@ -84,6 +84,7 @@ model = NGramLanguageModeler(len(vocab), EMBEDDING_DIM, CONTEXT_SIZE)
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print("device: ", device)
+model.to(device)
 
 optimizer = optim.SGD(model.parameters(), lr=0.001)
 
@@ -95,6 +96,7 @@ for epoch in range(10):
         # Step 1. Prepare the inputs to be passed to the model (i.e, turn the words into integer indices and wrap them in tensors)
         context_idxs = torch.tensor([word_to_ix[w] for w in context], dtype=torch.long)
         target_idxs = torch.tensor([word_to_ix[target]], dtype=torch.long)
+        context_idxs, target_idxs = context_idxs.to(device), target_idxs.to(device)
 
         # Step 2. Recall that torch *accumulates* gradients. Before passing in a new instance, you need to zero out the gradients from the old instance
         model.zero_grad()
