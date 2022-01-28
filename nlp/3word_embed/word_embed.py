@@ -96,13 +96,10 @@ for epoch in range(10):
         context_idxs = torch.tensor([word_to_ix[w] for w in context], dtype=torch.long)
         target_idxs = torch.tensor([word_to_ix[target]], dtype=torch.long)
 
-        # Step 2. Recall that torch *accumulates* gradients. Before passing in a
-        # new instance, you need to zero out the gradients from the old
-        # instance
+        # Step 2. Recall that torch *accumulates* gradients. Before passing in a new instance, you need to zero out the gradients from the old instance
         model.zero_grad()
 
-        # Step 3. Run the forward pass, getting log probabilities over next
-        # words
+        # Step 3. Run the forward pass, getting log probabilities over next words
         log_probs = model(context_idxs)
 
         # Step 4. Compute your loss function. (Again, Torch wants the target word wrapped in a tensor)
