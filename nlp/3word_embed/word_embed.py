@@ -116,7 +116,8 @@ print("losses:", losses)  # The loss decreased every iteration over the training
 # To get the embedding of a particular word, e.g. "beauty"
 print("Embedding beauty: ", model.embeddings.weight[word_to_ix["beauty"]])
 
-
+##################################################################################################################################################################
+# 3: Exercise: Computing Word Embeddings: Continuous Bag-of-Words
 
 
 
