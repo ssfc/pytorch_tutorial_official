@@ -55,7 +55,7 @@ ngrams = [
 ]
 
 # Print the first 3, just so you can see what they look like.
-print(ngrams[:3])
+print("ngrams[:3]: ", ngrams[:3])
 
 vocab = set(test_sentence)
 word_to_ix = {word: i for i, word in enumerate(vocab)}
@@ -115,7 +115,7 @@ for epoch in range(10):
         # Get the Python number from a 1-element Tensor by calling tensor.item()
         total_loss += loss.item()
     losses.append(total_loss)
-print(losses)  # The loss decreased every iteration over the training data!
+print("losses:", losses)  # The loss decreased every iteration over the training data!
 
 # To get the embedding of a particular word, e.g. "beauty"
 print("Embedding beauty: ", model.embeddings.weight[word_to_ix["beauty"]])
