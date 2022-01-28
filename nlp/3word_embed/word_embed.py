@@ -53,6 +53,7 @@ ngrams = [
     )
     for i in range(CONTEXT_SIZE, len(test_sentence))
 ]
+
 # Print the first 3, just so you can see what they look like.
 print(ngrams[:3])
 
