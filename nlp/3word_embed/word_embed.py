@@ -78,7 +78,7 @@ class NGramLanguageModeler(nn.Module):
 
 
 losses = []
-loss_function = nn.NLLLoss()
+criterion = nn.NLLLoss()
 
 model = NGramLanguageModeler(len(vocab), EMBEDDING_DIM, CONTEXT_SIZE)
 
@@ -94,6 +94,7 @@ for epoch in range(10):
 
         # Step 1. Prepare the inputs to be passed to the model (i.e, turn the words into integer indices and wrap them in tensors)
         context_idxs = torch.tensor([word_to_ix[w] for w in context], dtype=torch.long)
+        target_idxs = torch.tensor([word_to_ix[target]], dtype=torch.long)
 
         # Step 2. Recall that torch *accumulates* gradients. Before passing in a
         # new instance, you need to zero out the gradients from the old
@@ -104,9 +105,8 @@ for epoch in range(10):
         # words
         log_probs = model(context_idxs)
 
-        # Step 4. Compute your loss function. (Again, Torch wants the target
-        # word wrapped in a tensor)
-        loss = loss_function(log_probs, torch.tensor([word_to_ix[target]], dtype=torch.long))
+        # Step 4. Compute your loss function. (Again, Torch wants the target word wrapped in a tensor)
+        loss = criterion(log_probs, target_idxs)
 
         # Step 5. Do the backward pass and update the gradient
         loss.backward()
