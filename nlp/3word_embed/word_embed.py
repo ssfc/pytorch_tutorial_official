@@ -86,8 +86,7 @@ for epoch in range(10):
     total_loss = 0
     for context, target in ngrams:
 
-        # Step 1. Prepare the inputs to be passed to the model (i.e, turn the words
-        # into integer indices and wrap them in tensors)
+        # Step 1. Prepare the inputs to be passed to the model (i.e, turn the words into integer indices and wrap them in tensors)
         context_idxs = torch.tensor([word_to_ix[w] for w in context], dtype=torch.long)
 
         # Step 2. Recall that torch *accumulates* gradients. Before passing in a
