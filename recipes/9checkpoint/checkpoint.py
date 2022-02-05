@@ -11,6 +11,12 @@
 ##################################################################################################################################################################
 # 3: Steps
 
+# (1) Import necessary libraries for loading our data; 
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+# (2) Define and intialize the neural network; 
 
 
 
