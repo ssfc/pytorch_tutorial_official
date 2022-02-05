@@ -11,14 +11,14 @@
 ##################################################################################################################################################################
 # 3: Steps
 
-# (1) Import necessary libraries for loading our data; 
+# (1) Import necessary libraries for loading our data
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 
 
-# (2) Define and intialize the neural network; 
+# (2) Define and intialize the neural network
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
@@ -41,10 +41,36 @@ class Net(nn.Module):
 net = Net()
 print(net)
 
+# (3) Initialize the optimizer
 
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 
+# (4) Save the general checkpoint
+# Additional information
+EPOCH = 5
+PATH = "model.pt"
+LOSS = 0.4
 
+torch.save({
+            'epoch': EPOCH,
+            'model_state_dict': net.state_dict(),
+            'optimizer_state_dict': optimizer.state_dict(),
+            'loss': LOSS,
+            }, PATH)
 
+# (5) Load the general checkpoint
+model = Net()
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+
+checkpoint = torch.load(PATH)
+model.load_state_dict(checkpoint['model_state_dict'])
+optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+epoch = checkpoint['epoch']
+loss = checkpoint['loss']
+
+model.eval()
+# - or -
+model.train()
 
 
 
