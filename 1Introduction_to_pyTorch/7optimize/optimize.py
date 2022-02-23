@@ -7,12 +7,24 @@
 
 ##############################################################################################################################################
 # 1: Prerequisite Code
+import random
+import numpy as np
 import torch
 from torch import nn
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision.transforms import ToTensor, Lambda
+
+def setup_seed(seed):
+     torch.manual_seed(seed)
+     torch.cuda.manual_seed_all(seed)
+     np.random.seed(seed)
+     random.seed(seed)
+     torch.backends.cudnn.deterministic = True
+
+setup_seed(20)
+
 
 training_data = datasets.FashionMNIST(
     root="data",
@@ -114,6 +126,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)  # We initialize the optimizer by registering the model’s parameters that need to be trained, and passing in the learning rate hyperparameter.
 
 epochs = 10
+
 for t in range(epochs):
     print(f"Epoch {t+1}\n-------------------------------")
     train_loop(train_dataloader, model, criterion, optimizer)
