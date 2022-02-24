@@ -127,8 +127,8 @@ optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)  # We initiali
 
 EPOCHS = 10
 
-for t in range(EPOCHS):
-    print(f"Epoch {t+1}\n-------------------------------")
+for epoch in range(EPOCHS):
+    print(f"Epoch {epoch+1}\n-------------------------------")
     train_loop(train_dataloader, model, criterion, optimizer)
     test_loop(test_dataloader, model, criterion)
 print("Done!")
