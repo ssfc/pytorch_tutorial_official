@@ -135,7 +135,7 @@ for epoch in range(EPOCHS):
 print("Done!")
 '''
 
-
+best_loss = float('inf')
 for epoch in range(EPOCHS):
     print(f"Epoch {epoch+1}\n-------------------------------")
     size = len(train_dataloader.dataset)
