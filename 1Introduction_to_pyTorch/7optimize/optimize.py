@@ -69,7 +69,7 @@ model.to(device)
 # 2: Hyperparameters
 learning_rate = 1e-3  # Learning Rate - how much to update models parameters at each batch/epoch. Smaller values yield slow learning speed, while large values may result in unpredictable behavior during training.
 batch_size = 64  # Batch Size - the number of data samples propagated through the network before the parameters are updated; 
-epochs = 5  # Each iteration of the optimization loop is called an epoch; 
+EPOCHS = 5  # Each iteration of the optimization loop is called an epoch; 
 
 ##############################################################################################################################################
 # 3: Optimization Loop
@@ -125,9 +125,9 @@ def test_loop(dataloader, model, criterion):  # and test_loop that evaluates the
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)  # We initialize the optimizer by registering the model’s parameters that need to be trained, and passing in the learning rate hyperparameter.
 
-epochs = 10
+EPOCHS = 10
 
-for t in range(epochs):
+for t in range(EPOCHS):
     print(f"Epoch {t+1}\n-------------------------------")
     train_loop(train_dataloader, model, criterion, optimizer)
     test_loop(test_dataloader, model, criterion)
