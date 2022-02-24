@@ -160,6 +160,7 @@ for epoch in range(EPOCHS):
 
     if loss < best_loss:
         best_loss = loss 
+        print("best loss: ", best_loss)
 
         torch.save(model, 'model.pt')
         torch.save({
@@ -170,9 +171,16 @@ for epoch in range(EPOCHS):
             }, 'model_weights.pt')
 
 
+model = NeuralNetwork()
+optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate) 
 
+checkpoint = torch.load('model_weights.pt')
+model.load_state_dict(checkpoint['model_state_dict'])
+optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+epoch = checkpoint['epoch']
+loss = checkpoint['loss']
 
-
+# print("load loss: ", loss)
 
 
 
