@@ -183,7 +183,7 @@ loss = checkpoint['loss']
 
 # print("load loss: ", loss)
 
-for epoch in range(EPOCHS):
+for epoch in range(checkpoint_position+1, EPOCHS*2):
     print(f"Epoch {epoch+1}\n-------------------------------")
     size = len(train_dataloader.dataset)
     for i, data in enumerate(train_dataloader):
