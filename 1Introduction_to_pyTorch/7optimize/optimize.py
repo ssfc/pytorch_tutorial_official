@@ -125,7 +125,7 @@ def test_loop(dataloader, model, criterion):  # and test_loop that evaluates the
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)  # We initialize the optimizer by registering the model’s parameters that need to be trained, and passing in the learning rate hyperparameter.
 
-EPOCHS = 10
+EPOCHS = 2
 
 '''
 for epoch in range(EPOCHS):
@@ -158,6 +158,16 @@ for epoch in range(EPOCHS):
             loss, current = loss.item(), i * len(input)
             print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
 
+    if loss < best_loss:
+        best_loss = loss 
+
+        torch.save(model, 'model.pt')
+        torch.save({
+            'epoch': epoch,
+            'model_state_dict': model.state_dict(),
+            'optimizer_state_dict': optimizer.state_dict(),
+            'loss': loss,
+            }, 'model_weights.pt')
 
 
 
