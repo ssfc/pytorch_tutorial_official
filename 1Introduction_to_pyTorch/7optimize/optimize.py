@@ -138,7 +138,6 @@ print("Done!")
 
 for epoch in range(EPOCHS):
     print(f"Epoch {epoch+1}\n-------------------------------")
-#    train_loop(train_dataloader, model, criterion, optimizer)
     size = len(train_dataloader.dataset)
     for i, data in enumerate(train_dataloader):
         # (1) prepare data; 
