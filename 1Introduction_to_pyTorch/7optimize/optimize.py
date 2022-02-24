@@ -127,14 +127,37 @@ optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)  # We initiali
 
 EPOCHS = 10
 
+'''
 for epoch in range(EPOCHS):
     print(f"Epoch {epoch+1}\n-------------------------------")
     train_loop(train_dataloader, model, criterion, optimizer)
     test_loop(test_dataloader, model, criterion)
 print("Done!")
+'''
 
 
+for epoch in range(EPOCHS):
+    print(f"Epoch {epoch+1}\n-------------------------------")
+#    train_loop(train_dataloader, model, criterion, optimizer)
+    size = len(train_dataloader.dataset)
+    for i, data in enumerate(train_dataloader):
+        # (1) prepare data; 
+        input, target = data
+        input, target = input.to(device), target.to(device)
+        # (2) Forward
+        pred = model(input)  # we ask the model for its predictions on this batch. 
+        loss = criterion(pred, target)  # we compute the loss - the difference between outputs (the model prediction) and labels (the correct output).
 
+        # (3) Backpropagation
+        optimizer.zero_grad()  # Call optimizer.zero_grad() to reset the gradients of model parameters. 
+        loss.backward()  # we do the backward() pass, and calculate the gradients that will direct the learning. 
+
+        # (4) update
+        optimizer.step()  # it uses the gradients from the backward() call to nudge the learning weights in the direction it thinks will reduce the loss. 
+
+        if i % 100 == 0:
+            loss, current = loss.item(), i * len(input)
+            print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
 
 
 
