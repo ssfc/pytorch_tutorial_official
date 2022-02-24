@@ -164,7 +164,7 @@ for epoch in range(EPOCHS):
 
         torch.save(model, 'model.pt')
         torch.save({
-            'epoch': epoch,
+            'checkpoint_position': epoch,
             'model_state_dict': model.state_dict(),
             'optimizer_state_dict': optimizer.state_dict(),
             'loss': loss,
@@ -178,7 +178,7 @@ optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
 checkpoint = torch.load('model_weights.pt')
 model.load_state_dict(checkpoint['model_state_dict'])
 optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-epoch = checkpoint['epoch']
+checkpoint_position = checkpoint['checkpoint_position']
 loss = checkpoint['loss']
 
 # print("load loss: ", loss)
