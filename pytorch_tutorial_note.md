@@ -4,10 +4,12 @@ The essential problem is that we do not know the coding format of pytorch, so go
 
 ##	Chapter 1, introduction to pytorch; 
 ###	1.0, LEARN THE BASICS; 
+https://pytorch.org/tutorials/beginner/basics/intro.html
 #### Running the Tutorial Code; 
 #### How to Use this Guide; (2022-1-21)
 
 ###	1.1, QUICKSTART; 
+https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html
 #### Working with data; 
 1. torch.utils.data.DataLoader and torch.utils.data.Dataset; (1) Dataset stores the samples and their corresponding labels, (2) DataLoader wraps an iterable around the Dataset; 
 2. the file format is py, not ipynb (short for ipython notebook); (2022-1-21)
