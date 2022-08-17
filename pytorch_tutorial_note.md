@@ -35,16 +35,18 @@ gpu’s name is cuda; 1, Get Device for Training; 2, Define the Class; 3, Model 
 // replace nn.Sequential with one layer and one layer; (2022-1-24)
 
 ###	1.8, save & load; 
-1, Saving and Loading Model Weights; 2, Saving and Loading Models with Shapes; (2022-1-23)
+1. Saving and Loading Model Weights; 
+2. Saving and Loading Models with Shapes; (2022-1-23)
 	
 
 ##	Chapter 2, Introduction to PyTorch on YouTube
 ###	2.0, INTRODUCTION TO PYTORCH - YOUTUBE SERIES; (2022-1-23)
 
-###	2.1, INTRODUCTION TO PYTORCH; increase epoch to 10 to check whether result improves; 
-// tensor’s definition is according to dimension, not in mathematics; (2022-1-24)
-// dtype means data type; (2022-1-24)
-// assert condition == if not condition: raise AssertionError() (2022-1-25)
+###	2.1, INTRODUCTION TO PYTORCH; 
+1. increase epoch to 10 to check whether result improves; 
+2. tensor’s definition is according to dimension, not in mathematics; (2022-1-24)
+3. dtype means data type; (2022-1-24)
+4. assert condition == if not condition: raise AssertionError() (2022-1-25)
 
 ###	2.2, THE FUNDAMENTALS OF AUTOGRAD; 
 	
