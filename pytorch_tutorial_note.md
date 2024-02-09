@@ -2,7 +2,10 @@
 https://pytorch.org/tutorials/beginner/basics/intro.html
 The essential problem is that we do not know the coding format of pytorch, so going over pytorch tutorial and modifying it might be the best way to be masterful of it. 
 
+Comment:  有时候pytorch会找不到cuda, 输入 `nvidia-smi` 会报错NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running. 重启电脑就可以解决这个问题。(2024年2月9日)
+
 ##	Chapter 1, introduction to pytorch; 
+
 ###	1.0, LEARN THE BASICS; 
 https://pytorch.org/tutorials/beginner/basics/intro.html
 #### Running the Tutorial Code; 
@@ -52,6 +55,6 @@ ToTensor(); Lambda Transforms; (2022-1-22)
 4. assert condition == if not condition: raise AssertionError() (2022-1-25)
 
 ###	2.2, THE FUNDAMENTALS OF AUTOGRAD; 
-	
-	
+
+​	
 

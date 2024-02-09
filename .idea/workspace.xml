@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec07b836-d5ed-4e3c-8d9c-8f58a4631247" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1Introduction_to_pyTorch/1quickstart/quickstart.py" beforeDir="false" afterPath="$PROJECT_DIR$/1Introduction_to_pyTorch/1quickstart/quickstart.py" afterDir="false" />
-    </list>
+    <list default="true" id="ec07b836-d5ed-4e3c-8d9c-8f58a4631247" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,7 +84,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1615290037657</updated>
-      <workItem from="1707473094783" duration="2417000" />
+      <workItem from="1707473094783" duration="2445000" />
     </task>
     <servers />
   </component>
