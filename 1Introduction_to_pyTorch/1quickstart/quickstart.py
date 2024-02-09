@@ -44,6 +44,7 @@ for X, y in test_dataloader:
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Using {device} device")
 
+'''
 # Define model
 class NeuralNetwork(nn.Module):
     def __init__(self):
@@ -146,5 +147,5 @@ with torch.no_grad():
 
     print(f'Predicted: "{predicted}", Actual: "{actual}"')
 
-
+'''
 
